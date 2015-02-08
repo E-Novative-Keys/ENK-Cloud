@@ -33,7 +33,7 @@ define('IMG_ROOT', ROOT.DS.'webroot'.DS.'img'.DS);
 define('FONTS_ROOT', ROOT.DS.'webroot'.DS.'fonts'.DS);
 define('FILES_ROOT', ROOT.DS.'webroot'.DS.'files'.DS);
 
-define('INI_FILES', 'c:'.DS.'ini'.DS);
+define('INI_FILES', 'var/www/ini'.DS);
 
 // Database
 class DBConfig
@@ -42,7 +42,7 @@ class DBConfig
 		'dev' => array(
 			'dbtype'	=> 'mysql',
 			'host'		=> 'localhost',
-			'database'	=> 'mvc',
+			'database'	=> 'enkcloud',
 			'login'		=> 'root',
 			'password'	=> 'toor',
 			'prefix'	=>	'',
@@ -51,7 +51,7 @@ class DBConfig
 		'prod' => array(
 			'dbtype'	=> 'mysql',
 			'host'		=> 'localhost',
-			'database'	=> 'mvc',
+			'database'	=> 'enkcloud',
 			'login'		=> 'root',
 			'password'	=> 'toor',
 			'prefix'	=>	'',
