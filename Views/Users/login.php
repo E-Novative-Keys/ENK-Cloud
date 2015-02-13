@@ -23,8 +23,9 @@
 							<div class="form-group">
 								<?php 
 									echo $this->Form->input('User.email', array(
-										'type' 			=> 'text',
+										'type' 			=> 'email',
 										'placeholder' 	=> 'E-mail',
+										'required'		=> 'required',
 										'class' 		=> 'form-control'
 									));
 								?>
@@ -34,6 +35,7 @@
 									echo $this->Form->input('User.password', array(
 										'type' 			=> 'password',
 										'placeholder' 	=> 'Password',
+										'required'		=> 'required',
 										'class' 		=> 'form-control'
 									));
 								?>

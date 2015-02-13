@@ -20,7 +20,7 @@ class UsersController extends Controller
 						'action'	 => 'index'
 					));
 				else
-					$this->Session->setFlash('error', 'Informations non valides');
+					$this->Session->setFlash('Informations non valides', 'error');
 			}
 		}
 		else

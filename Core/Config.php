@@ -6,8 +6,6 @@ define('PROD', false);
 
 // Security
 define('AUTH_ENABLE', true);
-define('SALT',   '$$-;-GQ^ TdD/-)7;_Kls+Q/Z<w+RI^],f6/bL 8=>ou!Hx~N/T-I| ~n@lOp6+t');
-define('PEPPER', 'kwl:mxn+>Du2g}mXH$Yq|V{G-uo5yAY-:!%3G.38vR-Z<Rq@K/H-73SV>T RWFQK');
 
 // Global
 define('WEBROOT', dirname(__FILE__));
