@@ -126,14 +126,21 @@ class Form
 		foreach($options as $key => $value)
 			$attributes .= $key.'="'.$value.'" ';
 
-		$error = null;
+		$startDiv 	= null;
+		$endDiv		= null;
+		$error  	= null;
+
 		if(isset($this->errors[$errorName]))
-			$error = '<span class="help-inline">'.$this->errors[$errorName].'</span>';
+		{
+			$startDiv 	= '<div class="form-group has-error has-feedback">';
+			$endDiv 	= '</div>';
+			$error 		= '<span class="help-block">'.$this->errors[$errorName].'</span>';
+		}
 
 		if(isset($except))
-			return $label.sprintf($this->tags[$type], $name, $attributes, $except).$error;
+			return $startDiv.$label.sprintf($this->tags[$type], $name, $attributes, $except).$error.$endDiv;
 		else
-			return $label.sprintf($this->tags[$type], $name, $attributes).$error;
+			return $startDiv.$label.sprintf($this->tags[$type], $name, $attributes).$error.$endDiv;
 		
 		return $label;
 	}

@@ -118,7 +118,7 @@ class Auth
 		if(isset($this->controller->request->data['User']['password']))
 			$this->controller->request->data['User']['password'] = $this->password($this->controller->request->data['User']['password']);
 
-		$user = $this->controller->curl('http://enkwebservice.com/', $this->controller->request->data);
+		$user = $this->controller->curl('http://enkwebservice.com/connect/clients', $this->controller->request->data);
 		$user = json_decode($user, true);
 
 		if(isset($user['login']))
@@ -145,6 +145,9 @@ class Auth
 	{
 		if($this->isLogged())
 		{
+			$this->controller->request->data['Token'] = $this->controller->Session->read('Token');
+
+			$this->controller->curl('http://enkwebservice.com/disconnect/clients', $this->controller->request->data);
 			unset($_SESSION['User']);
 			unset($_SESSION['Token']);
 		}
