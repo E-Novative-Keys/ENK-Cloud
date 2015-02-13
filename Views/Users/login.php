@@ -1,12 +1,11 @@
 <?php $title_for_layout = 'Connexion | ENK-Cloud'; ?>
 <?php echo $this->Html->css('login'); ?>
 <?php echo $this->Html->script('login'); ?>
-
-<script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>
+<?php echo $this->Html->script('TweenLite.min'); ?>
 
 <div class="container">
 	<div class="row vertical-offset-100">
-		<div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-4">
+		<div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-4 col-sm-offset-3">
 			<div class="panel panel-default">
 				<div class="panel-heading logo">
 					<?php 
@@ -42,7 +41,7 @@
 							</div>
 							<div class="checkbox">
 								<label>
-									<input name="remember" type="checkbox" value="Remember Me"> Remember Me
+									<?php echo $this->Html->link('Forgot password ?', '#'); ?>
 								</label>
 							</div>
 							<?php 

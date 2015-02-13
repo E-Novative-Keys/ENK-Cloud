@@ -13,9 +13,11 @@ class NotificationsController extends Controller
 	{
 		$this->request->data['Token'] = $this->Session->read('Token');
 
+		/*
 		$clientNotifications = $this->curl('http://enkcloud.com/notifications', $this->request->data);
 
 		$this->set(compact('clientNotifications'));
+		*/
 	}
 }
 
