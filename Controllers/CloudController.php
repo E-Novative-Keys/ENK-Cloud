@@ -1,16 +1,16 @@
 <?php
 
-class PagesController extends Controller
+class CloudController extends Controller
 {
 	public function beforeFilter()
 	{
 		parent::beforeFilter();
-		$this->Auth->allow('index');
+		$this->Auth->authorized('client');
 	}
 
 	public function index()
-	{ 
-	
+	{
+
 	}
 }
 

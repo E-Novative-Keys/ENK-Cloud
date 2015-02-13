@@ -199,15 +199,18 @@ class Controller
 		if(empty($url))
 			return null;
 
+		$data = array();
+		$data['data'] = $post;
+
 		$options = array(
 			  CURLOPT_URL            => $url,
 			  CURLOPT_RETURNTRANSFER => true,       			// Retourner le contenu téléchargé dans une chaine
 			  CURLOPT_HEADER         => false,      			// Ne pas inclure l'entête de réponse du serveur dans la chaine retournée
 			  CURLOPT_FAILONERROR    => true,       			// Gestion des codes d'erreur HTTP
 			  CURLOPT_POST           => true,       			// Requête de type POST
-			  CURLOPT_POSTFIELDS     => http_build_query($post) // Variables envoyées par POST
+			  CURLOPT_POSTFIELDS     => http_build_query($data) // Variables envoyées par POST
 		);
-				 
+		
 		// Initialisation de cURL
 		$curl = curl_init();
 
@@ -216,13 +219,13 @@ class Controller
 		 
 		// Configuration des options de téléchargement
 		curl_setopt_array($curl, $options);
-	 
+	 	
 		// Execution de la requête
 		$content = curl_exec($curl);
-
+		
 		if(curl_errno($curl))
 			return null;
-		 
+		
 		// Fermeture de la connexion
 		curl_close($curl);
 

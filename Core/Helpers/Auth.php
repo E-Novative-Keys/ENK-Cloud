@@ -115,33 +115,24 @@ class Auth
 	*/
 	public function login($loginField = 'email')
 	{
-		$login 		= (isset($this->controller->request->data['User'][$loginField]))
-						? $this->controller->request->data['User'][$loginField]
-						: null;
-		$password 	= (isset($this->controller->request->data['User']['password']))
-						? $this->password($this->controller->request->data['User']['password'])
-						: null;
+		if(isset($this->controller->request->data['User']['password']))
+			$this->controller->request->data['User']['password'] = $this->password($this->controller->request->data['User']['password']);
 
-		$user = $this->controller->User->findFirst(array(
-			'conditions' 	=> array(
-				'User.'.$loginField => $login,
-				'User.password' 	=> $password,
-				'User.validated' 	=> 1
-			))
-		);
+		$user = $this->controller->curl('http://enkwebservice.com/', $this->controller->request->data);
+		$user = json_decode($user, true);
 
-		if($user)
+		if(isset($user['login']))
 		{
-			if(isset($user->email))
-				$this->controller->Session->write('User.email', 	$user->email);
-			if(isset($user->role))
-				$this->controller->Session->write('User.role',		$user->role);
-			if(isset($user->lastlogin))
-				$this->controller->Session->write('User.lastlogin', $user->lastlogin);
-			if(isset($user->lastip))
-				$this->controller->Session->write('User.lastip', 	$user->lastip);
+			if($user['login'] != false)
+			{
+				$this->controller->Session->write('Token.link', base64_encode($this->controller->request->data['User']['email']));
+				$this->controller->Session->write('Token.fields', $user['login']);
+				$this->controller->Session->write('User.role', 'client');
 
-			return true;
+				return true;
+			}
+			else
+				return false;
 		}
 		else
 			return false;
@@ -153,7 +144,10 @@ class Auth
 	public function logout()
 	{
 		if($this->isLogged())
+		{
 			unset($_SESSION['User']);
+			unset($_SESSION['Token']);
+		}
 	}
 
 	/**
@@ -161,7 +155,7 @@ class Auth
 	*/
 	public function password($value)
 	{
-		return sha1(md5(SALT.$value.PEPPER));
+		return base64_encode(md5($value));
 	}
 }
 

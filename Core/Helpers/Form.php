@@ -63,7 +63,9 @@ class Form
 		foreach($options as $key => $value)
 			$attributes .= $key.'="'.$value.'" ';
 			
-		return sprintf($this->tags['form'], BASE_URL.$this->controller->request->url, $attributes);
+		///die(BASE_URL.$this->controller->request->url);
+		$url = (BASE_URL.$this->controller->request->url === "//") ? '/' : BASE_URL.$this->controller->request->url;
+		return sprintf($this->tags['form'], $url, $attributes);
 	}
 
 	public function end()
