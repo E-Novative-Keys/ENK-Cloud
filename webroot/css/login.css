@@ -1,7 +1,7 @@
 body
 {
 	background-color: #444;
-    background: url(http://enkcloud.com/img/background_flot.png), url(http://enkcloud.com/img/background.jpg);
+    background: url(/img/background_flot.png), url(/img/background.jpg);
 }
 
 .logo
