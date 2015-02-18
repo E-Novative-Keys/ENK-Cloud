@@ -1,4 +1,3 @@
-<?php header("Access-Control-Allow-Origin: *"); ?>
 <?php $title_for_layout = 'Cloud | ENK-Cloud'; ?>
 <?php echo $this->Html->script('cloud'); ?>
 
