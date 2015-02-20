@@ -1,0 +1,114 @@
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+    padding-top:2px;
+    padding-bottom:2px
+}
+
+.top-logo { text-align:center }
+
+.top-right-menu { text-align:right }
+
+.menu-button {
+    background-color:#A9B5CB; 
+    padding-left:0
+}
+
+.search-bar {
+    margin-right:14px; 
+    background-color:#D4DAE5; 
+    background-image: url('../images/recherche.svg'); 
+    background-repeat: no-repeat; 
+    background-position: -15px -18px;
+}
+
+.myCloud {
+    background-color:#003083; 
+    text-align:center
+}
+
+.myNotifications {
+    background-color:#66E6FF; 
+    text-align:center
+}
+
+.myMessages {
+    background-color:#00D4FF; 
+    text-align:center
+}
+
+.cloud_files-buttons {
+    background-color:#D4DAE5; 
+    color:#001C53
+}
+
+.stockage-button {
+    background-color:#001C53; 
+    color:#66E6FF
+}
+
+.first_adjusted { margin-left:5% }
+
+.left-menu {
+    height:500px; 
+    text-align:center; 
+    background-image:linear-gradient(#A9B5CB, #D4DAE5)
+}
+
+.left-menu-stockage { 
+    width:90%; 
+    background-color:#001C53; 
+    color:white; 
+    border:0; 
+    height:30px 
+}
+
+.left-menu-notifications, .left-menu-messagerie { 
+    width:90%; 
+    background-color:transparent; 
+    color:#001C53; 
+    border:0 
+}
+
+.drag-zone {
+    height:220px;
+}
+
+.drag-top {
+    height:30px;
+}
+
+.drag-menu {
+    background-color:#001C53; 
+    color:white
+}
+
+.white-tip {
+    border-left: 1px solid white
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
