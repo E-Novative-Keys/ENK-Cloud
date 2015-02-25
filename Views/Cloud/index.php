@@ -1,5 +1,6 @@
 <?php $title_for_layout = 'Cloud | ENK-Cloud'; ?>
 <?php echo $this->Html->script('cloud'); ?>
+<?php echo $this->Html->script('jquery.filesize.min'); ?>
 
 <section>
     <div class="row">

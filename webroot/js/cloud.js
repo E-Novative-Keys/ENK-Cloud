@@ -11,7 +11,10 @@ function listFiles(user, dir) {
     $.ajax({
         type : "POST",
         url : "http://enkwebservice.com/cloud/files/" + user,
-        data : 'data=' + JSON.stringify({data : {Cloud : {project : 1, directory : dir}, Token : {link : $('#link').val(), fields : $('#fields').val()}}}),
+        data : 'data=' + JSON.stringify({data : {
+            Cloud : {project : 1, directory : dir},
+            Token : {link : $('#link').val(), fields : $('#fields').val()}
+        }}),
         crossDomain: true,
         dataType : "json"
     })
@@ -27,7 +30,7 @@ function listFiles(user, dir) {
                         .text((item.filename.length > 100) ? item.filename.substring(0, 100)+"..." : item.filename)
                     )
                     .append($('<td>')
-                        .text(item.size)
+                        .text(item.size).filesize()
                     )
                     .append($('<td>')
                         .text(item.extension)
