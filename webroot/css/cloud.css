@@ -1,62 +1,133 @@
-.vcenter {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
-    padding-top:2px;
-    padding-bottom:2px
+html, body {
+    background-color: #EEEEEE;
+    height: 100%;
+    width: 100%;
 }
 
-.top-logo { text-align:center }
+.center {
+    text-align:center;
+}
 
-.top-right-menu { text-align:right }
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align:right;
+}
+
+.inline {
+    display: inline-block!important;
+}
+
+.jumbotron {
+    padding: 0;
+    margin: 0;
+}
+
+.row {
+    padding: 0;
+    margin: 0;
+}
+
+header.jumbotron {
+    height: 80px;
+    background-color: #001C53;
+}
+
+nav.jumbotron {
+    /*min-height: 100%;*/
+    height: 70px;
+}
+
+#enk-logo-container {
+    height: 80px;
+    padding-left : 8%
+}
+
+#enk-logo {
+    height: 100%;
+    margin: 0;
+}
+
+header .header-menu {
+    height : 80px;
+    padding: 10px;
+}
+
+nav #nav-buttons {
+    padding: 15px;
+}
+
+.enk-button {
+    border-radius: 0;
+    background-color: #A9B5CB;
+}
 
 .menu-button {
-    background-color:#A9B5CB; 
-    padding-left:0
+    padding: 5px;
 }
 
 .search-bar {
     margin-right:14px; 
     background-color:#D4DAE5; 
-    background-image: url('../images/recherche.svg'); 
+    background-image: url('img/recherche.svg'); 
     background-repeat: no-repeat; 
     background-position: -15px -18px;
 }
 
-.myCloud {
-    background-color:#003083; 
-    text-align:center
+#link-cloud {
+    background-color:#003083;
 }
 
-.myNotifications {
-    background-color:#66E6FF; 
-    text-align:center
+#link-notifications {
+    background-color:#66E6FF;
 }
 
-.myMessages {
-    background-color:#00D4FF; 
-    text-align:center
+#link-messages {
+    background-color:#00D4FF;
 }
 
-.cloud_files-buttons {
+a[id^="link-"] {
+    height: 73px;
+}
+
+a[id^="link-"] img {
+    margin: 21px;
+    height: 40%;
+    width: 40%;
+}
+
+.storage-button {
+    margin: 4px;
+    background-color:#001C53; 
+    color:#66E6FF;
+    margin-right: 5%;
+}
+
+.storage-button:hover {
+    color:#66E6FF
+}
+
+.files-buttons {
+    margin: 4px;
     background-color:#D4DAE5; 
     color:#001C53
 }
 
-.stockage-button {
-    background-color:#001C53; 
-    color:#66E6FF
+section.jumbotron {
+
 }
 
-.first_adjusted { margin-left:5% }
-
-.left-menu {
-    height:500px; 
-    text-align:center; 
-    background-image:linear-gradient(#A9B5CB, #D4DAE5)
+#left-menu {
+    position: absolute;
+    text-align: center; 
+    background-image: linear-gradient(#A9B5CB, #D4DAE5);
+    height: calc(100% - 150px);
 }
 
 .left-menu-stockage { 
+    margin: 15px;
     width:90%; 
     background-color:#001C53; 
     color:white; 
@@ -64,11 +135,29 @@
     height:30px 
 }
 
-.left-menu-notifications, .left-menu-messagerie { 
+.left-menu-notifications, .left-menu-messagerie {
+    margin: 15px;
     width:90%; 
     background-color:transparent; 
     color:#001C53; 
-    border:0 
+    border: 0;
+}
+
+#files {
+    position: absolute;
+    left: 25%;
+    max-width: 75%;
+    width: 75%;
+    height: calc(100% - 150px);
+}
+
+#client-files {
+    position: absolute;
+}
+
+#dev-files {
+    position: absolute;
+    top: calc(50%);
 }
 
 .drag-zone {
@@ -80,35 +169,130 @@
 }
 
 .drag-menu {
+    width:100%;
     background-color:#001C53; 
     color:white
 }
 
 .white-tip {
-    border-left: 1px solid white
+    border-left: 1px solid white;
 }
 
+.table-header {
+    background-color:#001C53;
+    color:white;
+}
 
+.white-border {
+    border-left: 2px solid white;
+}
 
+th {
+    font-weight: normal;
+}
 
+td {
+    padding-left: 5px;
+    border-bottom: 2px solid #A9B5CB;
+}
 
+/* CSS3 Responsive */
 
+/* Tablettes */
+@media only screen and (device-width: 768px), (device-width: 800px) {
+    a[id^="link-"] img {
+        margin: 21px;
+        height: 40%;
+        width: 40%;
+    } /* retoucher la taille des icones sur tablette (trop petites actuellement et pas centrées) - certainement le margin à bouger en fonction aussi, perso quand je touche ici ça change que dalle x)..  */      
+}
 
+/* Mobile */
+@media only screen and (max-width: 767px) {
+    a[id^="link-"] img {
+        margin: 21px;
+        height: 40%;
+        width: 40%;
+    }
+    
+    header .header-menu {
+        padding: 24px;
+    }
 
+    #files {
+        position: relative;
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+    #client-files {
+        position: relative;
+    }
 
+    #dev-files {
+        position: relative;
+        top: 0;
+    }
+}
 
+.show-on-phones {
+    display: none!important;
+}
+.show-on-tablets {
+    display: none!important;
+}
+.show-on-desktops {
+    display: block;
+}
+.hide-on-phones {
+    display: block!important;
+}
+.hide-on-tablets {
+    display: block!important;
+}
+.hide-on-desktops {
+    display: none;
+}
 
+/*@media only screen and (device-width: 768px), only screen and (device-width: 1280px), only screen and (device-width: 800px) {*/
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
+    .hide-on-phones {
+        display: block!important;
+    }
+    .hide-on-tablets {
+        display: none!important;
+    }
+    .hide-on-desktops {
+        display: block!important;
+    }
+    .show-on-phones {
+        display: none!important;
+    }
+    .show-on-tablets {
+        display: block!important;
+    }
+    .show-on-desktops {
+        display: none!important;
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+@media only screen and (max-width: 767px) {
+    .hide-on-phones {
+        display: none!important;
+    }
+    .hide-on-tablets {
+        display: block!important;
+    }
+    .hide-on-desktops {
+        display: block!important;
+    }
+    .show-on-phones {
+        display: block!important;
+    }
+    .show-on-tablets {
+        display: none!important;
+    }
+    .show-on-desktops {
+        display: none!important;
+    }
+}

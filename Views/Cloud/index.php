@@ -1,26 +1,46 @@
 <?php $title_for_layout = 'Cloud | ENK-Cloud'; ?>
 <?php echo $this->Html->script('cloud'); ?>
 
-<h1>Page de Cloud</h1>
-<?php echo var_dump($this->Session->read()); ?>
-<br/>
-<br/>
-<div id="client_files"></div>
-<div id="dev_files"></div>
-<br/>
-<?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?>
+<section>
+    <div class="row">
+        <div id="files">
+            <table id="client-files" class="table-reponsive col-xs-12">
+                <thead class="table-header">
+                    <tr class="">
+                        <th class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
+                        	<img src="images/etoile.svg" height="26px" style="margin-left:-10px" />
+                        	Nom
+                        </th>    
+                        <th class="col-xs-2 col-sm-2 white-border">Taille</th>    
+                        <th class="col-xs-3 col-sm-2 white-border">Type</th>    
+                        <th class="col-xs-2 col-sm-2 white-border">
+                        	<span class="show-on-phones">Créé</span>
+                        	<span class="hide-on-phones">Créé le</span>
+                        </th>    
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
 
-<?php 
-	echo $this->Form->input('Token.link', array(
-		'type' 	=> 'hidden',
-		'id'	=> 'link',
-		'value' => $this->Session->read('Token.link')
-	));
-?>
-<?php 
-	echo $this->Form->input('Token.fields', array(
-		'type' 	=> 'hidden',
-		'id'	=> 'fields',
-		'value' => $this->Session->read('Token.fields')
-	));
-?>
+            <table id="dev-files" class="table-reponsive col-xs-12">
+                <thead class="table-header">
+                    <tr class="">
+                        <th class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
+                        	<img src="images/etoile.svg" height="26px" style="margin-left:-10px" />
+                        	Nom
+                        </th>    
+                        <th class="col-xs-2 col-sm-2 white-border">Taille</th>    
+                        <th class="col-xs-3 col-sm-2 white-border">Type</th>    
+                        <th class="col-xs-2 col-sm-2 white-border">
+                        	<span class="show-on-phones">Créé</span>
+                        	<span class="hide-on-phones">Créé le</span>
+                        </th>    
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>  
+    </div>
+</section>
+
+<?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?>

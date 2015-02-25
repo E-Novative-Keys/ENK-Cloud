@@ -1,12 +1,47 @@
-$(document).ready(function(){
-  $.ajax({
-    type : "POST",
-    url : "http://enkwebservice.com/cloud/files/client",
-    data : 'data=' + JSON.stringify({data : {Cloud : {project : 1, directory : '/'}, Token : {link : $('#link').val(), fields : $('#fields').val()}}}),
-    crossDomain: true,
-    dataType : "html"
-  })
-  .done(function(html) {
-    $("#client_files").append(html);
-  });
+$(document).ready(function() {
+    listFiles("client", btoa("/"));
+    listFiles("dev", btoa("/"));
+
+    $('table').on("click", ".file", function() {
+        listFiles("client", $(this).attr("data-file"));
+    });
 });
+
+function listFiles(user, dir) {
+    $.ajax({
+        type : "POST",
+        url : "http://enkwebservice.com/cloud/files/" + user,
+        data : 'data=' + JSON.stringify({data : {Cloud : {project : 1, directory : dir}, Token : {link : $('#link').val(), fields : $('#fields').val()}}}),
+        crossDomain: true,
+        dataType : "json"
+    })
+    .success(function(data) {
+        $('#' + user + '-files').find('tbody').empty();
+
+        $.each(data.content, function(index, item) {
+            $('#' + user + '-files').find('tbody')
+                .append($('<tr>')
+                    .attr("data-file", btoa('/' + item.filename))
+                    .attr("class", "file")
+                    .append($('<td>')
+                        .text((item.filename.length > 100) ? item.filename.substring(0, 100)+"..." : item.filename)
+                    )
+                    .append($('<td>')
+                        .text(item.size)
+                    )
+                    .append($('<td>')
+                        .text(item.extension)
+                    )
+                    .append($('<td>')
+                        .text(function(){
+                            var time = new Date(item.mtime * 1000);
+                            return time.getDate() + "/" + time.getMonth()+1 + "/" + time.getFullYear();
+                        })
+                    )
+                );
+        });
+    })
+    .fail(function() {
+        alert("fail");
+    });
+}
