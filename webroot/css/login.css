@@ -1,21 +1,17 @@
-body
-{
+body {
 	background-color: #444;
     background: url(/img/background_flot.png), url(/img/background.jpg);
 }
 
-.logo
-{
+.logo {
 	text-align: center;
 }
 
-.vertical-offset-100
-{
+.vertical-offset-100 {
     padding-top: 300px;
 }
 
-.btn-submit
-{
+.btn-submit {
 	background-color: #00D4FF;
 	color: #003083;
 }
