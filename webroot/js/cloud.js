@@ -8,6 +8,24 @@ $(document).ready(function() {
         else
             download($(this).attr("data-file"));
     });
+
+
+    $.contextMenu({
+        selector: '.file', 
+        callback: function(key, options) {
+
+            if(key == "rename")
+               renameFile($(this));
+            else if(key == "delete")
+            {
+
+            }
+        },
+        items: {
+            "rename": {name: "Renommer", icon: "edit"},
+            "delete": {name: "Supprimer", icon: "delete"},
+        }
+    });
 });
 
 function listFiles(user, dir) {
@@ -29,6 +47,7 @@ function listFiles(user, dir) {
                 .append($('<tr>')
                     .attr("data-file", btoa(((atob(dir) == "/") ? atob(dir) : atob(dir) + "/") + item.filename))
                     .attr("data-dir", item.isDir)
+                    .attr("data-user", user)
                     .attr("class", "file")
                     .append($('<td>')
                         .text((item.filename.length > 100) ? item.filename.substring(0, 100) + "..." : item.filename)
@@ -66,4 +85,39 @@ function download(file) {
     .success(function(data){
         console.log(data);
     });
+}
+
+function renameFile(tr)
+{
+    var rename = prompt("New file name", "");
+
+    var dir = atob(tr.attr("data-file"));
+    var args = dir.split('/');
+    var name = '';
+
+    if(tr.attr("data-dir") == "false")
+    {
+        name = args[args.length-1];
+        dir = dir.replace(args[args.length-1], '');
+    }
+
+    $.ajax({
+        type : "POST",
+        url : "http://enkwebservice.com/cloud/" + tr.attr("data-user") + "/files/rename",
+        data : "data=" + JSON.stringify({data : {
+            Cloud : {project : 1, directory : dir, name : name, rename : rename},
+            Token : {link : $('#link').val(), fields : $('#fields').val()}
+        }}),
+        crossDomain : true
+    })
+    .success(function() {
+        args[args.length-1] = rename;
+        tr.find('td:first-child').text(rename);
+        tr.attr("data-file", btoa(args.join('/')));
+    });
+}
+
+function deleteFile(user, dir, file)
+{
+
 }

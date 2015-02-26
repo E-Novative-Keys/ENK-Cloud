@@ -42,7 +42,7 @@ class DBConfig
 			'host'		=> 'localhost',
 			'database'	=> 'enkcloud',
 			'login'		=> 'root',
-			'password'	=> 'toor',
+			'password'	=> 'root',
 			'prefix'	=>	'',
 			'encoding'	=>	'utf8'
 		),
