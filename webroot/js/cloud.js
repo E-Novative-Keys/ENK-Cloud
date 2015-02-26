@@ -83,7 +83,7 @@ function download(file) {
         crossDomain : true
     })
     .success(function(data){
-        console.log(data);
+        document.location.href = 'data:application/octet-stream,' + escape(data);
     });
 }
 
