@@ -71,7 +71,7 @@ nav #nav-buttons {
 .search-bar {
     margin-right:14px; 
     background-color:#D4DAE5; 
-    background-image: url('img/recherche.svg'); 
+    background-image: url('../img/recherche.svg'); 
     background-repeat: no-repeat; 
     background-position: -15px -18px;
 }
