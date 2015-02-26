@@ -1,5 +1,6 @@
 $(document).ready(function(){
   $(document).mousemove(function(e){
+     event = e || window.event;
      TweenLite.to($('body'), 
         .5, 
         { css: 
