@@ -54,14 +54,16 @@ function listFiles(user, dir) {
 }
 
 function download(file) {
-    var url = "http://enkwebservice.com/cloud/files/download";
     $.ajax({
         type : "POST",
-        url : url,
+        url : "http://enkwebservice.com/cloud/files/download",
         data : "data=" + JSON.stringify({data : {
             Cloud : {project : 1, path : file},
             Token : {link : $('#link').val(), fields : $('#fields').val()}
         }}),
         crossDomain : true
+    })
+    .success(function(data){
+        console.log(data);
     });
 }
