@@ -3,7 +3,10 @@ $(document).ready(function() {
     listFiles("dev", btoa("/"));
 
     $('table').on("click", ".file", function() {
-        listFiles("client", $(this).attr("data-file"));
+        if($(this).attr("data-dir") == "true")
+            listFiles("client", $(this).attr("data-file"));
+        else
+            download($(this).attr("data-file"));
     });
 });
 
@@ -24,10 +27,11 @@ function listFiles(user, dir) {
         $.each(data.content, function(index, item) {
             $('#' + user + '-files').find('tbody')
                 .append($('<tr>')
-                    .attr("data-file", btoa('/' + item.filename))
+                    .attr("data-file", btoa(((atob(dir) == "/") ? atob(dir) : atob(dir) + "/") + item.filename))
+                    .attr("data-dir", item.isDir)
                     .attr("class", "file")
                     .append($('<td>')
-                        .text((item.filename.length > 100) ? item.filename.substring(0, 100)+"..." : item.filename)
+                        .text((item.filename.length > 100) ? item.filename.substring(0, 100) + "..." : item.filename)
                     )
                     .append($('<td>')
                         .text(item.size).filesize()
@@ -46,5 +50,18 @@ function listFiles(user, dir) {
     })
     .fail(function() {
         alert("fail");
+    });
+}
+
+function download(file) {
+    var url = "http://enkwebservice.com/cloud/files/download";
+    $.ajax({
+        type : "POST",
+        url : url,
+        data : "data=" + JSON.stringify({data : {
+            Cloud : {project : 1, path : file},
+            Token : {link : $('#link').val(), fields : $('#fields').val()}
+        }}),
+        crossDomain : true
     });
 }
