@@ -10,7 +10,6 @@
 
 	<?php echo $this->Html->css('bootstrap', true); ?>
 	<?php echo $this->Html->css('cloud', true); ?>
-	<?php echo $this->Html->css('contextMenu', true); ?>
 
 	<?php echo $this->Html->layout('css'); ?>
 </head>
@@ -40,7 +39,6 @@
 
 	<?php echo $this->Html->script('jquery-1.11.2.min', true); ?>
 	<?php echo $this->Html->script('bootstrap.min', true); ?>
-	<?php echo $this->Html->script('contextMenu', true); ?>
 	
 	<?php echo $this->Html->layout('js'); ?>
 </body>

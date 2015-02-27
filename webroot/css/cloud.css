@@ -187,6 +187,10 @@ section.jumbotron {
     border-left: 2px solid white;
 }
 
+.file {
+    cursor: pointer;
+}
+
 th {
     font-weight: normal;
 }

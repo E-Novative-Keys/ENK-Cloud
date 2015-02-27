@@ -9,6 +9,9 @@ $(document).ready(function() {
             download($(this).attr("data-file"));
     });
 
+    /*$('.file').dmUploader({
+        url: 'http://enkwebservice.com/cloud/files/add'
+    });*/
 
     $.contextMenu({
         selector: '.file', 
@@ -68,7 +71,15 @@ function listFiles(user, dir) {
         });
     })
     .fail(function() {
-        alert("fail");
+        $('#' + user + '-files').find('tbody').empty();
+        $('#' + user + '-files').find('tbody')
+            .append($('<tr>')
+                .append($('<td>')
+                    .attr("colspan", 4)
+                    .attr("class", "center")
+                    .text("Une erreur est survenue lors de la récupération de la liste de fichiers")
+                )
+            )
     });
 }
 
@@ -83,7 +94,8 @@ function download(file) {
         crossDomain : true
     })
     .success(function(data){
-        document.location.href = 'data:application/octet-stream,' + escape(data);
+        //document.location.href = 'data:application/octet-stream;content-disposition:attachment;filename=coucou.txt,' + encodeURIComponent(data);
+        document.location.href = 'data:application/octet-stream,' + encodeURIComponent(data);
     });
 }
 
