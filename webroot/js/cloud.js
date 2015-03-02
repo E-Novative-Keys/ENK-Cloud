@@ -4,11 +4,11 @@ $(document).ready(function() {
 
     $('table').on("click", ".file", function() {
         if($(this).attr("data-dir") == "true")
-            listFiles("client", $(this).attr("data-file"));
+            listFiles($(this).attr("data-user"), $(this).attr("data-file"));
         else
             download($(this).attr("data-file"));
     });
-
+    
     /*$('.file').dmUploader({
         url: 'http://enkwebservice.com/cloud/files/add'
     });*/
@@ -18,11 +18,9 @@ $(document).ready(function() {
         callback: function(key, options) {
 
             if(key == "rename")
-               renameFile($(this));
+                renameFile($(this));
             else if(key == "delete")
-            {
-
-            }
+                deleteFile($(this));
         },
         items: {
             "rename": {name: "Renommer", icon: "edit"},
@@ -32,6 +30,13 @@ $(document).ready(function() {
 });
 
 function listFiles(user, dir) {
+    var ret = atob(dir).split('/');
+    ret.pop();
+    ret = (ret.join('/') == "") ? '/' : ret.join('/');
+
+    $('#previous_' + user)
+        .attr("onclick", "listFiles('" + user + "', '" + btoa(ret) + "');");
+
     $.ajax({
         type : "POST",
         url : "http://enkwebservice.com/cloud/files/" + user,
@@ -46,6 +51,8 @@ function listFiles(user, dir) {
         $('#' + user + '-files').find('tbody').empty();
 
         $.each(data.content, function(index, item) {
+            var img = item.isDir ? 'directory' : item.extension;
+
             $('#' + user + '-files').find('tbody')
                 .append($('<tr>')
                     .attr("data-file", btoa(((atob(dir) == "/") ? atob(dir) : atob(dir) + "/") + item.filename))
@@ -53,7 +60,7 @@ function listFiles(user, dir) {
                     .attr("data-user", user)
                     .attr("class", "file")
                     .append($('<td>')
-                        .text((item.filename.length > 100) ? item.filename.substring(0, 100) + "..." : item.filename)
+                        .html('<img src="img/icons/' + img + '.png" /> ' + ((item.filename.length > 100) ? item.filename.substring(0, 100) + "..." : item.filename))
                     )
                     .append($('<td>')
                         .text(item.size).filesize()
@@ -129,7 +136,34 @@ function renameFile(tr)
     });
 }
 
-function deleteFile(user, dir, file)
+function deleteFile(tr)
 {
+    var secure = confirm("Voulez-vous supprimer cet élément ?");
 
+    if(secure)
+    {
+        var dir = atob(tr.attr("data-file")); 
+        var args = dir.split('/');
+        var name = '';
+
+        if(tr.attr("data-dir") == "false")
+        {
+            name = args[args.length-1]; 
+            dir = dir.replace(args[args.length-1], ''); 
+        }
+
+        $.ajax({
+            type : "POST",
+            url : "http://enkwebservice.com/cloud/" + tr.attr("data-user") + "/files/delete",
+            data : "data=" + JSON.stringify({data : { 
+                Cloud : {project : 1, directory : dir, name : name},
+                Token : {link : $('#link').val(), fields : $('#fields').val()}
+            }}),
+            crossDomain : true
+        })
+        .success(function() {
+            args.pop();
+            listFiles(tr.attr("data-user"), btoa(args.join('/')));
+        });
+    }
 }

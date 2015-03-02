@@ -31,6 +31,7 @@ define('IMG_ROOT', ROOT.DS.'webroot'.DS.'img'.DS);
 define('FONTS_ROOT', ROOT.DS.'webroot'.DS.'fonts'.DS);
 define('FILES_ROOT', ROOT.DS.'webroot'.DS.'files'.DS);
 
+//define('INI_FILES', DS.'Users'.DS.'Worker'.DS.'Desktop'.DS.'ini'.DS);
 define('INI_FILES', 'var/www/ini'.DS);
 
 // Database
@@ -42,7 +43,7 @@ class DBConfig
 			'host'		=> 'localhost',
 			'database'	=> 'enkcloud',
 			'login'		=> 'root',
-			'password'	=> 'toor',
+			'password'	=> 'root',
 			'prefix'	=>	'',
 			'encoding'	=>	'utf8'
 		),
@@ -51,7 +52,7 @@ class DBConfig
 			'host'		=> 'localhost',
 			'database'	=> 'enkcloud',
 			'login'		=> 'root',
-			'password'	=> 'toor',
+			'password'	=> 'root',
 			'prefix'	=>	'',
 			'encoding'	=>	'utf8'
 		)

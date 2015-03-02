@@ -1,6 +1,6 @@
 <header class="jumbotron">
     <div class="row">
-        <div id="enk-logo-container" class="col-xs-6 col-sm-3 col-md-3 col-lg-3 left">s
+        <div id="enk-logo-container" class="col-xs-6 col-sm-3 col-md-3 col-lg-3 left">
             <?php 
                 echo $this->image('logo.svg', array(
                     'alt'   => 'Logo E-Novative Keys',
