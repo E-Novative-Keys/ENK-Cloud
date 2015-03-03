@@ -15,43 +15,37 @@ $(document).ready(function() {
         folderCreate();
     });
 
-    $('.file').filedrop({
-        url: 'http://enkwebservice.com/cloud/client/files/add',
-        paramname: 'file',
-        data: {
-            data : JSON.stringify({data : {
-                Token : {link : $('#link').val(), fields : $('#fields').val()}
-            }})
-        },
-        error: function(err, file) {
-            switch(err) {
-                case 'BrowserNotSupported':
-                    alert('browser does not support HTML5 drag and drop')
-                    break;
-                case 'TooManyFiles':
-                    // user uploaded more than 'maxfiles'
-                    break;
-                case 'FileTooLarge':
-                    // program encountered a file whose size is greater than 'maxfilesize'
-                    // FileTooLarge also has access to the file which was too large
-                    // use file.name to reference the filename of the culprit file
-                    break;
-                case 'FileTypeNotAllowed':
-                    // The file type is not in the specified list 'allowedfiletypes'
-                    break;
-                case 'FileExtensionNotAllowed':
-                    // The file extension is not in the specified list 'allowedfileextensions'
-                    break;
-                default:
-                    break;
-            }
-        },
-        allowedfiletypes: ['image/jpeg','image/png','image/gif'],
-        allowedfileextensions: ['.jpg','.jpeg','.png','.gif'], // file extensions allowed. Empty array means no restrictions
-        maxfiles: 25,
-        maxfilesize: 20
-    });
+    // Drag and Drop Zone
     
+    // Stop propagation des events sur toute la page  
+    $(document).on('dragenter', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+    });
+    $(document).on('dragover', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+    });
+    $(document).on('drop', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+    });
+
+    // Events sur les dossiers de la liste
+    $('table').on("dragenter", ".file", function(e) 
+    {
+        e.stopPropagation();
+        e.preventDefault();
+    });
+    $('table').on("dragover", ".file", function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+    });
+    $('table').on("drop", ".file", function(e) {
+        e.preventDefault();
+        DnDFileUpload(e.originalEvent.dataTransfer.files, $('#DnDStatus'));
+    });
+
     // Menu contextuel au click droit
     $.contextMenu({
         selector: '.file', 

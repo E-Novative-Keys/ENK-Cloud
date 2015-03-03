@@ -1,11 +1,12 @@
 <?php $title_for_layout = 'Cloud | ENK-Cloud'; ?>
 
 <?php echo $this->Html->css('contextMenu'); ?>
+<?php echo $this->Html->css('fileDNDUpload'); ?>
 
 <?php echo $this->Html->script('jquery.filesize.min'); ?>
-<?php echo $this->Html->script('jquery.filedrop'); ?>
 <?php echo $this->Html->script('contextMenu'); ?>
 <?php echo $this->Html->script('cloud'); ?>
+<?php echo $this->Html->script('fileDnDUpload'); ?>
 
 <section>
     <div class="row">
