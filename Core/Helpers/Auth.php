@@ -121,12 +121,14 @@ class Auth
 		$user = $this->controller->curl('http://enkwebservice.com/connect/clients', $this->controller->request->data);
 		$user = json_decode($user, true);
 
-		if(isset($user['login']))
+		if(isset($user['user']))
 		{
-			if($user['login'] != false)
+			$user = $user['user'];
+
+			if(isset($user['token']) /*&& $user['role'] == 'client'*/)
 			{
-				$this->controller->Session->write('Token.link', base64_encode($this->controller->request->data['User']['email']));
-				$this->controller->Session->write('Token.fields', $user['login']);
+				$this->controller->Session->write('Token.link', base64_encode($user['email']));
+				$this->controller->Session->write('Token.fields', $user['token']);
 				$this->controller->Session->write('User.role', 'client');
 
 				return true;
