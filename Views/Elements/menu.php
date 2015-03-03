@@ -51,6 +51,7 @@
                     Messagerie
                 </button>
             </div>
+            <div id="DnDStatus"></div>
         </div>
     </div>
 </section>
