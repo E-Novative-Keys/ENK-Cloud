@@ -8,11 +8,11 @@ $(document).ready(function() {
         else
             download($(this).attr("data-file"));
     });
-    
-    /*$('.file').dmUploader({
-        url: 'http://enkwebservice.com/cloud/files/add'
-    });*/
 
+    $('#new-dir').click(function() {
+        folderCreate();
+    });
+    
     $.contextMenu({
         selector: '.file', 
         callback: function(key, options) {
@@ -30,12 +30,15 @@ $(document).ready(function() {
 });
 
 function listFiles(user, dir) {
+
     var ret = atob(dir).split('/');
     ret.pop();
     ret = (ret.join('/') == "") ? '/' : ret.join('/');
 
+    $('#storage').attr("data-dir", dir);
+
     $('#previous_' + user)
-        .attr("onclick", "listFiles('" + user + "', '" + btoa(ret) + "');");
+        .attr("onclick", "listFiles('" + user + "', '" + btoa(ret) + "');");    
 
     $.ajax({
         type : "POST",
@@ -166,4 +169,24 @@ function deleteFile(tr)
             listFiles(tr.attr("data-user"), btoa(args.join('/')));
         });
     }
+}
+
+function folderCreate()
+{
+    var name = prompt("New folder name", "");
+
+    var dir = $('#storage').attr("data-dir");
+
+    $.ajax({
+        type : "POST",
+        url : "http://enkwebservice.com/cloud/client/folder/add",
+        data : "data=" + JSON.stringify({data : { 
+            Cloud : {project : 1, directory : dir, name : name},
+            Token : {link : $('#link').val(), fields : $('#fields').val()}
+        }}),
+        crossDomain : true
+    })
+    .done(function() {
+        listFiles("client", dir);
+    });
 }

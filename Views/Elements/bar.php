@@ -17,7 +17,7 @@
         </a>
 
         <div id="nav-buttons" class="col-sm-9 col-md-9 col-lg-9 hide-on-phones"><!-- element -->
-            <button class="btn enk-button storage-button">
+            <button class="btn enk-button storage-button" id="storage">
                 <?php
                     echo $this->image('cloud_bleu.svg', array(
                         'alt' => 'espace de stockage',
@@ -26,7 +26,7 @@
                 ?>
                 <span class="show-on-desktops inline">Espace de stockage</span>
             </button>
-            <button class="btn enk-button files-buttons">
+            <button class="btn enk-button files-buttons" id="new-dir">
                 <?php
                     echo $this->image('nouveau_dossier.svg', array(
                         'alt' => 'Nouveau dossier',

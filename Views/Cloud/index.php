@@ -14,7 +14,6 @@
                 <thead class="table-header">
                     <tr class="">
                         <th class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
-                        	<!--<img id="previous_client" src="img/etoile.svg" height="26px" style="margin-left:-10px" />-->
                             <span class="center">
                                 <span id="previous_client" class="glyphicon glyphicon-menu-left previous_files"></span>
                                 Nom
