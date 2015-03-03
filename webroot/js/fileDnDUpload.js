@@ -7,20 +7,14 @@ function DnDFileUpload(files, obj)
 
         var status = new createStatusbar(obj);
         status.setData(files[i].name,files[i].size);
-        //sendFileToServer(fd,status);
+        sendFileToServer(fd,status);
     }
 }
 
 function createStatusbar(obj)
 {
-    /*this.statusbar      = $("<div class='DnDstatusbar'></div>");
-    this.filename       = $("<div class='DnDfilename'></div>").appendTo(this.statusbar);
-    this.size           = $("<div class='DnDfilesize'></div>").appendTo(this.statusbar);
-    this.progressBar    = $("<div class='DnDprogressBar'><div></div></div>").appendTo(this.statusbar);
-    this.abort          = $("<div class='DnDabort'>Abort</div>").appendTo(this.statusbar);*/
-
     this.statusbar      = $("<div class=\"progress\"></div>");
-    this.progressBar    = $("<div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"50\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:50%\"></div>")
+    this.progressBar    = $("<div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:0%\"></div>")
                             .html("")
                             .appendTo(this.statusbar);
     this.percent        = $("<span class=\"DnDPercent\">0%</span>").appendTo(this.statusbar);
@@ -38,8 +32,7 @@ function createStatusbar(obj)
         var progressBarWidth = progress * this.progressBar.width() / 100;
 
         this.progressBar
-            .animate({width: progressBarWidth}, 10)
-            /*.html(progress + "%")*/;
+            .animate({width: progressBarWidth}, 10);
         this.percent.html(progress + "%");
 
         if(parseInt(progress) >= 100)
@@ -57,4 +50,41 @@ function createStatusbar(obj)
             sb.hide();
         });
     }
+}
+
+function sendFileToServer(formData, status)
+{
+    var jqXHR = $.ajax({
+        type: "POST",
+        url: "http://enkwebservice.com/cloud/client/files/add",
+        data: formData + "data=" + JSON.stringify({
+            Token : {link : $('#link').val(), fields : $('#fields').val()}
+        }),
+        crossDomain : true,
+        contentType: false,
+        processData: false,
+        xhr: function() {
+            var xhrobj = $.ajaxSettings.xhr();
+            if(xhrobj.upload) {
+                xhrobj.upload.addEventListener('progress', function(event) {
+                    var percent = 0;
+                    var position = event.loaded || event.position;
+                    var total = event.total;
+                    if (event.lengthComputable) {
+                        percent = Math.ceil(position / total * 100);
+                    }
+                    
+                    // Set progress
+                    status.setProgress(percent);
+                }, false);
+            }
+            return xhrobj;
+        },
+        success : function(data) {
+            status.setProgress(100);
+        }
+    });
+ 
+ 
+    status.setAbort(jqXHR);
 }
