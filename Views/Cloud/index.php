@@ -2,10 +2,10 @@
 
 <?php echo $this->Html->css('contextMenu'); ?>
 
-<?php echo $this->Html->script('cloud'); ?>
 <?php echo $this->Html->script('jquery.filesize.min'); ?>
-<?php echo $this->Html->script('dmuploader'); ?>
+<?php echo $this->Html->script('jquery.filedrop'); ?>
 <?php echo $this->Html->script('contextMenu'); ?>
+<?php echo $this->Html->script('cloud'); ?>
 
 <section>
     <div class="row">
@@ -35,7 +35,7 @@
                     <tr class="">
                         <th class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
                         	<span class="center">
-                                <span id="previous_client" class="glyphicon glyphicon-menu-left previous_files"></span>
+                                <span id="previous_dev" class="glyphicon glyphicon-menu-left previous_files"></span>
                                 Nom
                             </span>
                         </th>    

@@ -2,6 +2,7 @@ $(document).ready(function() {
     listFiles("client", btoa("/"));
     listFiles("dev", btoa("/"));
 
+    // Liste des fichiers au click sur un dossier ou download d'un fichier
     $('table').on("click", ".file", function() {
         if($(this).attr("data-dir") == "true")
             listFiles($(this).attr("data-user"), $(this).attr("data-file"));
@@ -9,10 +10,49 @@ $(document).ready(function() {
             download($(this).attr("data-file"));
     });
 
+    // Création d'un nouveau dossier dans le répertoire courant
     $('#new-dir').click(function() {
         folderCreate();
     });
+
+    $('.file').filedrop({
+        url: 'http://enkwebservice.com/cloud/client/files/add',
+        paramname: 'file',
+        data: {
+            data : JSON.stringify({data : {
+                Token : {link : $('#link').val(), fields : $('#fields').val()}
+            }})
+        },
+        error: function(err, file) {
+            switch(err) {
+                case 'BrowserNotSupported':
+                    alert('browser does not support HTML5 drag and drop')
+                    break;
+                case 'TooManyFiles':
+                    // user uploaded more than 'maxfiles'
+                    break;
+                case 'FileTooLarge':
+                    // program encountered a file whose size is greater than 'maxfilesize'
+                    // FileTooLarge also has access to the file which was too large
+                    // use file.name to reference the filename of the culprit file
+                    break;
+                case 'FileTypeNotAllowed':
+                    // The file type is not in the specified list 'allowedfiletypes'
+                    break;
+                case 'FileExtensionNotAllowed':
+                    // The file extension is not in the specified list 'allowedfileextensions'
+                    break;
+                default:
+                    break;
+            }
+        },
+        allowedfiletypes: ['image/jpeg','image/png','image/gif'],
+        allowedfileextensions: ['.jpg','.jpeg','.png','.gif'], // file extensions allowed. Empty array means no restrictions
+        maxfiles: 25,
+        maxfilesize: 20
+    });
     
+    // Menu contextuel au click droit
     $.contextMenu({
         selector: '.file', 
         callback: function(key, options) {
@@ -66,16 +106,16 @@ function listFiles(user, dir) {
                         .html('<img src="img/icons/' + img + '.png" class="adaptated-src" /> ' + ((item.filename.length > 100) ? item.filename.substring(0, 100) + "..." : item.filename))
                     )
                     .append($('<td>')
-                        .text(item.size).filesize()
+                        .append($('<span>')
+                            .text(item.size).filesize()
+                            .attr("style", "visibility:" + (item.isDir == true ? "hidden" : "visible"))
+                        ) 
                     )
                     .append($('<td>')
                         .text(item.extension)
                     )
                     .append($('<td>')
-                        .text(function(){
-                            var time = new Date(item.mtime * 1000);
-                            return time.getDate() + "/" + time.getMonth()+1 + "/" + time.getFullYear();
-                        })
+                        .text(item.mtime)
                     )
                 );
         });
