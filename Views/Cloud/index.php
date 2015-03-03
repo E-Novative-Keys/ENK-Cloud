@@ -2,10 +2,10 @@
 
 <?php echo $this->Html->css('contextMenu'); ?>
 
-<?php echo $this->Html->script('cloud'); ?>
 <?php echo $this->Html->script('jquery.filesize.min'); ?>
-<?php echo $this->Html->script('dmuploader'); ?>
+<?php echo $this->Html->script('jquery.filedrop'); ?>
 <?php echo $this->Html->script('contextMenu'); ?>
+<?php echo $this->Html->script('cloud'); ?>
 
 <section>
     <div class="row">
