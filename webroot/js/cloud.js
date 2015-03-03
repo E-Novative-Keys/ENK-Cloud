@@ -60,7 +60,7 @@ function listFiles(user, dir) {
                     .attr("data-user", user)
                     .attr("class", "file")
                     .append($('<td>')
-                        .html('<img src="img/icons/' + img + '.png" /> ' + ((item.filename.length > 100) ? item.filename.substring(0, 100) + "..." : item.filename))
+                        .html('<img src="img/icons/' + img + '.png" class="adaptated-src" /> ' + ((item.filename.length > 100) ? item.filename.substring(0, 100) + "..." : item.filename))
                     )
                     .append($('<td>')
                         .text(item.size).filesize()
