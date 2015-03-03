@@ -35,7 +35,7 @@
                     <tr class="">
                         <th class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
                         	<span class="center">
-                                <span id="previous_client" class="glyphicon glyphicon-menu-left previous_files"></span>
+                                <span id="previous_dev" class="glyphicon glyphicon-menu-left previous_files"></span>
                                 Nom
                             </span>
                         </th>    
