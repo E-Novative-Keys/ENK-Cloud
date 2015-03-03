@@ -44,15 +44,6 @@
                 ?>
                 <span class="show-on-desktops inline">Uploader un fichier</span>
             </button>
-            <button class="btn enk-button files-buttons">
-                <?php
-                    echo $this->image('upld_dossier.svg', array(
-                        'alt' => 'Nouveau dossier',
-                        'height' => '20'
-                    ));
-                ?>
-                <span class="show-on-desktops inline">Uploader un dossier</span>
-            </button>
         </div>
     </div>
 </nav>

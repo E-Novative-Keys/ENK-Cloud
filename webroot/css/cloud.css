@@ -143,6 +143,11 @@ section.jumbotron {
     border: 0;
 }
 
+.previous_files {
+    margin: 5px;
+    margin-left: -10px;
+}
+
 #files {
     position: absolute;
     left: 25%;
