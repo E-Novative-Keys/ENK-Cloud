@@ -35,7 +35,7 @@ $(document).ready(function() {
     });
     $('table').on("drop", ".file", function(e) {
         e.preventDefault();
-        DnDFileUpload(e.originalEvent.dataTransfer.files, $('#DnDStatus'));
+        DnDFileUpload(e.originalEvent.dataTransfer.files, $(this), $('#DnDStatus'));
     });
 
     // Menu contextuel au click droit
