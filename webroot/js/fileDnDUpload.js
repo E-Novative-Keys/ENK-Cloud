@@ -61,15 +61,14 @@ function createStatusbar(obj)
 
 function sendFileToServer(formData, status)
 {
-    var jqXHR = $.ajax({
+    $.ajax({
         type: "POST",
         url: "http://enkwebservice.com/cloud/client/files/add",
         data: formData,
         crossDomain : true,
         contentType: false,
         processData: false,
-        dataType: "json",
-        xhr: function() {
+        /*xhr: function() {
             var xhrobj = $.ajaxSettings.xhr();
             if(xhrobj.upload) {
                 xhrobj.upload.addEventListener('progress', function(event) {
@@ -81,20 +80,15 @@ function sendFileToServer(formData, status)
                     }
                     
                     // Set progress
-                    status.setProgress(percent);
+                    //status.setProgress(percent);
                 }, false);
             }
             return xhrobj;
+        }*/
+        success: function(data) {
+            console.log(data);
         }
-    })
-    .success(function(data){
-        console.log(data);
-    })
-    .fail(function(){
-        alert('bouh');
     });
-
-    status.setAbort(jqXHR);
 }
 
 /*
