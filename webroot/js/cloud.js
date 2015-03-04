@@ -18,15 +18,7 @@ $(document).ready(function() {
     // Drag and Drop Zone
     
     // Stop propagation des events sur toute la page  
-    $(document).on('dragenter', function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-    });
-    $(document).on('dragover', function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-    });
-    $(document).on('drop', function(e) {
+    $(document).on('dragenter dragover drop', function(e) {
         e.stopPropagation();
         e.preventDefault();
     });
