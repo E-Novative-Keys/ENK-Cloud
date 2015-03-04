@@ -1,4 +1,4 @@
-<section class="jumbotron">
+<section>
     <div class="row">
         <div id="left-menu" class="col-xs-12 col-sm-3 col-md-3 col-lg-3 hide-on-phones"><!-- element --> 
             <div>
