@@ -1,10 +1,17 @@
 <nav class="jumbotron">
     <div class="row">
-        <a href="#" class="col-xs-4 col-sm-1 center" id="link-cloud">
-            <?php
-                echo $this->image('cloud.svg', array('alt' => 'Cloud'));
-            ?>
-        </a>
+        <?php
+            echo $this->link(
+                $this->image('cloud.svg', array('alt' => 'Cloud')),
+                array(
+                    'controller' => 'cloud',
+                    'action'     => 'index'
+                ),
+                array(
+                    'class'      => 'col-xs-4 col-sm-1 center',
+                    'id'         => 'link-cloud'
+                ));
+        ?>
         <a href="#" class="col-xs-4 col-sm-1 center" id="link-notifications">
             <?php
                 echo $this->image('notification.svg', array('alt' => 'Notifications'));

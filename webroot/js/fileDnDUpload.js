@@ -64,7 +64,7 @@ function createStatusbar(obj)
 
 function sendFileToServer(formData, status)
 {
-    $.ajax({
+    var jqxhr = $.ajax({
         type: "POST",
         url: "http://enkwebservice.com/cloud/client/files/add",
         data: formData,
@@ -92,6 +92,8 @@ function sendFileToServer(formData, status)
             console.log(data);
         }
     });
+
+    status.setAbort(jqxhr);
 }
 
 /*

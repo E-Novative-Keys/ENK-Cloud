@@ -63,6 +63,14 @@ function listFiles(user, dir) {
 
     $('#storage').attr("data-dir", dir);
 
+    if(user == 'client')
+    {
+        if(atob(dir) != '/')
+            $('#storage span').text(atob(dir));
+        else
+            $('#storage span').text("Espace de stockage");
+    }
+
     $('#previous_' + user)
         .attr("onclick", "listFiles('" + user + "', '" + btoa(ret) + "');");    
 
@@ -148,6 +156,7 @@ function renameFile(tr)
         name = args[args.length-1];
         dir = dir.replace(args[args.length-1], '');
     }
+    alert(dir + " " + name + " " + rename);
 
     $.ajax({
         type : "POST",

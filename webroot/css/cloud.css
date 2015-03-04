@@ -100,23 +100,22 @@ a[id^="link-"] img {
 
 .storage-button {
     margin: 4px;
-    background-color:#001C53; 
-    color:#66E6FF;
+    background-color: #001C53; 
+    color: #66E6FF;
     margin-right: 5%;
 }
 
 .storage-button:hover {
-    color:#66E6FF
+    color: #66E6FF
+}
+.storage-button:focus {
+    color: #66E6FF;
 }
 
 .files-buttons {
     margin: 4px;
     background-color:#D4DAE5; 
     color:#001C53
-}
-
-section.jumbotron {
-
 }
 
 #left-menu {
@@ -154,16 +153,13 @@ section.jumbotron {
     left: 25%;
     max-width: 75%;
     width: 75%;
-    height: calc(100% - 150px);
+    height: calc(100% - 155px);
 }
 
-#client-files {
-    position: absolute;
-}
-
-#dev-files {
-    position: absolute;
-    top: calc(50%);
+#files .table-responsive {
+    height: 50%;
+    max-height: 50%;
+    overflow: auto;
 }
 
 .drag-zone {
@@ -235,13 +231,9 @@ td {
         width: 100%;
         max-width: 100%;
     }
-    #client-files {
-        position: relative;
-    }
-
-    #dev-files {
-        position: relative;
-        top: 0;
+    #files .table-responsive {
+        height: auto;
+        max-height: auto;
     }
 }
 
