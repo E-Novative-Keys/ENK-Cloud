@@ -25,7 +25,7 @@
                         </th>    
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody style="overflow:auto;"></tbody>
             </table>
 
             <table id="dev-files" class="table-reponsive col-xs-12">
