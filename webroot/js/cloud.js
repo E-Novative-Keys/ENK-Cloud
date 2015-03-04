@@ -2,17 +2,43 @@ $(document).ready(function() {
     listFiles("client", btoa("/"));
     listFiles("dev", btoa("/"));
 
+    // Liste des fichiers au click sur un dossier ou download d'un fichier
     $('table').on("click", ".file", function() {
         if($(this).attr("data-dir") == "true")
             listFiles($(this).attr("data-user"), $(this).attr("data-file"));
         else
             download($(this).attr("data-file"));
     });
-    
-    /*$('.file').dmUploader({
-        url: 'http://enkwebservice.com/cloud/files/add'
-    });*/
 
+    // Création d'un nouveau dossier dans le répertoire courant
+    $('#new-dir').click(function() {
+        folderCreate();
+    });
+
+    // Drag and Drop Zone
+    
+    // Stop propagation des events sur toute la page  
+    $(document).on('dragenter dragover drop', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+    });
+
+    // Events sur les dossiers de la liste
+    $('table').on("dragenter", ".file", function(e) 
+    {
+        e.stopPropagation();
+        e.preventDefault();
+    });
+    $('table').on("dragover", ".file", function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+    });
+    $('table').on("drop", ".file", function(e) {
+        e.preventDefault();
+        DnDFileUpload(e.originalEvent.dataTransfer.files, $('#DnDStatus'));
+    });
+
+    // Menu contextuel au click droit
     $.contextMenu({
         selector: '.file', 
         callback: function(key, options) {
@@ -30,12 +56,15 @@ $(document).ready(function() {
 });
 
 function listFiles(user, dir) {
+
     var ret = atob(dir).split('/');
     ret.pop();
     ret = (ret.join('/') == "") ? '/' : ret.join('/');
 
+    $('#storage').attr("data-dir", dir);
+
     $('#previous_' + user)
-        .attr("onclick", "listFiles('" + user + "', '" + btoa(ret) + "');");
+        .attr("onclick", "listFiles('" + user + "', '" + btoa(ret) + "');");    
 
     $.ajax({
         type : "POST",
@@ -63,16 +92,16 @@ function listFiles(user, dir) {
                         .html('<img src="img/icons/' + img + '.png" class="adaptated-src" /> ' + ((item.filename.length > 100) ? item.filename.substring(0, 100) + "..." : item.filename))
                     )
                     .append($('<td>')
-                        .text(item.size).filesize()
+                        .append($('<span>')
+                            .text(item.size).filesize()
+                            .attr("style", "visibility:" + (item.isDir == true ? "hidden" : "visible"))
+                        ) 
                     )
                     .append($('<td>')
                         .text(item.extension)
                     )
                     .append($('<td>')
-                        .text(function(){
-                            var time = new Date(item.mtime * 1000);
-                            return time.getDate() + "/" + time.getMonth()+1 + "/" + time.getFullYear();
-                        })
+                        .text(item.mtime)
                     )
                 );
         });
@@ -166,4 +195,24 @@ function deleteFile(tr)
             listFiles(tr.attr("data-user"), btoa(args.join('/')));
         });
     }
+}
+
+function folderCreate()
+{
+    var name = prompt("New folder name", "");
+
+    var dir = $('#storage').attr("data-dir");
+
+    $.ajax({
+        type : "POST",
+        url : "http://enkwebservice.com/cloud/client/folder/add",
+        data : "data=" + JSON.stringify({data : { 
+            Cloud : {project : 1, directory : dir, name : name},
+            Token : {link : $('#link').val(), fields : $('#fields').val()}
+        }}),
+        crossDomain : true
+    })
+    .done(function() {
+        listFiles("client", dir);
+    });
 }

@@ -1,0 +1,24 @@
+.DnDProgress {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.DnDLabel {
+    position: absolute;
+    right: 35px;
+    white-space: nowrap;
+}
+
+.DnDPercent {
+    position: absolute;
+    left: 20px;
+    color: white;
+}
+
+.DnDTrash {
+    margin: 2px;
+    float: right;
+    color: #d9534f;
+    cursor: pointer;
+    font-weight: bold;
+}
