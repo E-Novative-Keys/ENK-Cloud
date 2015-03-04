@@ -13,33 +13,29 @@ function DnDFileUpload(files, obj)
 
 function createStatusbar(obj)
 {
-    /*this.statusbar      = $("<div class='DnDstatusbar'></div>");
-    this.filename       = $("<div class='DnDfilename'></div>").appendTo(this.statusbar);
-    this.size           = $("<div class='DnDfilesize'></div>").appendTo(this.statusbar);
-    this.progressBar    = $("<div class='DnDprogressBar'><div></div></div>").appendTo(this.statusbar);
-    this.abort          = $("<div class='DnDabort'>Abort</div>").appendTo(this.statusbar);*/
-
-    this.statusbar      = $("<div class=\"progress\"></div>");
+    this.statusbar      = $("<div class=\"progress DnDProgress\"></div>");
     this.progressBar    = $("<div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"50\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:50%\"></div>")
-                            .html("")
                             .appendTo(this.statusbar);
     this.percent        = $("<span class=\"DnDPercent\">0%</span>").appendTo(this.statusbar);
     this.abort          = $("<span class=\"glyphicon glyphicon-trash DnDTrash\"></span>").appendTo(this.statusbar);
     this.label          = $("<span class=\"DnDLabel\"></span>").appendTo(this.statusbar);
 
+    this.name           = undefined;
+    this.size           = undefined;
+
     obj.append(this.statusbar);
  
     this.setData = function(name,size) {
-        size = $("<span>").html(size).filesize().html();
-        this.label.html(name + " " + size);
+        this.size = $("<span>").html(size).filesize().html();
+        this.name = name;
+
+        this.label.html(this.name + " " + this.size);
     }
 
     this.setProgress = function(progress) {       
         var progressBarWidth = progress * this.progressBar.width() / 100;
 
-        this.progressBar
-            .animate({width: progressBarWidth}, 10)
-            /*.html(progress + "%")*/;
+        this.progressBar.animate({width: progressBarWidth}, 10);
         this.percent.html(progress + "%");
 
         if(parseInt(progress) >= 100)

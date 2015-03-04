@@ -1,5 +1,12 @@
+.DnDProgress {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .DnDLabel {
-    float: right;
+    position: absolute;
+    right: 35px;
+    white-space: nowrap;
 }
 
 .DnDPercent {

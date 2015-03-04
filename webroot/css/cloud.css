@@ -146,6 +146,7 @@ section.jumbotron {
 .previous_files {
     margin: 5px;
     margin-left: -10px;
+    cursor: pointer;
 }
 
 #files {
@@ -212,22 +213,18 @@ td {
 /* CSS3 Responsive */
 
 /* Tablettes */
-@media only screen and (device-width: 768px), (device-width: 800px) {
+@media only screen and (min-width: 768px) and (max-width: 1280px) {
     a[id^="link-"] img {
-        margin: 21px;
-        height: 40%;
-        width: 40%;
-    } /* retoucher la taille des icones sur tablette (trop petites actuellement et pas centrées) - certainement le margin à bouger en fonction aussi, perso quand je touche ici ça change que dalle x)..  */      
+        margin: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 60%;
+        width: 60%;
+    }
 }
 
 /* Mobile */
-@media only screen and (max-width: 767px) {
-    a[id^="link-"] img {
-        margin: 21px;
-        height: 40%;
-        width: 40%;
-    }
-    
+@media only screen and (max-width: 767px) {    
     header .header-menu {
         padding: 24px;
     }

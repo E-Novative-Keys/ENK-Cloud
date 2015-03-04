@@ -23,8 +23,8 @@
                         <th class="col-xs-2 col-sm-2 white-border">Taille</th>    
                         <th class="col-xs-3 col-sm-2 white-border">Type</th>    
                         <th class="col-xs-2 col-sm-2 white-border">
-                        	<span class="show-on-phones">Créé</span>
-                        	<span class="hide-on-phones">Créé le</span>
+                        	<span class="show-on-phones">Modifié</span>
+                        	<span class="hide-on-phones">Modifié le</span>
                         </th>    
                     </tr>
                 </thead>
@@ -43,8 +43,8 @@
                         <th class="col-xs-2 col-sm-2 white-border">Taille</th>    
                         <th class="col-xs-3 col-sm-2 white-border">Type</th>    
                         <th class="col-xs-2 col-sm-2 white-border">
-                        	<span class="show-on-phones">Créé</span>
-                        	<span class="hide-on-phones">Créé le</span>
+                        	<span class="show-on-phones">Modifié</span>
+                        	<span class="hide-on-phones">Modifié le</span>
                         </th>    
                     </tr>
                 </thead>
