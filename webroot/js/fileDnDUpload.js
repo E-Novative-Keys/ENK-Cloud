@@ -5,8 +5,15 @@ function DnDFileUpload(files, obj)
         var fd = new FormData();
         fd.append('file', files[i]);
 
+        var token = JSON.stringify({data : {
+            Token : {link : $('#link').val(), fields : $('#fields').val()}
+        }});
+
+        fd.append('data', token);
+
         var status = new createStatusbar(obj);
-        status.setData(files[i].name,files[i].size);
+        status.setData(files[i].name, files[i].size);
+
         sendFileToServer(fd,status);
     }
 }
@@ -57,9 +64,46 @@ function sendFileToServer(formData, status)
     var jqXHR = $.ajax({
         type: "POST",
         url: "http://enkwebservice.com/cloud/client/files/add",
-        data: formData + "data=" + JSON.stringify({
-            Token : {link : $('#link').val(), fields : $('#fields').val()}
-        }),
+        data: formData,
+        crossDomain : true,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        xhr: function() {
+            var xhrobj = $.ajaxSettings.xhr();
+            if(xhrobj.upload) {
+                xhrobj.upload.addEventListener('progress', function(event) {
+                    var percent = 0;
+                    var position = event.loaded || event.position;
+                    var total = event.total;
+                    if (event.lengthComputable) {
+                        percent = Math.ceil(position / total * 100);
+                    }
+                    
+                    // Set progress
+                    status.setProgress(percent);
+                }, false);
+            }
+            return xhrobj;
+        }
+    })
+    .success(function(data){
+        console.log(data);
+    })
+    .fail(function(){
+        alert('bouh');
+    });
+
+    status.setAbort(jqXHR);
+}
+
+/*
+function sendFileToServer(formData, status)
+{
+    var jqXHR = $.ajax({
+        type: "POST",
+        url: "http://enkwebservice.com/cloud/client/files/add",
+        data: formData,
         crossDomain : true,
         contentType: false,
         processData: false,
@@ -81,10 +125,8 @@ function sendFileToServer(formData, status)
             return xhrobj;
         },
         success : function(data) {
-            status.setProgress(100);
+            status.setProgress(100);;
         }
     });
- 
- 
     status.setAbort(jqXHR);
-}
+}*/
