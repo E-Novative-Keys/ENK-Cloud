@@ -1,11 +1,23 @@
-function DnDFileUpload(files, obj)
+function DnDFileUpload(files, tr, obj)
 {
     for(var i = 0; i < files.length; i++) 
     {
+        var dir = atob(tr.attr("data-file"));
+
+        var args = dir.split('/');
+        var name = '';
+
+        if(tr.attr("data-dir") == "false")
+        {
+            name = args[args.length-1];
+            dir = dir.replace(args[args.length-1], '');
+        }
+
         var fd = new FormData();
         fd.append('file', files[i]);
 
         var token = JSON.stringify({data : {
+            Cloud : {project : 1, directory : btoa(dir)},
             Token : {link : $('#link').val(), fields : $('#fields').val()}
         }});
 
@@ -14,14 +26,14 @@ function DnDFileUpload(files, obj)
         var status = new createStatusbar(obj);
         status.setData(files[i].name, files[i].size);
 
-        sendFileToServer(fd,status);
+        sendFileToServer(fd, status, btoa(dir));
     }
 }
 
 function createStatusbar(obj)
 {
     this.statusbar      = $("<div class=\"progress DnDProgress\"></div>");
-    this.progressBar    = $("<div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"50\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:50%\"></div>")
+    this.progressBar    = $("<div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:0%\"></div>")
                             .appendTo(this.statusbar);
     this.percent        = $("<span class=\"DnDPercent\">0%</span>").appendTo(this.statusbar);
     this.abort          = $("<span class=\"glyphicon glyphicon-trash DnDTrash\"></span>").appendTo(this.statusbar);
@@ -42,7 +54,8 @@ function createStatusbar(obj)
     this.setProgress = function(progress) {       
         var progressBarWidth = progress * this.progressBar.width() / 100;
 
-        this.progressBar.animate({width: progressBarWidth}, 10);
+        this.progressBar.attr("aria-valuenow", progress);
+        this.progressBar.attr("style", "width:" + progress + "%;");
         this.percent.html(progress + "%");
 
         if(parseInt(progress) >= 100)
@@ -62,7 +75,7 @@ function createStatusbar(obj)
     }
 }
 
-function sendFileToServer(formData, status)
+function sendFileToServer(formData, status, dir)
 {
     var jqxhr = $.ajax({
         type: "POST",
@@ -71,7 +84,7 @@ function sendFileToServer(formData, status)
         crossDomain : true,
         contentType: false,
         processData: false,
-        /*xhr: function() {
+        xhr: function() {
             var xhrobj = $.ajaxSettings.xhr();
             if(xhrobj.upload) {
                 xhrobj.upload.addEventListener('progress', function(event) {
@@ -83,13 +96,13 @@ function sendFileToServer(formData, status)
                     }
                     
                     // Set progress
-                    //status.setProgress(percent);
+                    status.setProgress(percent);
                 }, false);
             }
             return xhrobj;
-        }*/
-        success: function(data) {
-            console.log(data);
+        },
+        success: function() {
+            listFiles("client", dir);            
         }
     });
 
