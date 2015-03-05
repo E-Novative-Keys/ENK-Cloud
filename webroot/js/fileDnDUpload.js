@@ -59,12 +59,9 @@ function createStatusbar(obj)
         this.percent.html(progress + "%");
 
         if(parseInt(progress) >= 100)
-        {
             this.abort.hide();
-            this.progressBar.attr("class", "progress-bar progress-bar-success");
-        }
     }
-    
+
     this.setAbort = function(jqxhr) {
         var sb = this.statusbar;
 
@@ -101,8 +98,18 @@ function sendFileToServer(formData, status, dir)
             }
             return xhrobj;
         },
-        success: function() {
-            listFiles("client", dir);            
+        success: function(data) {
+            if(JSON.stringify(data) == '{"upload":"success"}')
+            {
+                status.progressBar.attr("class", "progress-bar progress-bar-success");
+                listFiles("client", dir); 
+            }
+            else
+            {
+                status.progressBar.attr("class", "progress-bar progress-bar-danger");
+                status.setProgress(100);
+                status.percent.html("");
+            }           
         }
     });
 

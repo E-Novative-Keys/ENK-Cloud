@@ -15,6 +15,10 @@ $(document).ready(function() {
         folderCreate();
     });
 
+    $('#storage').click(function() {
+        listFiles('client', $(this).attr("data-dir"));
+    });
+
     // Drag and Drop Zone
     
     // Stop propagation des events sur toute la page  
@@ -97,7 +101,7 @@ function listFiles(user, dir) {
                     .attr("data-user", user)
                     .attr("class", "file")
                     .append($('<td>')
-                        .html('<img src="img/icons/' + img + '.png" class="adaptated-src" /> ' + ((item.filename.length > 100) ? item.filename.substring(0, 100) + "..." : item.filename))
+                        .html('<img src="img/icons/' + img + '.png" class="adaptated-src" /> <span>' + ((item.filename.length > 100) ? item.filename.substring(0, 100) + "..." : item.filename) + '</span>')
                     )
                     .append($('<td>')
                         .append($('<span>')
@@ -167,13 +171,18 @@ function renameFile(tr)
         crossDomain : true
     })
     .success(function(data) {
-        alert(JSON.stringify(data));
         args[args.length-1] = rename;
-        tr.find('td:first-child').text(rename);
+        tr.find('td:first-child span').text(rename);
         tr.attr("data-file", btoa(args.join('/')));
-    })
-    .fail(function(data) {
-        alert(JSON.stringify(data));
+
+        var ext = ((args = rename.split('.')) != undefined && args.length > 1) ? args.pop() : '';
+
+        if(tr.attr("data-dir") == "true")
+            tr.find('td:first-child img').attr("src", "img/icons/directory.png");
+        else if(ext.length > 0)
+            tr.find('td:first-child img').attr("src", "img/icons/" + ext + ".png");
+
+        tr.find('td:nth-child(3)').html(ext);
     });
 }
 
@@ -211,7 +220,7 @@ function deleteFile(tr)
 
 function folderCreate()
 {
-    var name = prompt("New folder name", "");
+    var name = prompt("Nouveau dossier", "");
 
     var dir = $('#storage').attr("data-dir");
 
