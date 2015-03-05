@@ -41,7 +41,7 @@
                     );
                 ?>
             </a>
-            <input type="text" class="search-bar" placeholder="           Rechercher" />
+            <input type="text" class="search-bar" id="search" placeholder="           Rechercher" />
         </div>
 
         <div class="header-menu col-xs-6 col-md-9 col-lg-9 right show-on-phones">

@@ -50,6 +50,12 @@ $(document).ready(function() {
         listFiles("dev", btoa("/"));
     });
 
+    // Champs de recherche
+    $('#search').keyup(function(){
+        listFiles("client", btoa("/"), $(this).val());
+        listFiles("dev", btoa("/"), $(this).val());
+    });
+
     // Menu contextuel au click droit
     $.contextMenu({
         selector: '#client-files .file', 
@@ -67,11 +73,15 @@ $(document).ready(function() {
     });
 });
 
-function listFiles(user, dir) {
-
+function listFiles(user, dir, search) {
     var ret = atob(dir).split('/');
     ret.pop();
     ret = (ret.join('/') == "") ? '/' : ret.join('/');
+
+    if(search)
+        var cloud = {project : $('#projects-button').attr("data-project"), directory : dir, search : search};
+    else
+        var cloud = {project : $('#projects-button').attr("data-project"), directory : dir};
 
     $('#storage').attr("data-dir", dir);
 
@@ -90,7 +100,7 @@ function listFiles(user, dir) {
         type : "POST",
         url : "http://enkwebservice.com/cloud/files/" + user,
         data : 'data=' + JSON.stringify({data : {
-            Cloud : {project : $('#projects-button').attr("data-project"), directory : dir},
+            Cloud : cloud,
             Token : {link : $('#link').val(), fields : $('#fields').val()}
         }}),
         crossDomain: true,

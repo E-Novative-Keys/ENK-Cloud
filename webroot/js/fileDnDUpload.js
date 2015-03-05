@@ -17,7 +17,7 @@ function DnDFileUpload(files, tr, obj)
         fd.append('file', files[i]);
 
         var token = JSON.stringify({data : {
-            Cloud : {project : 1, directory : btoa(dir)},
+            Cloud : {project : $('#projects-button').attr("data-project"), directory : btoa(dir)},
             Token : {link : $('#link').val(), fields : $('#fields').val()}
         }});
 
@@ -109,7 +109,7 @@ function sendFileToServer(formData, status, dir)
                 status.progressBar.attr("class", "progress-bar progress-bar-danger");
                 status.setProgress(100);
                 status.percent.html("");
-            }           
+            }         
         }
     });
 
