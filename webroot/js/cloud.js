@@ -156,7 +156,6 @@ function renameFile(tr)
         name = args[args.length-1];
         dir = dir.replace(args[args.length-1], '');
     }
-    alert(dir + " " + name + " " + rename);
 
     $.ajax({
         type : "POST",
@@ -167,10 +166,14 @@ function renameFile(tr)
         }}),
         crossDomain : true
     })
-    .success(function() {
+    .success(function(data) {
+        alert(JSON.stringify(data));
         args[args.length-1] = rename;
         tr.find('td:first-child').text(rename);
         tr.attr("data-file", btoa(args.join('/')));
+    })
+    .fail(function(data) {
+        alert(JSON.stringify(data));
     });
 }
 
