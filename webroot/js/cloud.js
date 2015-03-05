@@ -169,29 +169,32 @@ function renameFile(tr)
         dir = dir.replace(args[args.length-1], '');
     }
 
-    $.ajax({
-        type : "POST",
-        url : "http://enkwebservice.com/cloud/" + tr.attr("data-user") + "/files/rename",
-        data : "data=" + JSON.stringify({data : {
-            Cloud : {project : $('#projects-button').attr("data-project"), directory : dir, name : name, rename : rename},
-            Token : {link : $('#link').val(), fields : $('#fields').val()}
-        }}),
-        crossDomain : true
-    })
-    .success(function(data) {
-        args[args.length-1] = rename;
-        tr.find('td:first-child span').text(rename);
-        tr.attr("data-file", btoa(args.join('/')));
+    if(rename)
+    {
+        $.ajax({
+            type : "POST",
+            url : "http://enkwebservice.com/cloud/" + tr.attr("data-user") + "/files/rename",
+            data : "data=" + JSON.stringify({data : {
+                Cloud : {project : $('#projects-button').attr("data-project"), directory : dir, name : name, rename : rename},
+                Token : {link : $('#link').val(), fields : $('#fields').val()}
+            }}),
+            crossDomain : true
+        })
+        .success(function(data) {
+            args[args.length-1] = rename;
+            tr.find('td:first-child span').text(rename);
+            tr.attr("data-file", btoa(args.join('/')));
 
-        var ext = ((args = rename.split('.')) != undefined && args.length > 1) ? args.pop() : '';
+            var ext = ((args = rename.split('.')) != undefined && args.length > 1) ? args.pop() : '';
 
-        if(tr.attr("data-dir") == "true")
-            tr.find('td:first-child img').attr("src", "img/icons/directory.png");
-        else if(ext.length > 0)
-            tr.find('td:first-child img').attr("src", "img/icons/" + ext + ".png");
+            if(tr.attr("data-dir") == "true")
+                tr.find('td:first-child img').attr("src", "img/icons/directory.png");
+            else if(ext.length > 0)
+                tr.find('td:first-child img').attr("src", "img/icons/" + ext + ".png");
 
-        tr.find('td:nth-child(3)').html(ext);
-    });
+            tr.find('td:nth-child(3)').html(ext);
+        });
+    }
 }
 
 function deleteFile(tr)
