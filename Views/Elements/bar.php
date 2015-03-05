@@ -56,7 +56,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                     <?php
                         echo $this->image('menu.svg', array(
-                            'alt' => 'Nouveau fichier',
+                            'alt' => 'Projet',
                             'height' => '20'
                         ));
                     ?>

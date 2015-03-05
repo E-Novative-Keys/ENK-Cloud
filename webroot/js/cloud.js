@@ -29,16 +29,16 @@ $(document).ready(function() {
     });
 
     // Events sur les dossiers de la liste
-    $('table').on("dragenter", ".file", function(e) 
+    $('#client-files').on("dragenter", ".file", function(e) 
     {
         e.stopPropagation();
         e.preventDefault();
     });
-    $('table').on("dragover", ".file", function(e) {
+    $('#client-files').on("dragover", ".file", function(e) {
         e.stopPropagation();
         e.preventDefault();
     });
-    $('table').on("drop", ".file", function(e) {
+    $('#client-files').on("drop", ".file", function(e) {
         e.preventDefault();
         DnDFileUpload(e.originalEvent.dataTransfer.files, $(this), $('#DnDStatus'));
     });
@@ -52,7 +52,7 @@ $(document).ready(function() {
 
     // Menu contextuel au click droit
     $.contextMenu({
-        selector: '.file', 
+        selector: '#client-files .file', 
         callback: function(key, options) {
 
             if(key == "rename")

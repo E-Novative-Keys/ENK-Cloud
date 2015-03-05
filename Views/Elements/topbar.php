@@ -11,15 +11,22 @@
         </div>
 
         <div class="header-menu col-xs-6 col-sm-9 col-md-9 col-lg-9 right hide-on-phones">
-            <button type="menuButton" class="btn enk-button menu-button">
-                <?php 
-                    echo $this->image('menu.svg', array(
-                        'alt'       => 'Menu',
-                        'height'    => '20')
-                    );
-                ?>
-                Menu
-            </button>
+            <span class="btn enk-button menu-button dropdown" data-project="">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <?php
+                        echo $this->image('menu.svg', array(
+                            'alt' => 'Menu',
+                            'height' => '20'
+                        ));
+                    ?>
+                    Menu
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <?php echo $this->link('Déconnexion', array('controller' => 'users', 'action' => 'logout')); ?>
+                    </li>
+                </ul>
+            </span>
             <a href="#">
                 <?php 
                     echo $this->image('profil_cloud.svg', array(
@@ -38,15 +45,22 @@
         </div>
 
         <div class="header-menu col-xs-6 col-md-9 col-lg-9 right show-on-phones">
-            <button type="menuButton" class="btn enk-button menu-button">
-                <?php 
-                    echo $this->image('menu.svg', array(
-                        'alt'       => 'Menu',
-                        'height'    => '20')
-                    );
-                ?>
-                Menu
-            </button>
+            <span class="btn enk-button menu-button dropdown" data-project="">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <?php
+                        echo $this->image('menu.svg', array(
+                            'alt' => 'Menu',
+                            'height' => '20'
+                        ));
+                    ?>
+                    Menu
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <?php echo $this->link('Déconnexion', array('controller' => 'users', 'action' => 'logout')); ?>
+                    </li>
+                </ul>
+            </span>
         </div>
     </div>
 </header>
