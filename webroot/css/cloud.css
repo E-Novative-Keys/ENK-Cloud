@@ -115,7 +115,12 @@ a[id^="link-"] img {
 .files-buttons {
     margin: 4px;
     background-color:#D4DAE5; 
-    color:#001C53
+    color:#001C53;
+}
+
+#projects-button a {
+    color:#001C53;
+    text-decoration: none;
 }
 
 #left-menu {
@@ -132,7 +137,18 @@ a[id^="link-"] img {
     background-color:#001C53; 
     color:white; 
     border:0; 
-    height:30px 
+    height: 30px;
+    max-height: 30px;
+}
+
+.cloud-project {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    max-width: 50%;
+    overflow: hidden;
+    white-space: nowrap;
+    background-color: #A9B5CB;
 }
 
 .left-menu-notifications, .left-menu-messagerie {
