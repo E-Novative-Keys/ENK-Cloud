@@ -136,7 +136,7 @@ function listFiles(user, dir, search) {
                 );
         });
     })
-    .fail(function() {
+    .fail(function(data) {
         $('#' + user + '-files').find('tbody').empty();
         $('#' + user + '-files').find('tbody')
             .append($('<tr>')
