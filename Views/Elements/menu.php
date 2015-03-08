@@ -51,7 +51,13 @@
                     Messagerie
                 </button>
             </div>
-            <div id="DnDStatus"></div>
+
+            <?php if($this->controller->request->controller == "cloud" && $this->controller->request->action == "index"): ?>
+                <div>
+                    <textarea id="comment"></textarea>
+                </div>
+                <div id="DnDStatus"></div>
+            <?php endif; ?>
         </div>
     </div>
 </section>

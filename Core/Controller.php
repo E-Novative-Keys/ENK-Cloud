@@ -11,7 +11,7 @@ class Controller
 	public function __construct($request = null)
 	{
 		// Helpers
-		$this->Html 	= new Html();
+		$this->Html 	= new Html($this);
 		$this->Form 	= new Form($this);
 		$this->Session 	= new Session($this);
 		$this->Auth 	= new Auth($this);

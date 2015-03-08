@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    var hidden_enable = true;
+
     listProjects();
     listFiles("client", btoa("/"));
     listFiles("dev", btoa("/"));
@@ -9,6 +11,21 @@ $(document).ready(function() {
             listFiles($(this).attr("data-user"), $(this).attr("data-file"));
         else
             download($(this).attr("data-file"));
+    });
+
+    $('table').on("mouseover", ".file", function() {
+        if($(this).attr("data-comment") != "")
+            $('#comment')
+                .attr("style", "visibility:visible;")
+                .attr("readonly", "readonly")
+                .html($(this).attr("data-comment"));
+    });
+
+    $('table').on("mouseout", ".file", function() {
+        if(hidden_enable)
+            $('#comment')
+                .attr("style", "visibility:hidden;")
+                .html("");
     });
 
     // Création d'un nouveau dossier dans le répertoire courant
@@ -60,15 +77,23 @@ $(document).ready(function() {
     $.contextMenu({
         selector: '#client-files .file', 
         callback: function(key, options) {
-
             if(key == "rename")
                 renameFile($(this));
             else if(key == "delete")
                 deleteFile($(this));
+            else if(key == "comment")
+            {
+                hidden_enable = false;
+                $('#comment').parent().append($('<input>')
+                        .attr("type", "button")
+                        .attr("value", "Editer")
+                );
+            }
         },
         items: {
             "rename": {name: "Renommer", icon: "edit"},
             "delete": {name: "Supprimer", icon: "delete"},
+            "comment": {name: "Ajouter/Editer un commentaire", icon: "edit"}
         }
     });
 });
@@ -117,6 +142,7 @@ function listFiles(user, dir, search) {
                     .attr("data-file", btoa(((atob(dir) == "/") ? atob(dir) : atob(dir) + "/") + item.filename))
                     .attr("data-dir", item.isDir)
                     .attr("data-user", user)
+                    .attr("data-comment", item.comment)
                     .attr("class", "file")
                     .append($('<td>')
                         .html('<img src="img/icons/' + img + '.png" class="adaptated-src" /> <span>' + ((item.filename.length > 100) ? item.filename.substring(0, 100) + "..." : item.filename) + '</span>')

@@ -5,6 +5,7 @@ class Html
 	public static $meta_for_layout = array();
 	public static $css_for_layout = array();
 	public static $js_for_layout = array();
+	public $controller = null;
 
 	protected $tags = array(
 		'meta' 				=> '<meta %s/>',
@@ -30,6 +31,11 @@ class Html
 		'xhtml-frame' 	=> '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">',
 		'xhtml11' 		=> '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">'
 	);
+
+	public function __construct($controller)
+	{
+		$this->controller = $controller;
+	}
 
 	public function docType($type = 'html5')
 	{
