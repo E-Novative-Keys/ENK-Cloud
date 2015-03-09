@@ -10,7 +10,7 @@ $(document).ready(function() {
         if($(this).attr("data-dir") == "true")
             listFiles($(this).attr("data-user"), $(this).attr("data-file"));
         else
-            download($(this).attr("data-file"));
+            download($(this).attr("data-user"), $(this).attr("data-file"));
     });
 
     $('table').on("mouseover", ".file", function() {
@@ -175,19 +175,23 @@ function listFiles(user, dir, search) {
     });
 }
 
-function download(file) {
+function download(user, file) {
+    $url = "http://enkwebservice.com/cloud/files/download/";
     $.ajax({
         type : "POST",
-        url : "http://enkwebservice.com/cloud/files/download",
+        url : $url + "request",
         data : "data=" + JSON.stringify({data : {
-            Cloud : {project : $('#projects-button').attr("data-project"), path : file},
+            Cloud : {project : $('#projects-button').attr("data-project"), path : file, user: user},
             Token : {link : $('#link').val(), fields : $('#fields').val()}
         }}),
+        dataType : "json",
         crossDomain : true
     })
     .success(function(data){
-        //document.location.href = 'data:application/octet-stream;content-disposition:attachment;filename=coucou.txt,' + encodeURIComponent(data);
-        document.location.href = 'data:application/octet-stream,' + encodeURIComponent(data);
+        window.location.href = "" + $url + data.token + "";
+    })
+    .fail(function(){
+        alert('fail');
     });
 }
 
