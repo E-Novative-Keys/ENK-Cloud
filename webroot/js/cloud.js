@@ -44,7 +44,7 @@ $(document).ready(function() {
     });
 
     // Sélection d'un projet
-    $('#projects-button').on('click', 'li', function() {
+    $('.projects-button').on('click', '.project', function() {
         $('projects-button').attr("data-project", $(this).attr("data-id"));
         listFiles("client", btoa("/"));
         listFiles("dev", btoa("/"));
@@ -73,10 +73,10 @@ function listFiles(user, dir) {
     ret.pop();
     ret = (ret.join('/') == "") ? '/' : ret.join('/');
 
-    $('#storage').attr("data-dir", dir);
-
     if(user == 'client')
     {
+        $('#storage').attr("data-dir", dir);
+
         if(atob(dir) != '/')
             $('#storage span').text(atob(dir));
         else
@@ -90,7 +90,7 @@ function listFiles(user, dir) {
         type : "POST",
         url : "http://enkwebservice.com/cloud/files/" + user,
         data : 'data=' + JSON.stringify({data : {
-            Cloud : {project : $('#projects-button').attr("data-project"), directory : dir},
+            Cloud : {project : $('.projects-button').attr("data-project"), directory : dir},
             Token : {link : $('#link').val(), fields : $('#fields').val()}
         }}),
         crossDomain: true,
@@ -144,7 +144,7 @@ function download(file) {
         type : "POST",
         url : "http://enkwebservice.com/cloud/files/download",
         data : "data=" + JSON.stringify({data : {
-            Cloud : {project : $('#projects-button').attr("data-project"), path : file},
+            Cloud : {project : $('.projects-button').attr("data-project"), path : file},
             Token : {link : $('#link').val(), fields : $('#fields').val()}
         }}),
         crossDomain : true
@@ -175,7 +175,7 @@ function renameFile(tr)
             type : "POST",
             url : "http://enkwebservice.com/cloud/" + tr.attr("data-user") + "/files/rename",
             data : "data=" + JSON.stringify({data : {
-                Cloud : {project : $('#projects-button').attr("data-project"), directory : dir, name : name, rename : rename},
+                Cloud : {project : $('.projects-button').attr("data-project"), directory : dir, name : name, rename : rename},
                 Token : {link : $('#link').val(), fields : $('#fields').val()}
             }}),
             crossDomain : true
@@ -217,7 +217,7 @@ function deleteFile(tr)
             type : "POST",
             url : "http://enkwebservice.com/cloud/" + tr.attr("data-user") + "/files/delete",
             data : "data=" + JSON.stringify({data : { 
-                Cloud : {project : $('#projects-button').attr("data-project"), directory : dir, name : name},
+                Cloud : {project : $('.projects-button').attr("data-project"), directory : dir, name : name},
                 Token : {link : $('#link').val(), fields : $('#fields').val()}
             }}),
             crossDomain : true
@@ -239,7 +239,7 @@ function folderCreate()
         type : "POST",
         url : "http://enkwebservice.com/cloud/client/folder/add",
         data : "data=" + JSON.stringify({data : { 
-            Cloud : {project : $('#projects-button').attr("data-project"), directory : dir, name : name},
+            Cloud : {project : $('.projects-button').attr("data-project"), directory : dir, name : name},
             Token : {link : $('#link').val(), fields : $('#fields').val()}
         }}),
         crossDomain : true
@@ -262,14 +262,15 @@ function listProjects() {
     .success(function(data) {
         $.each(data.projects, function(index, item) {
             var li = $('<li>')
+                .attr("class", "project")
                 .attr("data-id", btoa(index))
                 .append($('<a>')
                     .html(item)
                 );
 
-            $('#projects-button ul').append(li);
+            $('.projects-button ul').append(li);
         });
 
-        $('#projects-button').attr("data-project", $('#projects-button ul li:first-child').attr("data-id"));
+        $('.projects-button').attr("data-project", $('.projects-button ul .project:first-child').attr("data-id"));
     });
 }

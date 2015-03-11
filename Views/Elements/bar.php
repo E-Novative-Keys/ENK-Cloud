@@ -52,7 +52,7 @@
                 <span class="show-on-desktops inline">Uploader un fichier</span>
             </button>
 
-            <span id="projects-button" class="btn enk-button files-buttons dropdown" data-project="">
+            <span class="btn enk-button files-buttons dropdown projects-button" data-project="">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                     <?php
                         echo $this->image('menu.svg', array(

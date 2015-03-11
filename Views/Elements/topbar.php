@@ -45,7 +45,25 @@
         </div>
 
         <div class="header-menu col-xs-6 col-md-9 col-lg-9 right show-on-phones">
-            <span class="btn enk-button menu-button dropdown" data-project="">
+            <span class="btn enk-button dropdown projects-button" data-project="">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <?php
+                        echo $this->image('menu.svg', array(
+                            'alt' => 'Menu',
+                            'height' => '20'
+                        ));
+                    ?>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu center" role="menu">
+                    <li>
+                        <?php echo $this->link('Déconnexion', array('controller' => 'users', 'action' => 'logout')); ?>
+                    </li>
+                     <li role="presentation" class="divider"></li>
+                </ul>
+            </span>
+
+            <!--span class="btn enk-button menu-button dropdown" data-project="">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                     <?php
                         echo $this->image('menu.svg', array(
@@ -60,7 +78,7 @@
                         <?php echo $this->link('Déconnexion', array('controller' => 'users', 'action' => 'logout')); ?>
                     </li>
                 </ul>
-            </span>
+            </span-->
         </div>
     </div>
 </header>
