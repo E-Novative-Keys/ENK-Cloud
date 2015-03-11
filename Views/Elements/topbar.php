@@ -26,14 +26,7 @@
                         <?php echo $this->link('Déconnexion', array('controller' => 'users', 'action' => 'logout')); ?>
                     </li>
                 </ul>
-            </span>
-            <a href="#">
-                <?php 
-                    echo $this->image('profil_cloud.svg', array(
-                        'alt'       => 'Cloud')
-                    );
-                ?>
-            </a>   
+            </span>  
             <a href="#">
                 <?php 
                     echo $this->image('profil.svg', array(

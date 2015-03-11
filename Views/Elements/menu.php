@@ -2,30 +2,23 @@
     <div class="row">
         <div id="left-menu" class="col-xs-12 col-sm-3 col-md-3 col-lg-3 hide-on-phones"><!-- element --> 
             <div>
-                <button type="goToStockage" class="left-menu-stockage">
-                    <span class="hide-on-tablets">
-                        <?php 
-                            echo $this->image('cloud.svg', array(
-                                'alt'       => 'Espace de Stockage',
-                                'url'       => array('controller' => 'cloud', 'action' => 'index'),
-                                'height'    => '22',
-                                'style'     => 'padding-right:10px;'
-                            ));
-                        ?>
-                        Espace de Stockage
-                    </span>
-                    <span class="show-on-tablets">
-                       <?php 
-                            echo $this->image('cloud.svg', array(
-                                'alt'       => 'Espace de Stockage',
-                                'url'       => array('controller' => 'cloud', 'action' => 'index'),
-                                'height'    => '22',
-                                'style'     => 'padding-right:10px;'
-                            ));
-                        ?>
-                        Stockage
-                    </span>
-                </button>
+                <?php
+                    $storage = "<span class=\"hide-on-tablets\">".
+                                $this->image('cloud.svg', array(
+                                    'alt'       => 'Espace de Stockage',
+                                    'height'    => '22',
+                                    'style'     => 'padding-right:10px;'
+                                )).
+                                " Espace de Stockage</span> <span class=\"show-on-tablets\">".
+                                $this->image('cloud.svg', array(
+                                    'alt'       => 'Espace de Stockage',
+                                    'height'    => '22',
+                                    'style'     => 'padding-right:10px;'
+                                )).
+                                " Stockage</span>";
+
+                    echo $this->link($storage , array('controller' => 'cloud', 'action' => 'index'), array('class' => 'left-menu-stockage'));
+                ?>
             </div>
             <div>
                 <button type="goToNotifications" class="left-menu-notifications">

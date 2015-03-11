@@ -1,17 +1,22 @@
-function DnDFileUpload(files, tr, obj)
+function DnDFileUpload(files, tr, obj, directory)
 {
     for(var i = 0; i < files.length; i++) 
     {
-        var dir = atob(tr.attr("data-file"));
-
-        var args = dir.split('/');
-        var name = '';
-
-        if(tr.attr("data-dir") == "false")
+        if(tr != undefined)
         {
-            name = args[args.length-1];
-            dir = dir.replace(args[args.length-1], '');
+            var dir = atob(tr.attr("data-file"));
+
+            var args = dir.split('/');
+            var name = '';
+
+            if(tr.attr("data-dir") == "false")
+            {
+                name = args[args.length-1];
+                dir = dir.replace(args[args.length-1], '');
+            }
         }
+        else
+            var dir = directory;
 
         var fd = new FormData();
         fd.append('file', files[i]);

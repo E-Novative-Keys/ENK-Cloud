@@ -42,7 +42,14 @@
                 ?>
                 <span class="show-on-desktops inline">Nouveau dossier</span>
             </button>
-            <button class="btn enk-button files-buttons">
+            <?php 
+                echo $this->controller->Form->input('Cloud.file', array(
+                    'type'  =>  'file',
+                    'id'    =>  'file-upload',
+                    'style' =>  'display:none;'
+                ));
+            ?>
+            <button class="btn enk-button files-buttons" id="btn-upload">
                 <?php
                     echo $this->image('upld_fichier.svg', array(
                         'alt' => 'Nouveau fichier',

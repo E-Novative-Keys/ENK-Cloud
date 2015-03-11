@@ -149,6 +149,15 @@ a[id^="link-"] img {
     max-height: 30px;
 }
 
+.left-menu-stockage:hover {
+    color: white;
+    text-decoration: none;  
+}
+
+.left-menu-stockage span {
+    padding-top: 4px;
+}
+
 .cloud-project {
     margin-left: auto;
     margin-right: auto;

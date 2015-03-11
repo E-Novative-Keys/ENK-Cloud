@@ -13,6 +13,17 @@ $(document).ready(function() {
             download($(this).attr("data-user"), $(this).attr("data-file"));
     });
 
+    // Simulating File Upload click
+    $('#btn-upload').click(function(e){
+        e.preventDefault();
+        $('#file-upload').click();
+    });
+
+    $('#file-upload').change(function(e){
+        e.preventDefault();
+        DnDFileUpload($(this)[0].files, undefined, $('#DnDStatus'), atob($('#storage').attr("data-dir")));
+    });
+
     // Text area des commentaires
 
     $('table').on("mouseover", ".file", function() {
@@ -85,6 +96,10 @@ $(document).ready(function() {
         e.preventDefault();
         DnDFileUpload(e.originalEvent.dataTransfer.files, $(this), $('#DnDStatus'));
     });
+    $('#client-dropzone').on("drop", function(e) {
+        e.preventDefault();
+        DnDFileUpload(e.originalEvent.dataTransfer.files, $(this), $('#DnDStatus'));
+    });
 
     // Sélection d'un projet
     $('.projects-button').on('click', '.project', function() {
@@ -103,13 +118,13 @@ $(document).ready(function() {
     $.contextMenu({
         selector: '#client-files .file', 
         callback: function(key, options) {
-            row = $(this);
             if(key == "rename")
                 renameFile($(this));
             else if(key == "delete")
                 deleteFile($(this));
             else if(key == "comment")
             {
+                row = $(this);
                 $('#comment')
                     .attr("style", "visibility:visible;")
                     .attr("readonly", false)
@@ -190,6 +205,14 @@ function listFiles(user, dir, search) {
                     )
                 );
         });
+        
+        if(user == 'client')
+        {
+            $('#client-dropzone')
+                .attr("style", "height: calc(100% - " + $('#' + user + '-files').height() + "px - 1px);")
+                .attr("data-dir", "true")
+                .attr("data-file", $('#storage').attr("data-dir"));
+        }
     })
     .fail(function(data) {
         $('#' + user + '-files').find('tbody').empty();
@@ -293,7 +316,8 @@ function deleteFile(tr)
         })
         .success(function() {
             args.pop();
-            listFiles(tr.attr("data-user"), btoa(args.join('/')));
+            dir = btoa(args.join('/'));
+            listFiles(tr.attr("data-user"), (dir.length == 0) ? btoa('/') : dir);
         });
     }
 }

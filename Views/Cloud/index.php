@@ -33,6 +33,7 @@
                         <tbody></tbody>
                     </table>
                 </div>
+                <div id="client-dropzone"></div>
             </div>
 
             <div class="files-table">
