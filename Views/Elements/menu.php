@@ -54,7 +54,8 @@
 
             <?php if($this->controller->request->controller == "cloud" && $this->controller->request->action == "index"): ?>
                 <div>
-                    <textarea id="comment"></textarea>
+                    <textarea id="comment" class="form-control"></textarea>
+                    <button id="edit-comment" class="btn enk-button">Enregistrer</button>
                 </div>
                 <div id="DnDStatus"></div>
             <?php endif; ?>

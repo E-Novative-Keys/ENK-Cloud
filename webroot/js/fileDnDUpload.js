@@ -17,7 +17,7 @@ function DnDFileUpload(files, tr, obj)
         fd.append('file', files[i]);
 
         var token = JSON.stringify({data : {
-            Cloud : {project : $('#projects-button').attr("data-project"), directory : btoa(dir)},
+            Cloud : {project : $('.projects-button').attr("data-project"), directory : btoa(dir)},
             Token : {link : $('#link').val(), fields : $('#fields').val()}
         }});
 

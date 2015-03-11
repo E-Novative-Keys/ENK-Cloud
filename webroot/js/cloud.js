@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var hidden_enable = true;
+    var row = undefined;
 
     listProjects();
     listFiles("client", btoa("/"));
@@ -13,19 +13,45 @@ $(document).ready(function() {
             download($(this).attr("data-user"), $(this).attr("data-file"));
     });
 
+    // Text area des commentaires
+
     $('table').on("mouseover", ".file", function() {
-        if($(this).attr("data-comment") != "")
+        if(row == undefined && $(this).attr("data-comment") != "")
             $('#comment')
                 .attr("style", "visibility:visible;")
-                .attr("readonly", "readonly")
-                .html($(this).attr("data-comment"));
+                .attr("readonly", true)
+                .val($(this).attr("data-comment"));
     });
 
     $('table').on("mouseout", ".file", function() {
-        if(hidden_enable)
+        if(row == undefined)
             $('#comment')
                 .attr("style", "visibility:hidden;")
-                .html("");
+                .val("");
+    });
+
+    $('#edit-comment').on("click", function() {
+        $.ajax({
+            method: "POST",
+            url : "http://enkwebservice.com/cloud/comment",
+            data : 'data=' + JSON.stringify({data : {
+                Cloud : {user : "client", project : $('.projects-button').attr("data-project"), file : $(this).attr("data-file"), comment : $('#comment').val()},
+                Token : {link : $('#link').val(), fields : $('#fields').val()}
+            }}),
+            crossDomain: true,
+            dataType : "json"
+        }).success(function(data) {
+            if(data.comment)
+            {
+                $('#comment').attr("style", "visibility:hidden;");
+                $('#edit-comment').attr("style", "visibility:hidden;");
+
+                row.attr("data-comment", $('#comment').val());
+                row = undefined;
+            }
+            else
+                alert("bouh");
+        });
     });
 
     // Création d'un nouveau dossier dans le répertoire courant
@@ -62,7 +88,7 @@ $(document).ready(function() {
 
     // Sélection d'un projet
     $('.projects-button').on('click', '.project', function() {
-        $('projects-button').attr("data-project", $(this).attr("data-id"));
+        $('.projects-button').attr("data-project", $(this).attr("data-id"));
         listFiles("client", btoa("/"));
         listFiles("dev", btoa("/"));
     });
@@ -77,17 +103,20 @@ $(document).ready(function() {
     $.contextMenu({
         selector: '#client-files .file', 
         callback: function(key, options) {
+            row = $(this);
             if(key == "rename")
                 renameFile($(this));
             else if(key == "delete")
                 deleteFile($(this));
             else if(key == "comment")
             {
-                hidden_enable = false;
-                $('#comment').parent().append($('<input>')
-                        .attr("type", "button")
-                        .attr("value", "Editer")
-                );
+                $('#comment')
+                    .attr("style", "visibility:visible;")
+                    .attr("readonly", false)
+                    .val($(this).attr("data-comment"));
+                $('#edit-comment')
+                    .attr("data-file", $(this).attr("data-file"))
+                    .attr("style", "visibility:visible");
             }
         },
         items: {
