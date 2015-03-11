@@ -167,6 +167,13 @@ a[id^="link-"] img {
     border: 0;
 }
 
+#comment {
+    visibility: hidden;
+    width: 100%;
+    height: 200px;
+    resize: none;
+}
+
 .previous_files {
     margin: 5px;
     margin-left: -10px;

@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    var hidden_enable = true;
+
     listProjects();
     listFiles("client", btoa("/"));
     listFiles("dev", btoa("/"));
@@ -8,7 +10,22 @@ $(document).ready(function() {
         if($(this).attr("data-dir") == "true")
             listFiles($(this).attr("data-user"), $(this).attr("data-file"));
         else
-            download($(this).attr("data-file"));
+            download($(this).attr("data-user"), $(this).attr("data-file"));
+    });
+
+    $('table').on("mouseover", ".file", function() {
+        if($(this).attr("data-comment") != "")
+            $('#comment')
+                .attr("style", "visibility:visible;")
+                .attr("readonly", "readonly")
+                .html($(this).attr("data-comment"));
+    });
+
+    $('table').on("mouseout", ".file", function() {
+        if(hidden_enable)
+            $('#comment')
+                .attr("style", "visibility:hidden;")
+                .html("");
     });
 
     // Création d'un nouveau dossier dans le répertoire courant
@@ -50,28 +67,46 @@ $(document).ready(function() {
         listFiles("dev", btoa("/"));
     });
 
+    // Champs de recherche
+    $('#search').keyup(function(){
+        listFiles("client", btoa("/"), $(this).val());
+        listFiles("dev", btoa("/"), $(this).val());
+    });
+
     // Menu contextuel au click droit
     $.contextMenu({
         selector: '#client-files .file', 
         callback: function(key, options) {
-
             if(key == "rename")
                 renameFile($(this));
             else if(key == "delete")
                 deleteFile($(this));
+            else if(key == "comment")
+            {
+                hidden_enable = false;
+                $('#comment').parent().append($('<input>')
+                        .attr("type", "button")
+                        .attr("value", "Editer")
+                );
+            }
         },
         items: {
             "rename": {name: "Renommer", icon: "edit"},
             "delete": {name: "Supprimer", icon: "delete"},
+            "comment": {name: "Ajouter/Editer un commentaire", icon: "edit"}
         }
     });
 });
 
-function listFiles(user, dir) {
-
+function listFiles(user, dir, search) {
     var ret = atob(dir).split('/');
     ret.pop();
     ret = (ret.join('/') == "") ? '/' : ret.join('/');
+
+    if(search)
+        var cloud = {project : $('.projects-button').attr("data-project"), directory : dir, search : search};
+    else
+        var cloud = {project : $('.projects-button').attr("data-project"), directory : dir};
 
     if(user == 'client')
     {
@@ -90,7 +125,7 @@ function listFiles(user, dir) {
         type : "POST",
         url : "http://enkwebservice.com/cloud/files/" + user,
         data : 'data=' + JSON.stringify({data : {
-            Cloud : {project : $('.projects-button').attr("data-project"), directory : dir},
+            Cloud : cloud,
             Token : {link : $('#link').val(), fields : $('#fields').val()}
         }}),
         crossDomain: true,
@@ -107,6 +142,7 @@ function listFiles(user, dir) {
                     .attr("data-file", btoa(((atob(dir) == "/") ? atob(dir) : atob(dir) + "/") + item.filename))
                     .attr("data-dir", item.isDir)
                     .attr("data-user", user)
+                    .attr("data-comment", item.comment)
                     .attr("class", "file")
                     .append($('<td>')
                         .html('<img src="img/icons/' + img + '.png" class="adaptated-src" /> <span>' + ((item.filename.length > 100) ? item.filename.substring(0, 100) + "..." : item.filename) + '</span>')
@@ -126,7 +162,7 @@ function listFiles(user, dir) {
                 );
         });
     })
-    .fail(function() {
+    .fail(function(data) {
         $('#' + user + '-files').find('tbody').empty();
         $('#' + user + '-files').find('tbody')
             .append($('<tr>')
@@ -139,19 +175,23 @@ function listFiles(user, dir) {
     });
 }
 
-function download(file) {
+function download(user, file) {
+    $url = "http://enkwebservice.com/cloud/files/download/";
     $.ajax({
         type : "POST",
-        url : "http://enkwebservice.com/cloud/files/download",
+        url : $url + "request",
         data : "data=" + JSON.stringify({data : {
-            Cloud : {project : $('.projects-button').attr("data-project"), path : file},
+            Cloud : {project : $('.projects-button').attr("data-project"), path : file, user: user},
             Token : {link : $('#link').val(), fields : $('#fields').val()}
         }}),
+        dataType : "json",
         crossDomain : true
     })
     .success(function(data){
-        //document.location.href = 'data:application/octet-stream;content-disposition:attachment;filename=coucou.txt,' + encodeURIComponent(data);
-        document.location.href = 'data:application/octet-stream,' + encodeURIComponent(data);
+        window.location.href = "" + $url + data.token + "";
+    })
+    .fail(function(){
+        alert('fail');
     });
 }
 

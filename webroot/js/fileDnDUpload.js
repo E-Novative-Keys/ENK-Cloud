@@ -17,7 +17,7 @@ function DnDFileUpload(files, tr, obj)
         fd.append('file', files[i]);
 
         var token = JSON.stringify({data : {
-            Cloud : {project : 1, directory : btoa(dir)},
+            Cloud : {project : $('#projects-button').attr("data-project"), directory : btoa(dir)},
             Token : {link : $('#link').val(), fields : $('#fields').val()}
         }});
 
@@ -109,43 +109,9 @@ function sendFileToServer(formData, status, dir)
                 status.progressBar.attr("class", "progress-bar progress-bar-danger");
                 status.setProgress(100);
                 status.percent.html("");
-            }           
+            }         
         }
     });
 
     status.setAbort(jqxhr);
 }
-
-/*
-function sendFileToServer(formData, status)
-{
-    var jqXHR = $.ajax({
-        type: "POST",
-        url: "http://enkwebservice.com/cloud/client/files/add",
-        data: formData,
-        crossDomain : true,
-        contentType: false,
-        processData: false,
-        xhr: function() {
-            var xhrobj = $.ajaxSettings.xhr();
-            if(xhrobj.upload) {
-                xhrobj.upload.addEventListener('progress', function(event) {
-                    var percent = 0;
-                    var position = event.loaded || event.position;
-                    var total = event.total;
-                    if (event.lengthComputable) {
-                        percent = Math.ceil(position / total * 100);
-                    }
-                    
-                    // Set progress
-                    status.setProgress(percent);
-                }, false);
-            }
-            return xhrobj;
-        },
-        success : function(data) {
-            status.setProgress(100);;
-        }
-    });
-    status.setAbort(jqXHR);
-}*/

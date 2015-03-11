@@ -25,7 +25,8 @@
 										'type' 			=> 'email',
 										'placeholder' 	=> 'E-mail',
 										'required'		=> 'required',
-										'class' 		=> 'form-control'
+										'class' 		=> 'form-control',
+										'autofocus'		=> 'autofocus'
 									));
 								?>
 							</div>
