@@ -60,8 +60,6 @@ $(document).ready(function() {
                 row.attr("data-comment", $('#comment').val());
                 row = undefined;
             }
-            else
-                alert("bouh");
         });
     });
 

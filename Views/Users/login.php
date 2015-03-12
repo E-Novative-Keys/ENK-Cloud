@@ -17,6 +17,11 @@
 					?>
 				</div>
 				<div class="panel-body">
+					<div class="checkbox">
+						<label>
+							Connexion :
+						</label>
+					</div>
 					<?php echo $this->Form->create(); ?>
 						<fieldset>
 							<div class="form-group">
@@ -26,7 +31,8 @@
 										'placeholder' 	=> 'E-mail',
 										'required'		=> 'required',
 										'class' 		=> 'form-control',
-										'autofocus'		=> 'autofocus'
+										'autofocus'		=> 'autofocus',
+										'id'			=> 'email'
 									));
 								?>
 							</div>
@@ -36,19 +42,19 @@
 										'type' 			=> 'password',
 										'placeholder' 	=> 'Password',
 										'required'		=> 'required',
-										'class' 		=> 'form-control'
+										'class' 		=> 'form-control',
+										'id'			=> 'passwd'
 									));
 								?>
 							</div>
-							<div class="checkbox">
-								<label>
+							<div class="checkbox" id="input">
 									<input type="button" class="btn btn-link" id="forgot" value="Forgot password ?" />
-								</label>
 							</div>
 							<?php 
 								echo $this->Form->submit(array(
 									'value' => 'Login',
-									'class' => 'btn btn-lg btn-block btn-submit'
+									'class' => 'btn btn-lg btn-block btn-submit',
+									'id'	=> 'submit'
 								));
 							?>
 						</fieldset>
