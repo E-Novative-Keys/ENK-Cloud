@@ -1,4 +1,4 @@
-<?php $title_for_layout = 'Connexion | ENK-Cloud'; ?>
+<?php $title_for_layout = 'Initialisation du Compte | ENK-Cloud'; ?>
 <?php echo $this->Html->css('login'); ?>
 <?php echo $this->Html->script('login'); ?>
 <?php echo $this->Html->script('TweenLite.min'); ?>
@@ -17,22 +17,16 @@
 					?>
 				</div>
 				<div class="panel-body">
+					<div class="checkbox">
+						<label>
+							New password
+						</label>
+					</div>
 					<?php echo $this->Form->create(); ?>
 						<fieldset>
 							<div class="form-group">
 								<?php 
-									echo $this->Form->input('User.email', array(
-										'type' 			=> 'email',
-										'placeholder' 	=> 'E-mail',
-										'required'		=> 'required',
-										'class' 		=> 'form-control',
-										'autofocus'		=> 'autofocus'
-									));
-								?>
-							</div>
-							<div class="form-group">
-								<?php 
-									echo $this->Form->input('User.password', array(
+									echo $this->Form->input('Client.password', array(
 										'type' 			=> 'password',
 										'placeholder' 	=> 'Password',
 										'required'		=> 'required',
@@ -40,14 +34,19 @@
 									));
 								?>
 							</div>
-							<div class="checkbox">
-								<label>
-									<input type="button" class="btn btn-link" id="forgot" value="Forgot password ?" />
-								</label>
+							<div class="form-group">
+								<?php 
+									echo $this->Form->input('Client.confirm', array(
+										'type' 			=> 'password',
+										'placeholder' 	=> 'Confirm Password',
+										'required'		=> 'required',
+										'class' 		=> 'form-control'
+									));
+								?>
 							</div>
 							<?php 
 								echo $this->Form->submit(array(
-									'value' => 'Login',
+									'value' => 'Save',
 									'class' => 'btn btn-lg btn-block btn-submit'
 								));
 							?>

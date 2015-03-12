@@ -11,7 +11,7 @@ define('AUTH_ENABLE', true);
 define('WEBROOT', dirname(__FILE__));
 define('ROOT', dirname(WEBROOT));
 define('DS', DIRECTORY_SEPARATOR);
-define('BASE_URL', dirname(dirname($_SERVER['SCRIPT_NAME'])));
+define('BASE_URL', dirname(dirname($_SERVER['SCRIPT_NAME'])) == '/' ? '' : dirname(dirname($_SERVER['SCRIPT_NAME'])));
 
 define('CORE', ROOT.DS.'Core'.DS);
 define('CONTROLLERS', ROOT.DS.'Controllers'.DS);

@@ -119,7 +119,6 @@ class Html
 			if(file_exists(CSS_ROOT.$path))
 			{
 				$path 	= CSS.$path;
-				$path = trim($path, '/');
 
 				if($inline)
 					$css .= sprintf($this->tags['css'], 'stylesheet', $path);
@@ -190,7 +189,6 @@ class Html
 			if(file_exists(JS_ROOT.$path))
 			{
 				$path = JS.$path;
-				$path = trim($path, '/');
 
 				if($inline)
 					$js .= sprintf($this->tags['javascriptlink'], $path);
@@ -218,7 +216,6 @@ class Html
 		if(file_exists(IMG_ROOT.$path))
 		{
 			$path = IMG.$path;
-			$path = trim($path, '/');
 
 			if(!isset($options['alt']))
 				$options['alt'] = '';
