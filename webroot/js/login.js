@@ -17,26 +17,25 @@ $(document).ready(function(){
   });
 
   $('#forgot').click(function(e){
-    e.stopPropagation();
-    $flag = true;
     $(this)
-      .attr("id", "return")
-      .val("Retour");
+      .attr("style", "display:none")
     $('#submit')
         .attr("type", "button")
         .attr("value", "Envoyer");
     $('#passwd').attr("style", "visibility:hidden");
-    $('.checkbox label').html("Forgot Password :");
-    
+    $('#return').attr("style", "display:block");
+    $('.checkbox label').html("Forgot Password :"); 
   });
 
-  $(document).on("click", "#return", function(){
-    $flag = false;
-    $(this).attr("id", "forgot");
+  $('#return').click(function(e){
+    $(this)
+      .attr("style", "display:none")
     $('#submit')
         .attr("type", "submit")
         .attr("value", "Login");
     $('#passwd').attr("style", "visibility:visible");
+    $('#forgot').attr("style", "display:block");
+    $('.checkbox label').html("Connexion :"); 
   });
 
   $('#submit').click(function(){

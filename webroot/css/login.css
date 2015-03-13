@@ -15,3 +15,8 @@ body {
 	background-color: #00D4FF;
 	color: #003083;
 }
+
+.right-btn-invisible {
+	float: right;
+	display: none;
+}

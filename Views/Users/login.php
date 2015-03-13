@@ -48,7 +48,10 @@
 								?>
 							</div>
 							<div class="checkbox" id="input">
-									<input type="button" class="btn btn-link" id="forgot" value="Forgot password ?" />
+								<input type="button" class="btn btn-link" id="forgot" value="Forgot password ?" />
+							</div>
+							<div class="checkbox" id="input">
+								<input type="button" class="btn btn-link right-btn-invisible" id="return" value="Retour" />
 							</div>
 							<?php 
 								echo $this->Form->submit(array(
