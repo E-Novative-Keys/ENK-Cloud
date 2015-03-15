@@ -226,10 +226,10 @@ function listFiles(user, dir, search) {
 }
 
 function download(user, file) {
-    $url = "http://enkwebservice.com/cloud/files/download/";
+    $url = "http://enkwebservice.com/cloud/files/download";
     $.ajax({
         type : "POST",
-        url : $url + "request",
+        url : $url,
         data : "data=" + JSON.stringify({data : {
             Cloud : {project : $('.projects-button').attr("data-project"), path : file, user: user},
             Token : {link : $('#link').val(), fields : $('#fields').val()}
@@ -238,10 +238,10 @@ function download(user, file) {
         crossDomain : true
     })
     .success(function(data){
-        window.location.href = "" + $url + data.token + "";
+        window.location.href = "" + $url + "/" + data.token + "";
     })
     .fail(function(){
-        alert('fail');
+        alert('Erreur lors du téléchargement du fichier');
     });
 }
 
@@ -263,11 +263,12 @@ function renameFile(tr)
     {
         $.ajax({
             type : "POST",
-            url : "http://enkwebservice.com/cloud/" + tr.attr("data-user") + "/files/rename",
+            url : "http://enkwebservice.com/cloud/files/rename",
             data : "data=" + JSON.stringify({data : {
-                Cloud : {project : $('.projects-button').attr("data-project"), directory : dir, name : name, rename : rename},
+                Cloud : {project : $('.projects-button').attr("data-project"), directory : btoa(dir), name : name, rename : rename},
                 Token : {link : $('#link').val(), fields : $('#fields').val()}
             }}),
+            dataType : "json",
             crossDomain : true
         })
         .success(function(data) {
@@ -305,9 +306,9 @@ function deleteFile(tr)
 
         $.ajax({
             type : "POST",
-            url : "http://enkwebservice.com/cloud/" + tr.attr("data-user") + "/files/delete",
+            url : "http://enkwebservice.com/cloud/files/delete",
             data : "data=" + JSON.stringify({data : { 
-                Cloud : {project : $('.projects-button').attr("data-project"), directory : dir, name : name},
+                Cloud : {project : $('.projects-button').attr("data-project"), directory : btoa(dir), name : name},
                 Token : {link : $('#link').val(), fields : $('#fields').val()}
             }}),
             crossDomain : true
@@ -328,7 +329,7 @@ function folderCreate()
 
     $.ajax({
         type : "POST",
-        url : "http://enkwebservice.com/cloud/client/folder/add",
+        url : "http://enkwebservice.com/cloud/folder/add",
         data : "data=" + JSON.stringify({data : { 
             Cloud : {project : $('.projects-button').attr("data-project"), directory : dir, name : name},
             Token : {link : $('#link').val(), fields : $('#fields').val()}
