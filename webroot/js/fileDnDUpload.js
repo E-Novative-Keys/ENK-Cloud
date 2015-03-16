@@ -81,7 +81,7 @@ function sendFileToServer(formData, status, dir)
 {
     var jqxhr = $.ajax({
         type: "POST",
-        url: "http://enkwebservice.com/cloud/client/files/add",
+        url: "http://enkwebservice.com/cloud/files/add",
         data: formData,
         crossDomain : true,
         contentType: false,
