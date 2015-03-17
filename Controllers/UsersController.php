@@ -65,6 +65,7 @@ class UsersController extends Controller
 			{
 				if($this->request->data['Client']['password'] == $this->request->data['Client']['confirm'])
 				{	
+					$this->request->data['Client']['id'] 			= $this->Session->read('Client.id');	
 					$this->request->data['Client']['email'] 		= $this->Session->read('Client.email');				
 					$this->request->data['Client']['lastname'] 		= $this->Session->read('Client.lastname');
 					$this->request->data['Client']['firstname'] 	= $this->Session->read('Client.firstname');
@@ -79,7 +80,7 @@ class UsersController extends Controller
 					$this->request->data['Token']['link'] 			= base64_encode($this->Session->read('Client.email'));
 					$this->request->data['Token']['fields'] 		= $this->Session->read('Client.token');
 
-					$this->curl('http://enkwebservice.com/clients/edit/'.$this->Session->read('Client.id'), $this->request->data);
+					$this->curl('http://enkwebservice.com/clients/edit/', $this->request->data);
 					$this->Session->setFlash('Votre mot de passe a été initialisé', 'success');
 					die($this->redirect(array('controller' => 'users', 'action' => 'login')));
 				}
