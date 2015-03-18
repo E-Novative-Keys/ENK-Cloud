@@ -3,6 +3,7 @@
 // Configuration
 define('DEBUG', true);
 define('PROD', false);
+define('USE_BD', false);
 
 // Security
 define('AUTH_ENABLE', true);

@@ -23,7 +23,7 @@ class Model
 			$this->table = strtolower(get_class($this)).'s';
 
 		// Vérification pour ne pas se connecter lors de l'accès a un fichier .ini
-		if(!is_array($this->table))
+		if(!is_array($this->table) && USE_BD)
 		{
 			//Récupération des informations de connexion à la bdd
 			$config = DBConfig::$databases[$this->config];
