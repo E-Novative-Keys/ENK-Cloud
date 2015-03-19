@@ -7,6 +7,7 @@
 <?php echo $this->Html->script('contextMenu'); ?>
 <?php echo $this->Html->script('cloud'); ?>
 <?php echo $this->Html->script('fileDnDUpload'); ?>
+<?php echo $this->Html->script('jquery-ui.min'); ?>
 
 <section>
     <div class="row">

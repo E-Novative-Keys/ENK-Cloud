@@ -6,7 +6,7 @@ $(document).ready(function() {
     listFiles("dev", btoa("/"));
 
     // Liste des fichiers au click sur un dossier ou download d'un fichier
-    $('table').on("click", ".file", function() {
+    $('table').on("dblclick", ".file", function() {
         if($(this).attr("data-dir") == "true")
             listFiles($(this).attr("data-user"), $(this).attr("data-file"));
         else
@@ -51,7 +51,8 @@ $(document).ready(function() {
             }}),
             crossDomain: true,
             dataType : "json"
-        }).success(function(data) {
+        })
+        .success(function(data) {
             if(data.comment)
             {
                 $('#comment').attr("style", "visibility:hidden;");
@@ -99,6 +100,10 @@ $(document).ready(function() {
         DnDFileUpload(e.originalEvent.dataTransfer.files, $(this), $('#DnDStatus'));
     });
 
+    $('#client-files').selectable({
+        filter:'.file'
+    });
+
     // Sélection d'un projet
     $('.projects-button').on('click', '.project', function() {
         $('.projects-button').attr("data-project", $(this).attr("data-id"));
@@ -135,6 +140,7 @@ $(document).ready(function() {
         items: {
             "rename": {name: "Renommer", icon: "edit"},
             "delete": {name: "Supprimer", icon: "delete"},
+            "move": {name: "Déplacer les éléments sélectionnés", icon:"paste"},
             "comment": {name: "Ajouter/Editer un commentaire", icon: "edit"}
         }
     });
