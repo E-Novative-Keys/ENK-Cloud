@@ -208,6 +208,14 @@ a[id^="link-"] img {
     overflow: auto;
 }
 
+#client-files .ui-selecting {
+    background: #66E6FF;
+}
+
+#client-files .ui-selected { 
+    background: #00D4FF;
+}
+
 .drag-zone {
     height:220px;
 }

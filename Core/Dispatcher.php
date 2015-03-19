@@ -18,11 +18,7 @@ class Dispatcher
 		$action 	= $this->request->action;
 
 		// Recherche de la méthode $action dans l'ensemble des méthodes présentes dans les classes $controller (ex: PagesController) et Controller
-		if(!in_array(
-				$action,
-				array_diff(get_class_methods($controller),
-				get_class_methods('Controller')))
-		)
+		if(!in_array($action, array_diff(get_class_methods($controller), get_class_methods('Controller'))))
 		{
 			$error = new Controller($this->request);
 			$error->notFound('Action : '.$action.' non trouvée dans le controlleur '.$this->request->controller);

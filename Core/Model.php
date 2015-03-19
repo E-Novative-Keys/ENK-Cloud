@@ -23,7 +23,7 @@ class Model
 			$this->table = strtolower(get_class($this)).'s';
 
 		// Vérification pour ne pas se connecter lors de l'accès a un fichier .ini
-		if(!is_array($this->table))
+		if(!is_array($this->table) && USE_BD)
 		{
 			//Récupération des informations de connexion à la bdd
 			$config = DBConfig::$databases[$this->config];
@@ -92,18 +92,16 @@ class Model
 					else if($v['rule'] == 'email')
 					{
 						if(!preg_match(
-							'/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$/',
-							$data[$key])
-						)
+						'/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$/',
+						$data[$key]))
 							$errors[$key] = $v['message'];
 					}
 					else if(is_array($v['rule']))
 					{
 						if($v['rule'][0] == 'between')
 						{
-							if(	strlen($data[$key]) < $v['rule'][1]
-								|| strlen($data[$key]) > $v['rule'][2]
-							)
+							if(strlen($data[$key]) < $v['rule'][1]
+							|| strlen($data[$key]) > $v['rule'][2])
 								$errors[$key] = $v['message'];
 						}
 						else if($v['rule'][0] == 'min')
@@ -177,8 +175,8 @@ class Model
 
 			for($i = 0 ; $i < count($request['join']) ; $i++)
 			{
-				$joinType = 'LEFT JOIN ';
-				$joinStr = '';
+				$joinType 	= 'LEFT JOIN ';
+				$joinStr 	= '';
 
 				foreach($request['join'][$i] as $key => $value)
 				{
@@ -591,7 +589,7 @@ class Model
 	public function deleteIni($id)
 	{
 		if(is_array($this->table) && count($this->table) == 2
-			&& $this->table[0] == 'ini' && file_exists(INI_FILES.$this->table[1].'.ini'))
+		&& $this->table[0] == 'ini' && file_exists(INI_FILES.$this->table[1].'.ini'))
 		{
 			$ini = parse_ini_file(INI_FILES.$this->table[1].'.ini', true);
 			
@@ -606,7 +604,7 @@ class Model
 		return null;
 	}
 
-	protected function array_sort($array, $orderby, $order = "ASC")
+	private function array_sort($array, $orderby, $order = "ASC")
 	{
 		$sortArray = array();
 

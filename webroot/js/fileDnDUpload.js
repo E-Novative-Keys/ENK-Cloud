@@ -64,7 +64,12 @@ function createStatusbar(obj)
         this.percent.html(progress + "%");
 
         if(parseInt(progress) >= 100)
+        {
             this.abort.hide();
+            this.statusbar.delay(1000).fadeOut(3000, function(){
+                $(this.statusbar).remove();
+            });
+        }
     }
 
     this.setAbort = function(jqxhr) {
