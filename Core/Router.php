@@ -89,13 +89,13 @@ class Router
 		foreach($params as $key => $value)
 		{
 			// Découpage en regex nommées ex : (?P<page>[a-z0-9\-]+)
-			$route['regex'] = str_replace(":$key", "(?P<$key>$value)", $route['regex']);
-			$route['originregex'] = str_replace(":$key", "($value)", $route['originregex']);	
+			$route['regex'] 		= str_replace(":$key", "(?P<$key>$value)", $route['regex']);
+			$route['originregex'] 	= str_replace(":$key", "($value)", $route['originregex']);	
 		}
 		
 		// Formation d'une regex complète ex : /^(?P<page>[a-z0-9\-]+)\/(?P<id>[0-9]+)$/
-		$route['regex'] = '/^'.str_replace('/','\/', $route['regex']).'$/';
-		$route['originregex'] = '/^'.str_replace('/','\/', $route['originregex']).'$/';
+		$route['regex'] 		= '/^'.str_replace('/','\/', $route['regex']).'$/';
+		$route['originregex'] 	= '/^'.str_replace('/','\/', $route['originregex']).'$/';
 
 		self::$routes[] = $route;
 	}

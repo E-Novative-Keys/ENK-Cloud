@@ -125,7 +125,7 @@ class Auth
 		{
 			$user = $user['user'];
 
-			if(isset($user['token']) /*&& $user['role'] == 'client'*/)
+			if(isset($user['token']) && $user['role'] == 'client')
 			{
 				$this->controller->Session->write('Token.link', base64_encode($user['email']));
 				$this->controller->Session->write('Token.fields', $user['token']);

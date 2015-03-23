@@ -23,7 +23,7 @@ class Model
 			$this->table = strtolower(get_class($this)).'s';
 
 		// Vérification pour ne pas se connecter lors de l'accès a un fichier .ini
-		if(!is_array($this->table) && USE_BD)
+		if(!is_array($this->table) && DBConfig::$databases)
 		{
 			//Récupération des informations de connexion à la bdd
 			$config = DBConfig::$databases[$this->config];
@@ -70,7 +70,7 @@ class Model
 	*/
 	public function validates($data)
 	{
-		$data = $data[get_class($this)];
+		$data 	= $data[get_class($this)];
 		$errors = array(); 
 
 		foreach($this->validate as $key => $value)
@@ -392,7 +392,7 @@ class Model
 	public function findIni($request = array())
 	{
 		if(is_array($this->table) && count($this->table) == 2
-			&& $this->table[0] == 'ini' && file_exists(INI_FILES.$this->table[1].'.ini'))
+		&& $this->table[0] == 'ini' && file_exists(INI_FILES.$this->table[1].'.ini'))
 		{
 			$ini 	= parse_ini_file(INI_FILES.$this->table[1].'.ini', true);
 			$fields = $ini;
@@ -517,7 +517,7 @@ class Model
 	public function saveIni($data)
 	{
 		if(is_array($this->table) && count($this->table) == 2
-			&& $this->table[0] == 'ini' && file_exists(INI_FILES.$this->table[1].'.ini'))
+		&& $this->table[0] == 'ini' && file_exists(INI_FILES.$this->table[1].'.ini'))
 		{
 			$ini 		= parse_ini_file(INI_FILES.$this->table[1].'.ini', true);
 			$data 		= $data[get_class($this)];
