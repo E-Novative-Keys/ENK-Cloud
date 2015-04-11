@@ -23,6 +23,7 @@ function listMails()
         $.each(data.mails, function(index, item) {
             $('#mails').find('tbody')
                 .append($('<tr>')
+                    .attr("data-id", btoa(item.id))
                     .attr("data-from", "L'équipe de dev")
                     .attr("data-object", item.object)
                     .attr("data-content", item.content)
@@ -53,9 +54,24 @@ function listMails()
     });
 }
 
-function deleteMail()
+function deleteMail(mail)
 {
-
+    if(confirm("Voulez-vous supprimer cet e-mail ?"))
+    {
+        $.ajax({
+            type : "POST",
+            url : "http://enkwebservice.com/mailbox/delete",
+            data : 'data=' + JSON.stringify({data : {
+                Mail : {project : $('.projects-button').attr("data-project"), id : mail.attr("data-id")},
+                Token : {link : $('#link').val(), fields : $('#fields').val()}
+            }}),
+            crossDomain: true,
+            dataType : "json"
+        })
+        .success(function(data) {
+            listMails();
+        });
+    }
 }
 
 function mailDetails(mail)
