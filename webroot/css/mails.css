@@ -1,0 +1,47 @@
+#email {
+    position: absolute;
+    left: 25%;
+    max-width: 75%;
+    width: 75%;
+    height: calc(100% - 155px);
+}
+
+#email .email-table {
+    height: 50%;
+    max-height: 50%;
+    overflow: auto;
+}
+
+#mails .ui-selecting {
+    background: #66E6FF;
+}
+
+#mails .ui-selected { 
+    background: #00D4FF;
+}
+
+.mail {
+    cursor: pointer;
+}
+
+/* Mobile */
+@media only screen and (max-width: 767px) {    
+    #mails {
+        position: relative;
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #email {
+        position: relative;
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #mails .table-responsive {
+        height: auto;
+        max-height: auto;
+    }
+}

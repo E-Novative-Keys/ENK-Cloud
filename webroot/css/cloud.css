@@ -5,7 +5,7 @@ html, body {
 }
 
 .center {
-    text-align:center;
+    text-align: center;
 }
 
 .dropdown .center {
@@ -22,7 +22,7 @@ html, body {
 }
 
 .right {
-    text-align:right;
+    text-align: right;
 }
 
 .inline {
@@ -77,23 +77,23 @@ nav #nav-buttons {
 }
 
 .search-bar {
-    margin-right:14px; 
-    background-color:#D4DAE5; 
+    margin-right: 14px; 
+    background-color: #D4DAE5; 
     background-image: url('../img/recherche.svg'); 
     background-repeat: no-repeat; 
     background-position: -15px -18px;
 }
 
 #link-cloud {
-    background-color:#003083;
+    background-color: #003083;
 }
 
 #link-notifications {
-    background-color:#66E6FF;
+    background-color: #66E6FF;
 }
 
 #link-messages {
-    background-color:#00D4FF;
+    background-color: #00D4FF;
 }
 
 a[id^="link-"] {
@@ -122,12 +122,12 @@ a[id^="link-"] img {
 
 .files-buttons {
     margin: 4px;
-    background-color:#D4DAE5; 
-    color:#001C53;
+    background-color: #D4DAE5; 
+    color: #001C53;
 }
 
 .dropdown a {
-    color:#001C53;
+    color: #001C53;
     text-decoration: none;
 }
 
@@ -138,24 +138,37 @@ a[id^="link-"] img {
     height: calc(100% - 150px);
 }
 
-.left-menu-stockage { 
+.left-menu-selected {
+    background-color: #001C53!important;
+    color: white!important;
+}
+
+.left-menu-stockage {
     display: block;
     margin: 15px;
-    width:90%; 
-    background-color:#001C53; 
-    color:white; 
-    border:0; 
+    width: 90%;
+    color: #001C53;
+    border: 0; 
     height: 30px;
     max-height: 30px;
 }
 
-.left-menu-stockage:hover {
+.left-menu-stockage:hover, .left-menu-notifications:hover, .left-menu-messagerie:hover {
     color: white;
     text-decoration: none;  
 }
 
 .left-menu-stockage span {
     padding-top: 4px;
+}
+
+.left-menu-notifications, .left-menu-messagerie {
+    display: block;
+    margin: 15px;
+    width: 90%; 
+    background-color: transparent; 
+    color: #001C53;
+    border: 0;
 }
 
 .cloud-project {
@@ -166,14 +179,6 @@ a[id^="link-"] img {
     overflow: hidden;
     white-space: nowrap;
     background-color: #A9B5CB;
-}
-
-.left-menu-notifications, .left-menu-messagerie {
-    margin: 15px;
-    width:90%; 
-    background-color:transparent; 
-    color:#001C53; 
-    border: 0;
 }
 
 #comment {
@@ -217,17 +222,17 @@ a[id^="link-"] img {
 }
 
 .drag-zone {
-    height:220px;
+    height: 220px;
 }
 
 .drag-top {
-    height:30px;
+    height: 30px;
 }
 
 .drag-menu {
-    width:100%;
-    background-color:#001C53; 
-    color:white
+    width: 100%;
+    background-color: #001C53; 
+    color: white;
 }
 
 .adaptated-src {
@@ -239,8 +244,8 @@ a[id^="link-"] img {
 }
 
 .table-header {
-    background-color:#001C53;
-    color:white;
+    background-color: #001C53;
+    color: white;
 }
 
 .white-border {

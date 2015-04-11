@@ -17,32 +17,44 @@
                                 )).
                                 " Stockage</span>";
 
-                    echo $this->link($storage , array('controller' => 'cloud', 'action' => 'index'), array('class' => 'left-menu-stockage'));
+                    echo $this->link($storage,
+                        array('controller' => 'cloud', 'action' => 'index'),
+                        array('class' =>
+                            ($this->controller->request->controller == 'cloud' && $this->controller->request->action == 'index')
+                            ? 'left-menu-stockage left-menu-selected' : 'left-menu-stockage'
+                        )
+                    );
                 ?>
             </div>
             <div>
-                <button type="goToNotifications" class="left-menu-notifications">
-                    <?php 
-                        echo $this->image('notification_bleu.svg', array(
+                <?php 
+                    echo $this->link(
+                        $this->image('notification_bleu.svg', array(
                             'alt'       => 'Notifications',
-                            /*'url'       => array('controller' => 'cloud', 'action' => 'index'),*/
                             'height'    => '30'
-                        ));
-                    ?>
-                    Notifications
-                </button>
+                        ))."Notifications",
+                        array('controller' => 'notifications', 'action' => 'index'),
+                        array('class' =>
+                            ($this->controller->request->controller == 'notifications' && $this->controller->request->action == 'index')
+                            ? 'left-menu-notifications left-menu-selected' : 'left-menu-notifications'
+                        )
+                    );
+                ?>
             </div>
             <div>
-                <button type="goToMessagerie" class="left-menu-messagerie">
-                    <?php 
-                        echo $this->image('messagerie_bleu.svg', array(
+                <?php 
+                    echo $this->link(
+                        $this->image('messagerie_bleu.svg', array(
                             'alt'       => 'Messagerie',
-                            /*'url'       => array('controller' => 'cloud', 'action' => 'index'),*/
                             'height'    => '30'
-                        ));
-                    ?>
-                    Messagerie
-                </button>
+                        ))."Messagerie",
+                        array('controller' => 'mails', 'action' => 'index'),
+                        array('class' =>
+                            ($this->controller->request->controller == 'mails' && $this->controller->request->action == 'index')
+                            ? 'left-menu-messagerie left-menu-selected' : 'left-menu-messagerie'
+                        )
+                    );
+                ?>
             </div>
 
             <?php if($this->controller->request->controller == "cloud" && $this->controller->request->action == "index"): ?>

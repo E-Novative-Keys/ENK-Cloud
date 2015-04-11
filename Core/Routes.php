@@ -8,9 +8,9 @@ Router::connect('/cloud', array('controller' => 'cloud', 'action' => 'index'));
 
 Router::connect('/notifications', array('controller' => 'notifications', 'action' => 'index'));
 
-Router::connect('/mailbox', array('controller' => 'messages', 'action' => 'index'));
-Router::connect('/mailbox/sent-mail', array('controller' => 'messages', 'action' => 'sent'));
-Router::connect('/mailbox/new', array('controller' => 'messages', 'action' => 'add'));
+Router::connect('/mailbox', array('controller' => 'mails', 'action' => 'index'));
+Router::connect('/mailbox/sent-mail', array('controller' => 'mails', 'action' => 'sent'));
+Router::connect('/mailbox/new', array('controller' => 'mails', 'action' => 'add'));
 
 Router::connect('/config/:token',
 	array('controller' => 'users', 'action' => 'configPassword'),

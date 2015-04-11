@@ -6,7 +6,7 @@
 <?php echo $this->Html->script('jquery-ui.min'); ?>
 <?php echo $this->Html->script('jquery.filesize.min'); ?>
 <?php echo $this->Html->script('contextMenu'); ?>
-<?php echo $this->Html->script('filesmanager'); ?>
+<?php echo $this->Html->script('filesManager'); ?>
 <?php echo $this->Html->script('fileDnDUpload'); ?>
 <?php echo $this->Html->script('cloud'); ?>
 
