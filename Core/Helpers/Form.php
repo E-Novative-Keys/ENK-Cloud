@@ -105,14 +105,30 @@ class Form
 
 		if(in_array($type, $exceptions))
 		{
-			$except = $options['value'];
-			unset($options['value']);
+			if(isset($options['value']))
+			{
+				$except = $options['value'];
+				unset($options['value']);
+			}
+			else
+				$except = '';
 		}
 
 		$label = null;
 		if(isset($options['label']))
 		{
-			$label = '<label for="input'.ucfirst($errorName).'">'.$options['label'].'</label>';
+			if(!is_array($options['label']))
+				$label = '<label for="input'.ucfirst($errorName).'">'.$options['label'].'</label>';
+			else
+			{
+				$label = '<label for="input'.ucfirst($errorName).'" ';
+				foreach($options['label'] as $key => $value)
+				{
+					if($key != "text")
+						$label .= $key.'="'.$value.'" ';
+				}
+				$label .= '>'.$options['label']['text'].'</label>';
+			}
 			unset($options['label']);
 
 			if(isset($options['id']))

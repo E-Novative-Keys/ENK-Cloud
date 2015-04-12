@@ -33,9 +33,7 @@
                             <tr><th class="col-md-12 col-xs-12 col-sm-12 white-border center">Détails du message reçu</th></tr>
                         </thead>
                     </table>
-                    <div class="col-xs-12" id="details">
-                        
-                    </div>
+                    <div class="col-xs-12" id="details"></div>
                 </div>
             </div>
         </div>  
