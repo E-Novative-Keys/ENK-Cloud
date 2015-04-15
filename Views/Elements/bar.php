@@ -78,19 +78,21 @@
                 </button>
             <?php endif; ?>
 
-            <span class="btn enk-button files-buttons dropdown projects-button" data-project="">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                    <?php
-                        echo $this->image('menu.svg', array(
-                            'alt' => 'Projet',
-                            'height' => '20'
-                        ));
-                    ?>
-                    <span class="show-on-desktops inline">Sélectionner un projet</span>
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu"></ul>
-            </span>
+            <?php if($this->controller->request->controller != "notifications"): ?>
+                <span class="btn enk-button files-buttons dropdown projects-button" data-project="">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <?php
+                            echo $this->image('menu.svg', array(
+                                'alt' => 'Projet',
+                                'height' => '20'
+                            ));
+                        ?>
+                        <span class="show-on-desktops inline">Sélectionner un projet</span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu"></ul>
+                </span>
+            <?php endif; ?>
         </div>
     </div>
 </nav>
