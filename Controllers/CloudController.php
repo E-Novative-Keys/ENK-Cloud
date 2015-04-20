@@ -14,10 +14,7 @@ class CloudController extends Controller
 			$this->redirect(array('controller' => 'users', 'action' => 'login'));
 	}
 
-	public function index()
-	{
-		
-	}
+	public function index() {}
 }
 
 ?>
