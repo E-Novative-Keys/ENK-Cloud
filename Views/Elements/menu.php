@@ -50,19 +50,55 @@
                         ))."Messagerie",
                         array('controller' => 'mails', 'action' => 'index'),
                         array('class' =>
-                            ($this->controller->request->controller == 'mails' && $this->controller->request->action == 'index')
+                            ($this->controller->request->controller == 'mails')
                             ? 'left-menu-messagerie left-menu-selected' : 'left-menu-messagerie'
                         )
                     );
                 ?>
             </div>
 
-            <?php if($this->controller->request->controller == "cloud" && $this->controller->request->action == "index"): ?>
+             <?php if($this->controller->request->controller == "mails"): ?>
+                <div>
+                    <?php 
+                        echo $this->link("Message reçus",
+                            array('controller' => 'mails', 'action' => 'index'),
+                            array('class' =>
+                                ($this->controller->request->controller == 'mails' && $this->controller->request->action == 'index')
+                                ? 'left-submenu-messagerie left-submenu-selected' : 'left-submenu-messagerie'
+                            )
+                        );
+                    ?>
+                </div>
+                <div>
+                    <?php 
+                        echo $this->link("Messages envoyés",
+                            array('controller' => 'mails', 'action' => 'sent'),
+                            array('class' =>
+                                ($this->controller->request->controller == 'mails' && $this->controller->request->action == 'sent')
+                                ? 'left-submenu-messagerie left-submenu-selected' : 'left-submenu-messagerie'
+                            )
+                        );
+                    ?>
+                </div>
+                <div>
+                    <?php 
+                        echo $this->link("Composer un message",
+                            array('controller' => 'mails', 'action' => 'add'),
+                            array('class' =>
+                                ($this->controller->request->controller == 'mails' && $this->controller->request->action == 'add')
+                                ? 'left-submenu-messagerie left-submenu-selected' : 'left-submenu-messagerie'
+                            )
+                        );
+                    ?>
+                </div>
+
+            <?php elseif($this->controller->request->controller == "cloud" && $this->controller->request->action == "index"): ?>
                 <div>
                     <textarea id="comment" class="form-control"></textarea>
                     <button id="edit-comment" class="btn enk-button">Enregistrer</button>
                 </div>
                 <div id="DnDStatus"></div>
+
             <?php endif; ?>
         </div>
     </div>
