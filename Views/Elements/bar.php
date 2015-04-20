@@ -78,7 +78,8 @@
                 </button>
             <?php endif; ?>
 
-            <?php if($this->controller->request->controller != "notifications"): ?>
+            <?php if(($this->controller->request->controller == "mails" && $this->controller->request->action == "add")
+            || $this->controller->request->controller == "cloud"): ?>
                 <span class="btn enk-button files-buttons dropdown projects-button" data-project="">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <?php

@@ -3,7 +3,7 @@
 <?php echo $this->Html->css('mails'); ?>
 
 <?php echo $this->Html->script('mailsManager'); ?>
-<?php echo $this->Html->script('mails'); ?>
+<?php echo $this->Html->script('listProjects'); ?>
 
 <section>
 	<div class="row">

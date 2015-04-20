@@ -11,7 +11,6 @@ function listMails()
         type : "POST",
         url : $url,
         data : 'data=' + JSON.stringify({data : {
-            Mail : {project : $('.projects-button').attr("data-project")},
             Token : {link : $('#link').val(), fields : $('#fields').val()}
         }}),
         crossDomain: true,
@@ -62,7 +61,7 @@ function deleteMail(mail)
             type : "POST",
             url : "http://enkwebservice.com/mailbox/delete",
             data : 'data=' + JSON.stringify({data : {
-                Mail : {project : $('.projects-button').attr("data-project"), id : mail.attr("data-id")},
+                Mail : {id : mail.attr("data-id")},
                 Token : {link : $('#link').val(), fields : $('#fields').val()}
             }}),
             crossDomain: true,
