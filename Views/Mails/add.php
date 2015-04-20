@@ -11,7 +11,7 @@
 			<div class="well well-sm">
 			<?php echo $this->Form->create(array('class' => 'form-horizontal')); ?>
 				<fieldset>
-					<legend class="text-center">Nouveau message</legend>
+					<legend class="text-center">Nouveau message - <span id="project-name"></span></legend>
 
 					<div class="form-group">
 						<label class="col-md-3 control-label" for="inputObject">Objet</label>
@@ -46,7 +46,7 @@
 					<?php
 						echo $this->Form->input("Mail.project", array(
 							'type' 	=> 'hidden',
-							'value' => 'MQ=='
+							'id'	=> 'project'
 						));
 					?>
 					<div class="form-group">

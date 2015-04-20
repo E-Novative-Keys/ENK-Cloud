@@ -19,7 +19,7 @@
 				<div class="panel-body">
 					<div class="checkbox">
 						<label>
-							New password
+							Nouveau Mot de Passe
 						</label>
 					</div>
 					<?php echo $this->Form->create(); ?>

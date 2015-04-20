@@ -31,7 +31,6 @@ define('IMG_ROOT',		ROOT.DS.'webroot'.DS.'img'.DS);
 define('FONTS_ROOT', 	ROOT.DS.'webroot'.DS.'fonts'.DS);
 define('FILES_ROOT', 	ROOT.DS.'webroot'.DS.'files'.DS);
 
-//define('INI_FILES', DS.'Users'.DS.'Worker'.DS.'Desktop'.DS.'ini'.DS);
 define('INI_FILES', 	false);
 
 // Database

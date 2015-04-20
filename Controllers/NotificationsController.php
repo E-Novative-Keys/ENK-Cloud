@@ -14,16 +14,7 @@ class NotificationsController extends Controller
 			$this->redirect(array('controller' => 'users', 'action' => 'login'));
 	}
 
-	public function index()
-	{
-		$this->request->data['Token'] = $this->Session->read('Token');
-
-		/*
-		$clientNotifications = $this->curl('http://enkcloud.com/notifications', $this->request->data);
-
-		$this->set(compact('clientNotifications'));
-		*/
-	}
+	public function index() {}
 }
 
 ?>
