@@ -2,19 +2,19 @@ $(document).ready(function() {
 
 	listNotifications();
 
-    $('.list-group-item').on('mouseover', function(event) {
+    $('.list-group').on('mouseover', '.list-group-item', function(event) {
 		event.preventDefault();
         if(!$(this).closest('li').hasClass('prevent'))
 		  $(this).closest('li').addClass('open');
 	});
     
-    $('.list-group-item').on('mouseout', function(event) {
+    $('.list-group').on('mouseout', '.list-group-item', function(event) {
     	event.preventDefault();
         if(!$(this).closest('li').hasClass('prevent'))
 		  $(this).closest('li').removeClass('open');
 	});
 
-    $('.list-group-item').on('click', '.list-group-submenu-item', function() {
+    $('.list-group').on('click', '.list-group-submenu-item', function() {
     	deleteNotification($(this));
     });
 
@@ -28,8 +28,7 @@ function listNotifications()
         data : "data=" + JSON.stringify({data : {
             Token : {link : $('#link').val(), fields : $('#fields').val()}
         }}),
-        crossDomain : true,
-        async: false
+        crossDomain : true
     })
     .success(function(data) {
         $('.list-group').empty();
@@ -76,8 +75,7 @@ function deleteNotification(notif)
         	Notification : {id : notif.attr('data-id')},
             Token : {link : $('#link').val(), fields : $('#fields').val()}
         }}),
-        crossDomain : true,
-        async: false
+        crossDomain : true
     })
     .success(function(){
     	listNotifications();
