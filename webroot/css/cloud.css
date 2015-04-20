@@ -164,7 +164,7 @@ a[id^="link-"] img {
 
 .left-menu-stockage:hover, .left-menu-notifications:hover, .left-menu-messagerie:hover {
     color: white;
-    text-decoration: none;  
+    text-decoration: none;
 }
 
 .left-menu-stockage span {
