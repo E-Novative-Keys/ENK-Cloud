@@ -39,19 +39,39 @@ $(document).ready(function(){
 	$('#submit').click(function(){
 		if($flag)
 		{
-			$.ajax({
-				method: "POST",
-				url : "http://enkwebservice.com/users/token",
-				data : 'data=' + JSON.stringify({data : {
-					Client : {email : $('#email').val()}
-				}}),
-				crossDomain: true
-			})
-			.success(function(){
-				$('#return').click();
+			if($('#email').val().length > 0 && $('#email').val().match("^[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)+$"))
+			{
+				$.ajax({
+					method: "POST",
+					url : "http://enkwebservice.com/users/token",
+					data : 'data=' + JSON.stringify({data : {
+						Client : {email : $('#email').val()}
+					}}),
+					crossDomain: true
+				})
+				.success(function(){
+					$('#return').click();
+					$('body').append(
+						$('<div>')
+							.attr("class", "alert alert-success")
+							.attr("style", "z-index: 1000; position: fixed; top: 35px; right: 20px; width: 15%;")
+							.append(
+								$('<a>')
+									.attr("href", "#")
+									.attr("class", "close")
+									.attr("data-dismiss", "alert")
+									.text("x")
+							)
+							.append($('<strong>').text("Success : "))
+							.append("Un lien de réinitialisation de mot de passe vous a été envoyé par mail")	
+					);
+				});
+			}
+			else
+			{
 				$('body').append(
 					$('<div>')
-						.attr("class", "alert alert-success")
+						.attr("class", "alert alert-danger")
 						.attr("style", "z-index: 1000; position: fixed; top: 35px; right: 20px; width: 15%;")
 						.append(
 							$('<a>')
@@ -60,10 +80,10 @@ $(document).ready(function(){
 								.attr("data-dismiss", "alert")
 								.text("x")
 						)
-						.append($('<strong>').text("Success : "))
-						.append("Un lien de réinitialisation de mot de passe vous a été envoyé par mail")	
+						.append($('<strong>').text("Error : "))
+						.append("L'adresse e-mail saisie est invalide")	
 				);
-			});
+			}
 		}
 	});
 });

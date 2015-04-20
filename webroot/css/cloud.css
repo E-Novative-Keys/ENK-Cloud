@@ -77,7 +77,9 @@ nav #nav-buttons {
 }
 
 .search-bar {
-    margin-right: 14px; 
+    margin-top:16px;
+    margin-right:24px;
+    margin-left:24px;
     background-color: #D4DAE5; 
     background-image: url('../img/recherche.svg'); 
     background-repeat: no-repeat; 
@@ -131,6 +133,11 @@ a[id^="link-"] img {
     text-decoration: none;
 }
 
+.adjusted {
+    margin-top:14px;
+    margin-right:52px;
+}
+
 #left-menu {
     position: absolute;
     text-align: center; 
@@ -141,6 +148,15 @@ a[id^="link-"] img {
 .left-menu-selected {
     background-color: #001C53!important;
     color: white!important;
+}
+
+.left-submenu-selected {
+    background-color: #29354e!important;
+    color: white!important;
+    padding: 2px!important;
+    margin-left: auto!important;
+    margin-right: auto!important;
+    max-width: 50%!important;
 }
 
 .left-menu-stockage {
@@ -155,7 +171,7 @@ a[id^="link-"] img {
 
 .left-menu-stockage:hover, .left-menu-notifications:hover, .left-menu-messagerie:hover {
     color: white;
-    text-decoration: none;  
+    text-decoration: none;
 }
 
 .left-menu-stockage span {
@@ -169,6 +185,22 @@ a[id^="link-"] img {
     background-color: transparent; 
     color: #001C53;
     border: 0;
+}
+
+.left-submenu-messagerie {
+    display: block;
+    margin: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 50%;
+    background-color: transparent; 
+    color: #001C53;
+    border: 0;
+}
+
+.left-submenu-messagerie:hover {
+    color: white;
+    text-decoration: none;  
 }
 
 .cloud-project {
