@@ -4,6 +4,8 @@ Router::connect('/', array('controller' => 'users', 'action' => 'login'));
 
 Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
 
+Router::connect('/profile', array('controller' => 'users', 'action' => 'profile'));
+
 Router::connect('/cloud', array('controller' => 'cloud', 'action' => 'index'));
 
 Router::connect('/notifications', array('controller' => 'notifications', 'action' => 'index'));

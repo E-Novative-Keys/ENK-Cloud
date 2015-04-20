@@ -23,7 +23,7 @@
                 </a>
                 <ul class="dropdown-menu" role="menu">
                     <li>
-                        <?php echo $this->link('Modifier profil', array('controller' => 'users', 'action' => 'changePass')); ?>
+                        <?php echo $this->link('Mon profil', array('controller' => 'users', 'action' => 'profile')); ?>
                     </li>
                     <li>
                         <?php echo $this->link('Déconnexion', array('controller' => 'users', 'action' => 'logout')); ?>

@@ -6,6 +6,9 @@ class UsersController extends Controller
 	{
 		parent::beforeFilter();
 		$this->Auth->allow(array('login', 'configPassword'));
+
+		if($this->request->action == 'profile')
+			$this->layout = 'cloud';
 	}
 
 	public function login()
@@ -90,6 +93,11 @@ class UsersController extends Controller
 	public function changePass($token = null)
 	{
 		
+	}
+
+	public function profile()
+	{
+
 	}
 }
 
