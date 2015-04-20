@@ -79,10 +79,9 @@ class Controller
 			$view = VIEWS.DS.ucfirst($this->request->controller).DS.$view.'.php';
 
 		// Si le layout et la vue existent, on charge le tout
-		if(	$this->layout
-			&& file_exists(VIEWS.DS.'Layouts'.DS.$this->layout.'.php')
-			&& file_exists($view)
-		)
+		if($this->layout
+		&& file_exists(VIEWS.DS.'Layouts'.DS.$this->layout.'.php')
+		&& file_exists($view))
 		{
 			// Temporisation de sortie
 			// Rien n'est envoyé au navigateur et est stocké dans un tampon : $content_for_layout
