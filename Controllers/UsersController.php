@@ -97,7 +97,44 @@ class UsersController extends Controller
 
 	public function profile()
 	{
+		if(isset($this->request->data) && !empty($this->request->data))
+		{
+			if(isset($this->request->data['User']['oldpass'])
+			&& isset($this->request->data['User']['password'])
+			&& isset($this->request->data['User']['confirm']))
+			{
+				if($this->request->data['User']['password'] == $this->request->data['User']['confirm'])
+				{
+					$this->request->data['Client']['id'] 			= $this->Session->read('User.id');	
+					$this->request->data['Client']['email'] 		= $this->Session->read('User.email');				
+					$this->request->data['Client']['lastname'] 		= $this->Session->read('User.lastname');
+					$this->request->data['Client']['firstname'] 	= $this->Session->read('User.firstname');
+					$this->request->data['Client']['address'] 		= $this->Session->read('User.address');
+					$this->request->data['Client']['siret'] 		= $this->Session->read('User.siret');
+					$this->request->data['Client']['phonenumber'] 	= $this->Session->read('User.phonenumber');
+					$this->request->data['Client']['enterprise'] 	= $this->Session->read('User.enterprise');
+					$this->request->data['Client']['password'] 		= $this->Auth->password($this->request->data['User']['password']);
+					$this->request->data['Client']['oldpass'] 		= $this->Auth->password($this->request->data['User']['oldpass']);
 
+					$this->request->data['Token']['link'] 			= $this->Session->read('Token.link');
+					$this->request->data['Token']['fields'] 		= $this->Session->read('Token.fields');
+
+					unset($this->request->data['User']);
+
+					$result = $this->curl('http://enkwebservice.com/clients/update/', $this->request->data);
+					$result = json_decode($result, true);
+
+					if(isset($result['error']))
+						$this->Session->setFlash($result['error'], 'error');
+					else
+						$this->Session->setFlash('Votre mot de passe a bien été mis à jour', 'success');
+				}
+				else
+					$this->Session->setFlash('Les mots de passe ne correspondent pas', 'error');
+			}
+			else
+				$this->Session->setFlash('Veuillez compléter tous les champs', 'error');
+		}
 	}
 }
 

@@ -130,6 +130,20 @@ class Auth
 				$this->controller->Session->write('Token.link', base64_encode($user['email']));
 				$this->controller->Session->write('Token.fields', $user['token']);
 				$this->controller->Session->write('User.role', 'client');
+				$this->controller->Session->write('User.id', $user['id']);
+				$this->controller->Session->write('User.firstname', $user['firstname']);
+				$this->controller->Session->write('User.lastname', $user['lastname']);
+				$this->controller->Session->write('User.email', $user['email']);
+				$this->controller->Session->write('User.address', $user['address']);
+				$this->controller->Session->write('User.siret', $user['siret']);
+				$this->controller->Session->write('User.phonenumber', $user['phonenumber']);
+				$this->controller->Session->write('User.enterprise', $user['enterprise']);
+
+				if($user['lastlogin'] != null && strlen($user['lastlogin']) > 0)
+					$this->controller->Session->write('User.lastlogin', DateTime::createFromFormat('Y-m-d H:i:s', $user['lastlogin'])->format('d-m-Y H:i:s'));
+				else
+					$this->controller->Session->write('User.lastip', null);
+				$this->controller->Session->write('User.lastip', $user['lastip']);
 
 				return true;
 			}
