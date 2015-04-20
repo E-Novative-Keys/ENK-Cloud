@@ -77,7 +77,9 @@ nav #nav-buttons {
 }
 
 .search-bar {
-    margin-right: 14px; 
+    margin-top:16px;
+    margin-right:24px;
+    margin-left:24px;
     background-color: #D4DAE5; 
     background-image: url('../img/recherche.svg'); 
     background-repeat: no-repeat; 
@@ -129,6 +131,11 @@ a[id^="link-"] img {
 .dropdown a {
     color: #001C53;
     text-decoration: none;
+}
+
+.adjusted {
+    margin-top:14px;
+    margin-right:52px;
 }
 
 #left-menu {

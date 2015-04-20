@@ -39,8 +39,7 @@ class UsersController extends Controller
 				'controller' => 'users',
 				'action'	 => 'login'
 			));
-		}
-		
+		}	
 	}
 
 	public function configPassword($token = null)
@@ -86,6 +85,11 @@ class UsersController extends Controller
 				}
 			}
 		}
+	}
+
+	public function changePass($token = null)
+	{
+		
 	}
 }
 
