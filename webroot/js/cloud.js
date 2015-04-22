@@ -106,6 +106,7 @@ $(document).ready(function() {
 
     // Sélection d'un projet
     $('.projects-button').on('click', '.project', function() {
+        $('.projects-button .inline').text($(this).text());
         $('.projects-button').attr("data-project", $(this).attr("data-id"));
         listFiles("client", btoa("/"));
         listFiles("dev", btoa("/"));
@@ -183,6 +184,7 @@ function listProjects() {
             $('.projects-button ul').append(li);
         });
 
+        $('.projects-button .inline').text($('.projects-button ul .project:first-child').text());
         $('.projects-button').attr("data-project", $('.projects-button ul .project:first-child').attr("data-id"));
     });
 }

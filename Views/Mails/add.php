@@ -5,9 +5,9 @@
 <?php echo $this->Html->script('mailsManager'); ?>
 <?php echo $this->Html->script('listProjects'); ?>
 
-<section>
+<section id="mail_add">
 	<div class="row">
-		<div class="col-md-6 col-md-offset-4">
+		<div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-4 col-md-offset-4">
 			<div class="well well-sm">
 			<?php echo $this->Form->create(array('class' => 'form-horizontal')); ?>
 				<fieldset>

@@ -48,4 +48,8 @@
         height: auto;
         max-height: auto;
     }
+
+    #mail_add {
+        margin-top: 20px;
+    }
 }

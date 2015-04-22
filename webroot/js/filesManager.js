@@ -175,6 +175,9 @@ function moveFile(tr)
         })
         .success(function() {
             listFiles("client", btoa(dir));
+        })
+        .fail(function(data) {
+            alert(JSON.stringify(data));
         });
     });
 }

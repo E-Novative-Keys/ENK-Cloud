@@ -9,6 +9,7 @@ $(document).ready(function() {
 
     // Sélection d'un projet
     $('.projects-button').on('click', '.project', function() {
+        $('.projects-button .inline').text($(this).text());
         $('.projects-button').attr("data-project", $(this).attr("data-id"));
         listMails();
     });

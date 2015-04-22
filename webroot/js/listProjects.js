@@ -3,6 +3,7 @@ $(document).ready(function() {
 
     // Sélection d'un projet
     $('.projects-button').on('click', '.project', function() {
+        $('.projects-button .inline').text($(this).text());
         $('.projects-button').attr("data-project", $(this).attr("data-id"));
         $('#project-name').html($(this).html().replace(new RegExp("<[^>]*>"), ""));
         $('#project').attr('value', $(this).attr('data-id'));
@@ -29,10 +30,15 @@ function listProjects() {
                 );
 
             $('.projects-button ul').append(li);
-            $('#project-name').html(item);
-            $('#project').attr('value', btoa(index));
+
+            if($('#project-name').text().length == 0)
+            {
+                $('#project-name').html(item);
+                $('#project').attr('value', btoa(index));
+            }
         });
 
+        $('.projects-button .inline').text($('.projects-button ul .project:first-child').text());
         $('.projects-button').attr("data-project", $('.projects-button ul .project:first-child').attr("data-id"));
     });
 }
