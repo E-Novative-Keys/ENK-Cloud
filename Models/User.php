@@ -17,6 +17,10 @@ class User extends Model
 			'EmptyRule' => array(
 				'rule' => 'notEmpty',
 				'message' => 'Vous devez entrer un mot de passe'
+			),
+			'BetweenRule' => array(
+				'rule' 		=> array('between', 5, 100),
+				'message' 	=> 'Votre mot de passe doit contenir au moins 6 caractères'
 			)
 		)
 	);
