@@ -38,7 +38,7 @@
 	?>
 
 	<?php echo $this->Html->script('jquery-1.11.2.min', true); ?>
-	<?php echo $this->Html->script('bootstrap.min', true); ?>
+	<?php echo $this->Html->script('bootstrap', true); ?>
 	
 	<?php echo $this->Html->layout('js'); ?>
 </body>

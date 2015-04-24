@@ -85,7 +85,7 @@ class UsersController extends Controller
 					$this->Session->setFlash('Votre mot de passe a été initialisé', 'success');
 					die($this->redirect(array('controller' => 'users', 'action' => 'login')));
 				}
-				//Si le mot de passe fait moins de 6 caractères
+				// Si le mot de passe fait moins de 6 caractères
 				else
 					$this->Session->setFlash('Votre mot de passe doit contenir au moins 6 caractères', 'error');
 			}
@@ -128,7 +128,7 @@ class UsersController extends Controller
 						else
 							$this->Session->setFlash('Votre mot de passe a bien été mis à jour', 'success');
 					}
-					//Si le mot de passe fait moins de 6 caractères
+					// Si le mot de passe fait moins de 6 caractères
 					else
 						$this->Session->setFlash('Votre mot de passe doit contenir au moins 6 caractères', 'error');
 				}
