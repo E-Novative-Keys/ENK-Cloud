@@ -1,3 +1,9 @@
+/**
+* Liste les fichiers des parties Cloud client/dev pour un projet donné suivant un répertoire courant
+* @param user   (client/dev)
+* @param dir    (répertoire courant)
+* @param search (optionel : utilisé pour faire de la recherche récursive de fichiers -> barre de recherche)
+*/
 function listFiles(user, dir, search)
 {
     var ret = atob(dir).split('/');
@@ -35,6 +41,7 @@ function listFiles(user, dir, search)
     .success(function(data) {
         $('#' + user + '-files').find('tbody').empty();
 
+        // Ajout de chaque dossier/fichier dans le tableau correspondant
         $.each(data.content, function(index, item) {
             var img = item.isDir ? 'directory' : item.extension;
 
@@ -63,6 +70,7 @@ function listFiles(user, dir, search)
                 );
         });
         
+        // Dimension de la zone de drag and drop sous les dossiers/fichiers
         if(user == 'client')
             $('#client-dropzone')
                 .attr("style", "height: calc(100% - " + $('#' + user + '-files').height() + "px - 1px);")
@@ -82,6 +90,11 @@ function listFiles(user, dir, search)
     });
 }
 
+
+/**
+* Création d'un nouveau répertoire
+* Rafraichit la liste des fichiers une fois le nouveau dossier créé
+*/
 function folderCreate() 
 {
     var name = prompt("Nouveau dossier", "");
@@ -102,6 +115,12 @@ function folderCreate()
     });
 }
 
+
+/**
+* Renomme un fichier/dossier
+* Option visible dans le menu contextuel
+* @param tr (objet tr contenant les informations du fichier/dossier à renommer)
+*/
 function renameFile(tr)
 {
     var rename = prompt("New file name", "");
@@ -148,6 +167,11 @@ function renameFile(tr)
     }
 }
 
+/**
+* Déplace un ou plusieurs fichiers
+* Option visible dans le menu contextuel
+* @param tr (objet tr contenant les informations des fichiers à déplacer)
+*/
 function moveFile(tr)
 {
     var files = $('.ui-selected');
@@ -182,6 +206,11 @@ function moveFile(tr)
     });
 }
 
+/**
+* Renomme un fichier/dossier
+* Option visible dans le menu contextuel
+* @param tr (objet tr contenant les informations du fichier/dossier à supprimer)
+*/
 function deleteFile(tr)
 {
     if(confirm("Voulez-vous supprimer cet élément ?"))
@@ -213,6 +242,12 @@ function deleteFile(tr)
     }
 }
 
+/**
+* Téléchargement d'un fichier
+* Fonctionnement : 1 Requête Ajax -> reception token, 2 location.href url + token
+* @param user (client/dev)
+* @param file (chemin vers le fichier recherché)
+*/
 function download(user, file)
 {
     $url = "http://enkwebservice.com/cloud/files/download";

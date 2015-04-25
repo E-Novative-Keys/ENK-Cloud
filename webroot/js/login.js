@@ -1,6 +1,11 @@
 $(document).ready(function(){
 	$flag = false;
 
+	
+	
+	/*** Effet de Parralaxe ***/
+
+	// Effet de Parralaxe sur la page de login
 	$(document).mousemove(function(e){
 		event = e || window.event;
 		TweenLite.to($('body'), .5, { 
@@ -10,23 +15,36 @@ $(document).ready(function(){
 		});
 	});
 
+
+
+	/*** Popup Alert ***/
+
+	// Personnalisation de la popup d'erreur : effet de disparition
 	$(".alert").delay(1000).fadeOut(3000, function(){
 		$(".alert").alert('close');
 	});
 
+
+
+	/*** Forgot Password ***/
+
+	// Evènement au click sur le label 'forgot password'
 	$('#forgot').click(function(e){
 		$flag = true;
+		
 		$(this).attr("style", "display:none;");
 		$('#submit')
 			.attr("type", "button")
 			.attr("value", "Envoyer");
 		$('#passwd').attr("style", "visibility:hidden;");
 		$('#return').attr("style", "display:block;");
-		$('.checkbox label').html("Forgot Password :"); 
+		$('.checkbox label').html("Forgot Password :");
 	});
 
+	// Evènement au click sur le label 'Retour'
 	$('#return').click(function(e){
 		$flag = false;
+		
 		$(this).attr("style", "display:none;");
 		$('#submit')
 			.attr("type", "submit")
@@ -36,10 +54,13 @@ $(document).ready(function(){
 		$('.checkbox label').html("Connexion :"); 
 	});
 
+	// Evènement au click sur le bouton 'Envoyer' lors du forgot password
 	$('#submit').click(function(){
 		if($flag)
 		{
-			if($('#email').val().length > 0 && $('#email').val().match("^[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)+$"))
+			// Vérifications avant envoi en ajax
+			if($('#email').val().length > 0
+			&& $('#email').val().match("^[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)+$"))
 			{
 				$.ajax({
 					method: "POST",
@@ -50,7 +71,10 @@ $(document).ready(function(){
 					crossDomain: true
 				})
 				.success(function(){
+					// Déclenchement évènement 'Retour'
 					$('#return').click();
+					
+					// Apparition d'une popup Success
 					$('body').append(
 						$('<div>')
 							.attr("class", "alert alert-success")
@@ -69,6 +93,7 @@ $(document).ready(function(){
 			}
 			else
 			{
+				// Apparition d'une popup Error
 				$('body').append(
 					$('<div>')
 						.attr("class", "alert alert-danger")
@@ -81,7 +106,7 @@ $(document).ready(function(){
 								.text("x")
 						)
 						.append($('<strong>').text("Error : "))
-						.append("L'adresse e-mail saisie est invalide")	
+						.append("L'adresse e-mail saisie est invalide")
 				);
 			}
 		}

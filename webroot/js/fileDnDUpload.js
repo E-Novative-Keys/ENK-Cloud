@@ -1,5 +1,14 @@
+/**
+* Préparation à l'envoi de fichiers en Ajax, création d'un objet FormData contenant le fichier
+* Appel des fonctions de statusBar et d'envoi en Ajax
+* @param files  (liste de fichiers à uploader)
+* @param tr     (objet tr contenant les informations du dossier de destination des fichiers à uploader)
+* @param obj    (objet/endroit de création de la status bar de progression)
+* @param directory (optionel, répertoire d'upload différent)
+*/
 function DnDFileUpload(files, tr, obj, directory)
 {
+    // Boucle sur la liste de fichiers, envoi fichier par fichier
     for(var i = 0; i < files.length; i++) 
     {
         if(tr != undefined)
@@ -35,6 +44,10 @@ function DnDFileUpload(files, tr, obj, directory)
     }
 }
 
+/**
+* Création de la barre de progression de l'upload du fichier
+* @param obj    (objet/endroit de création de la status bar de progression)
+*/
 function createStatusbar(obj)
 {
     this.statusbar      = $("<div class=\"progress DnDProgress\"></div>");
@@ -82,6 +95,12 @@ function createStatusbar(obj)
     }
 }
 
+/**
+* Envoi du fichier au serveur, Mise à jour en temps réel de la barre de progression
+* @param formData   (objet formdata contenant le fichier à uploader et les token)
+* @param status     (barre de progression)
+* @param dir        (répertoire d'upload du fichier)
+*/
 function sendFileToServer(formData, status, dir)
 {
     var jqxhr = $.ajax({
@@ -95,12 +114,12 @@ function sendFileToServer(formData, status, dir)
             var xhrobj = $.ajaxSettings.xhr();
             if(xhrobj.upload) {
                 xhrobj.upload.addEventListener('progress', function(event) {
-                    var percent = 0;
-                    var position = event.loaded || event.position;
-                    var total = event.total;
-                    if (event.lengthComputable) {
-                        percent = Math.ceil(position / total * 100);
-                    }
+                    var percent     = 0;
+                    var position    = event.loaded || event.position;
+                    var total       = event.total;
+                    
+                    if(event.lengthComputable)
+                        percent     = Math.ceil(position / total * 100);
                     
                     // Set progress
                     status.setProgress(percent);

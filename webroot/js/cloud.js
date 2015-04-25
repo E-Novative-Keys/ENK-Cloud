@@ -1,31 +1,69 @@
 $(document).ready(function() {
     var row = undefined;
 
+
     listProjects();
+
     listFiles("client", btoa("/"));
     listFiles("dev", btoa("/"));
 
-    // Liste des fichiers au click sur un dossier ou download d'un fichier
-    $('table').on("dblclick", ".file", function() {
-        if($(this).attr("data-dir") == "true")
-            listFiles($(this).attr("data-user"), $(this).attr("data-file"));
-        else
-            download($(this).attr("data-user"), $(this).attr("data-file"));
+
+
+    /*** Menu - Bar ***/
+
+    /* Champs de recherche */
+
+    // Evènement de recherche de fichiers à chaque touche appuyée
+    $('#search').keyup(function(){
+        listFiles("client", btoa("/"), $(this).val());
+        listFiles("dev", btoa("/"), $(this).val());
     });
 
-    // Simulating File Upload click
+    /* Bouton Upload de fichiers */
+
+    // Evènement au click sur le bouton 'Uploader un fichier'
     $('#btn-upload').click(function(e){
         e.preventDefault();
         $('#file-upload').click();
     });
 
+    // Evènement lors de la validation de la fenêtre d'Upload de fichier
+    // Va transmettre le fichier souhaité à la fonction d'envoi en ajax
     $('#file-upload').change(function(e){
         e.preventDefault();
         DnDFileUpload($(this)[0].files, undefined, $('#DnDStatus'), atob($('#storage').attr("data-dir")));
     });
 
-    // Text area des commentaires
+    /* Bouton Espace de stockage */
 
+    // Evènement permettant de rafraichir la liste de fichiers du le répertoire courant
+    $('#storage').click(function() {
+        listFiles('client', $(this).attr("data-dir"));
+    });
+
+    /* Bouton Création Nouveau Dossier */
+
+    // Création d'un nouveau dossier dans le répertoire courant
+    $('#new-dir').click(function() {
+        folderCreate();
+    });
+
+    /* Bouton Sélection de Projet */
+
+    // Affichage de la liste de fichiers clients/dev pour un projet sélectionné
+    $('.projects-button').on('click', '.project', function() {
+        $('.projects-button .inline').text($(this).text());
+        $('.projects-button').attr("data-project", $(this).attr("data-id"));
+        listFiles("client", btoa("/"));
+        listFiles("dev", btoa("/"));
+    });
+
+
+
+    /*** Affichage des commentaires ***/
+
+    // Evènement lors du passage de la souris sur un fichier/dossier de la liste
+    // Va regarder si un commentaire existe et affiche un textarea si oui
     $('table').on("mouseover", ".file", function() {
         if(row == undefined && $(this).attr("data-comment") != "")
             $('#comment')
@@ -34,6 +72,7 @@ $(document).ready(function() {
                 .val($(this).attr("data-comment"));
     });
 
+    // Evènement lorsque la souris n'est plus sur le fichier/dossier qui cache la textarea
     $('table').on("mouseout", ".file", function() {
         if(row == undefined)
             $('#comment')
@@ -41,12 +80,14 @@ $(document).ready(function() {
                 .val("");
     });
 
+    // Evènement au click pour l'enregistrement d'un commentaire (ajout/edition)
     $('#edit-comment').on("click", function() {
         $.ajax({
             method: "POST",
             url : "http://enkwebservice.com/cloud/comment",
             data : 'data=' + JSON.stringify({data : {
-                Cloud : {user : "client", project : $('.projects-button').attr("data-project"), file : $(this).attr("data-file"), comment : $('#comment').val()},
+                Cloud : {user : "client", project : $('.projects-button').attr("data-project"),
+                        file : $(this).attr("data-file"), comment : $('#comment').val()},
                 Token : {link : $('#link').val(), fields : $('#fields').val()}
             }}),
             crossDomain: true,
@@ -64,24 +105,34 @@ $(document).ready(function() {
         });
     });
 
-    // Création d'un nouveau dossier dans le répertoire courant
-    $('#new-dir').click(function() {
-        folderCreate();
+
+
+    /*** Gestion de la liste de fichiers ***/
+
+    /* Liste de fichiers */
+
+    // Evènement au double click sur un élément de la liste de fichiers/dossiers
+    // Met à jour la liste de fichiers au double click sur un dossier
+    // Télécharge le fichier au double click sur un fichier
+    $('table').on("dblclick", ".file", function() {
+        if($(this).attr("data-dir") == "true")
+            listFiles($(this).attr("data-user"), $(this).attr("data-file"));
+        else
+            download($(this).attr("data-user"), $(this).attr("data-file"));
     });
 
-    $('#storage').click(function() {
-        listFiles('client', $(this).attr("data-dir"));
+    // Librairie jQuery permettant la selection de tr
+    $('#client-files').selectable({
+        filter:'.file'
     });
 
-    // Drag and Drop Zone
+    /* Zone Drag and Drop */
     
-    // Stop propagation des events sur toute la page  
+    // Stop la propagation des events sur toute la page  
     $(document).on('dragenter dragover drop', function(e) {
         e.stopPropagation();
         e.preventDefault();
     });
-
-    // Events sur les dossiers de la liste
     $('#client-files').on("dragenter", ".file", function(e) 
     {
         e.stopPropagation();
@@ -91,34 +142,24 @@ $(document).ready(function() {
         e.stopPropagation();
         e.preventDefault();
     });
+
+    // Drag and Drog de fichiers sur fichiers/dossiers de la liste du client
     $('#client-files').on("drop", ".file", function(e) {
         e.preventDefault();
         DnDFileUpload(e.originalEvent.dataTransfer.files, $(this), $('#DnDStatus'));
     });
+
+    // Drag and Drog de fichiers sur dans la zone de la liste du client (hors fichiers/dossiers)
     $('#client-dropzone').on("drop", function(e) {
         e.preventDefault();
         DnDFileUpload(e.originalEvent.dataTransfer.files, $(this), $('#DnDStatus'));
     });
 
-    $('#client-files').selectable({
-        filter:'.file'
-    });
 
-    // Sélection d'un projet
-    $('.projects-button').on('click', '.project', function() {
-        $('.projects-button .inline').text($(this).text());
-        $('.projects-button').attr("data-project", $(this).attr("data-id"));
-        listFiles("client", btoa("/"));
-        listFiles("dev", btoa("/"));
-    });
 
-    // Champs de recherche
-    $('#search').keyup(function(){
-        listFiles("client", btoa("/"), $(this).val());
-        listFiles("dev", btoa("/"), $(this).val());
-    });
+    /*** Menu Contextuel ***/
 
-    // Menu contextuel au click droit
+    // Menu présent au click droit sur fichiers/dossiers du cloud client
     $.contextMenu({
         selector: '#client-files .file', 
         callback: function(key, options) {
@@ -162,6 +203,12 @@ $(document).ready(function() {
     });
 });
 
+
+/**
+* Affiche la liste des projets de l'utilisateur courant dans un sélecteur de projets
+* !! async : false, les données récupérées en Ajax sont nécessaires au fonctionnement
+* d'autres requêtes ajax, il est donc primordial d'avoir une execution synchrone
+*/
 function listProjects() {
     $.ajax({
         type : "POST",
