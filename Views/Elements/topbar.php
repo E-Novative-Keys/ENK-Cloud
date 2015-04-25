@@ -5,20 +5,15 @@
                 echo $this->image('logo.svg', array(
                     'alt'   => 'Logo E-Novative Keys',
                     'url'   => array('controller' => 'cloud', 'action' => 'index'),
-                    'id' => 'enk-logo'
+                    'id'    => 'enk-logo'
                 ));
             ?>
         </div>
 
         <div class="header-menu col-xs-6 col-sm-9 col-md-9 col-lg-9 right hide-on-phones">
-            <span class="btn enk-button menu-button dropdown  <?php if($this->controller->request->controller != 'cloud') echo 'adjusted' ?>" data-project="">
+            <span class="btn enk-button menu-button dropdown<?php echo ($this->controller->request->controller != 'cloud') ? ' adjusted' : ''; ?>" data-project="">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                    <?php
-                        echo $this->image('menu.svg', array(
-                            'alt' => 'Menu',
-                            'height' => '20'
-                        ));
-                    ?>
+                    <?php echo $this->image('menu.svg', array('alt' => 'Menu', 'height' => '20')); ?>
                     Menu
                 </a>
                 <ul class="dropdown-menu" role="menu">
@@ -38,12 +33,7 @@
         <div class="header-menu col-xs-6 col-md-9 col-lg-9 right show-on-phones">
             <span class="btn enk-button dropdown projects-button" data-project="">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                    <?php
-                        echo $this->image('menu.svg', array(
-                            'alt' => 'Menu',
-                            'height' => '20'
-                        ));
-                    ?>
+                    <?php echo $this->image('menu.svg', array('alt' => 'Menu', 'height' => '20')); ?>
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu center" role="menu">

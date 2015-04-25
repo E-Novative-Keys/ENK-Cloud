@@ -3,40 +3,22 @@
         <?php
             echo $this->link(
                 $this->image('cloud.svg', array('alt' => 'Cloud')),
-                array(
-                    'controller' => 'cloud',
-                    'action'     => 'index'
-                ),
-                array(
-                    'class'      => 'col-xs-4 col-sm-1 center',
-                    'id'         => 'link-cloud'
-                )
+                array('controller' => 'cloud', 'action' => 'index'),
+                array('class' => 'col-xs-4 col-sm-1 center', 'id'=> 'link-cloud')
             );
         ?>
         <?php
             echo $this->link(
                 $this->image('notification.svg', array('alt' => 'Notifications')),
-                array(
-                    'controller'    => 'notifications',
-                    'action'        => 'index'
-                ),
-                 array(
-                    'class'      => 'col-xs-4 col-sm-1 center',
-                    'id'         => 'link-notifications'
-                )
+                array('controller' => 'notifications', 'action' => 'index'),
+                array('class' => 'col-xs-4 col-sm-1 center', 'id' => 'link-notifications')
             );
         ?>
         <?php
             echo $this->link(
                 $this->image('messagerie.svg', array('alt' => 'Messagerie')),
-                array(
-                    'controller'    => 'mails',
-                    'action'        => 'index'
-                ),
-                 array(
-                    'class'      => 'col-xs-4 col-sm-1 center',
-                    'id'         => 'link-messages'
-                )
+                array('controller' => 'mails','action' => 'index'),
+                array('class' => 'col-xs-4 col-sm-1 center', 'id' => 'link-messages')
             );
         ?>
 

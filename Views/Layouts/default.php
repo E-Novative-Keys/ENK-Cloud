@@ -7,12 +7,12 @@
 	<?php echo $this->Html->meta('icon', 'img/favicon.ico'); ?>
 
 	<?php echo $this->Html->layout('meta'); ?>
-</head>
-<body>
+
 	<?php echo $this->Html->css('bootstrap', true); ?>
 
 	<?php echo $this->Html->layout('css'); ?>
-
+</head>
+<body>
 	<?php echo $this->Session->flash(); ?>
 	
 	<?php echo $content_for_layout; ?>
