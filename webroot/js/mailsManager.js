@@ -1,3 +1,6 @@
+/**
+* Affiche la liste de messages reçus/envoyés dans le tableau approprié selon la page concernée
+*/
 function listMails()
 {
 	if($('#email').attr("data-type") == "received")
@@ -53,6 +56,11 @@ function listMails()
     });
 }
 
+/**
+* Supprime le message reçu/envoyé et raffiche la liste de messages reçus/envoyés après
+* Option visible dans le menu contextuel
+* @param mail (objet/tr contenant les informations data-id, data-content, ... du message à supprimer)
+*/
 function deleteMail(mail)
 {
     if(confirm("Voulez-vous supprimer cet e-mail ?"))
@@ -73,6 +81,10 @@ function deleteMail(mail)
     }
 }
 
+/**
+* Affiche les détails d'un message dans la zone appropriée
+* @param mail   (objet/tr contenant les informations data-from, data-object, data-date, data-content du message à afficher)
+*/
 function mailDetails(mail)
 {
     $('#details').empty();
@@ -89,5 +101,5 @@ function mailDetails(mail)
         )
         .append($('<div>')
             .text(mail.attr("data-content"))
-        )
+        );
 }

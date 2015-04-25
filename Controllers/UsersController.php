@@ -39,6 +39,9 @@ class UsersController extends Controller
 		}	
 	}
 
+	/**
+	* Configuration du password après avoir reçu un email de création de compte ou de forgot password
+	*/
 	public function configPassword($token = null)
 	{
 		$post = array("Client" => array("token" => $token));

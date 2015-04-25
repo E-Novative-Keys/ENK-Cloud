@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	$flag = false;
 
-	
-	
+
+
 	/*** Effet de Parralaxe ***/
 
 	// Effet de Parralaxe sur la page de login
@@ -87,7 +87,7 @@ $(document).ready(function(){
 									.text("x")
 							)
 							.append($('<strong>').text("Success : "))
-							.append("Un lien de réinitialisation de mot de passe vous a été envoyé par mail")	
+							.append("Un lien de réinitialisation de mot de passe vous a été envoyé par mail")
 					);
 				});
 			}

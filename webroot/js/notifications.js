@@ -2,24 +2,34 @@ $(document).ready(function() {
 
 	listNotifications();
 
+
+
+    /*** Gestion des notifications ***/
+
+    // Affichage du bouton de suppression de notification au passage de la souris sur une notification
     $('.list-group').on('mouseover', '.list-group-item', function(event) {
 		event.preventDefault();
         if(!$(this).closest('li').hasClass('prevent'))
 		  $(this).closest('li').addClass('open');
 	});
     
+    // Lorsque la souris n'est plus sur la notification, on cache le bouton de suppression de notification
     $('.list-group').on('mouseout', '.list-group-item', function(event) {
     	event.preventDefault();
         if(!$(this).closest('li').hasClass('prevent'))
 		  $(this).closest('li').removeClass('open');
 	});
 
+    // Evènement au click sur le bouton de suppression d'une notification
     $('.list-group').on('click', '.list-group-submenu-item', function() {
     	deleteNotification($(this));
     });
 
 });
 
+/**
+* Liste les notifications pour l'utilisateur courant tout projet confondu
+*/
 function listNotifications()
 {
 	$.ajax({
@@ -66,6 +76,10 @@ function listNotifications()
     });
 }
 
+/**
+* Suppression d'une notification et mise à jour de la liste de notifications
+* @param notif  (objet/notif ayant l'id de la notif à supprimer -> data-id)
+*/
 function deleteNotification(notif)
 {
 	$.ajax({

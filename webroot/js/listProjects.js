@@ -1,7 +1,15 @@
+/*
+* Sélection de projets pour l'envoi de message
+* L'utilisateur sélectionne quel est le projet concerné par le message qu'il écrit
+*/
 $(document).ready(function() {
     listProjects();
 
-    // Sélection d'un projet
+
+
+    /*** Sélecteur de projets ***/
+
+    // Mise à jour d'informations et champs caché au click sur un projet
     $('.projects-button').on('click', '.project', function() {
         $('.projects-button .inline').text($(this).text());
         $('.projects-button').attr("data-project", $(this).attr("data-id"));
@@ -10,6 +18,10 @@ $(document).ready(function() {
     });
 });
 
+/**
+* Affiche la liste des projets de l'utilisateur courant dans un sélecteur de projets
+* !! async : false
+*/
 function listProjects() {
     $.ajax({
         type : "POST",

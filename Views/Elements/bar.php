@@ -27,8 +27,8 @@
                 <button class="btn enk-button storage-button" id="storage">
                     <?php
                         echo $this->image('cloud_bleu.svg', array(
-                            'alt' => 'espace de stockage',
-                            'height' => '20'
+                            'alt'       => 'Espace de stockage',
+                            'height'    => '20'
                         ));
                     ?>
                     <span class="show-on-desktops inline">Espace de stockage</span>
@@ -36,8 +36,8 @@
                 <button class="btn enk-button files-buttons" id="new-dir">
                     <?php
                         echo $this->image('nouveau_dossier.svg', array(
-                            'alt' => 'Nouveau dossier',
-                            'height' => '20'
+                            'alt'       => 'Nouveau dossier',
+                            'height'    => '20'
                         ));
                     ?>
                     <span class="show-on-desktops inline">Nouveau dossier</span>
@@ -52,8 +52,8 @@
                 <button class="btn enk-button files-buttons" id="btn-upload">
                     <?php
                         echo $this->image('upld_fichier.svg', array(
-                            'alt' => 'Nouveau fichier',
-                            'height' => '20'
+                            'alt'       => 'Nouveau fichier',
+                            'height'    => '20'
                         ));
                     ?>
                     <span class="show-on-desktops inline">Uploader un fichier</span>
@@ -66,8 +66,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <?php
                             echo $this->image('menu.svg', array(
-                                'alt' => 'Projet',
-                                'height' => '20'
+                                'alt'       => 'Projet',
+                                'height'    => '20'
                             ));
                         ?>
                         <span class="show-on-desktops inline">Sélectionner un projet</span>

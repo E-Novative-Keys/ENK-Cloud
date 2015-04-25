@@ -6,17 +6,17 @@ class User extends Model
 		'email' => array(
 			'EmptyRule' => array(
 				'rule' => 'notEmpty',
-				'message' => 'Vous devez entrer une adresse e-mail'
+				'message' 	=> 'Vous devez entrer une adresse e-mail'
 			),
 			'EmailRule' => array(
 				'rule' => 'email',
-				'message' => 'Vous devez entrer une adresse e-mail valide'
+				'message' 	=> 'Vous devez entrer une adresse e-mail valide'
 			)
 		),
 		'password' => array(
 			'EmptyRule' => array(
 				'rule' => 'notEmpty',
-				'message' => 'Vous devez entrer un mot de passe'
+				'message' 	=> 'Vous devez entrer un mot de passe'
 			),
 			'BetweenRule' => array(
 				'rule' 		=> array('between', 5, 100),
