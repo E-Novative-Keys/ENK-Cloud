@@ -63,4 +63,31 @@
             </div>
         </div>  
     </div>
+
+    <div class="modal fade" id="renameModal" tabindex="-1" role="dialog" aria-labelledby="rename" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="rename">Renommer un fichier/dossier</h4>
+                </div>
+            
+                <form class="form-horizontal">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="dir" class="col-sm-3 control-label">Nouveau nom</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="renameField" placeholder="Nouveau nom" class="form-control" required />
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                        <button type="button" id="renameSubmit" class="btn btn-primary" data-dismiss="modal">Créer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </section>

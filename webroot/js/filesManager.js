@@ -97,7 +97,7 @@ function listFiles(user, dir, search)
 */
 function folderCreate() 
 {
-    var name = prompt("Nouveau dossier", "");
+    var name = $('#dir').val();
 
     var dir = $('#storage').attr("data-dir");
 
@@ -123,48 +123,53 @@ function folderCreate()
 */
 function renameFile(tr)
 {
-    var rename = prompt("New file name", "");
+    $('#renameModal').modal('show');
 
-    var dir = atob(tr.attr("data-file"));
-    var args = dir.split('/');
-    var name = '';
+    $('#renameSubmit').on('click', function(){
+        var rename = $('#renameField').val();
 
-    if(tr.attr("data-dir") == "false")
-    {
-        name = args[args.length-1];
-        dir = dir.replace(args[args.length-1], '');
-    }
+        var dir     = atob(tr.attr("data-file"));
+        var args    = dir.split('/');
+        var name    = '';
 
-    if(rename)
-    {
-        $.ajax({
-            type : "POST",
-            url : "http://enkwebservice.com/cloud/files/rename",
-            data : "data=" + JSON.stringify({data : {
-                Cloud : {project : $('.projects-button').attr("data-project"), directory : btoa(dir), name : name, rename : rename},
-                Token : {link : $('#link').val(), fields : $('#fields').val()}
-            }}),
-            dataType : "json",
-            crossDomain : true
-        })
-        .success(function(data) {
-            args[args.length-1] = rename;
-            tr.find('td:first-child span').text(rename);
-            tr.attr("data-file", btoa(args.join('/')));
+        if(tr.attr("data-dir") == "false")
+        {
+            name = args[args.length-1];
+            dir = dir.replace(args[args.length-1], '');
+        }
 
-            var ext = ((args = rename.split('.')) != undefined && args.length > 1) ? args.pop() : '';
+        if(rename)
+        {
+            $.ajax({
+                type : "POST",
+                url : "http://enkwebservice.com/cloud/files/rename",
+                data : "data=" + JSON.stringify({data : {
+                    Cloud : {project : $('.projects-button').attr("data-project"), directory : btoa(dir), name : name, rename : rename},
+                    Token : {link : $('#link').val(), fields : $('#fields').val()}
+                }}),
+                dataType : "json",
+                crossDomain : true
+            })
+            .success(function(data) {
+                args[args.length-1] = rename;
+                tr.find('td:first-child span').text(rename);
+                tr.attr("data-file", btoa(args.join('/')));
 
-            if(tr.attr("data-dir") == "true")
-                tr.find('td:first-child img').attr("src", "img/icons/directory.png");
-            else if(ext.length > 0)
-                tr.find('td:first-child img').attr("src", "img/icons/" + ext + ".png");
+                var ext = ((args = rename.split('.')) != undefined && args.length > 1) ? args.pop() : '';
 
-            tr.find('td:nth-child(3)').html(ext);
-        })
-        .fail(function(e){
-            alert(e);
-        });
-    }
+                if(tr.attr("data-dir") == "true")
+                    tr.find('td:first-child img').attr("src", "img/icons/directory.png");
+                else if(ext.length > 0)
+                    tr.find('td:first-child img').attr("src", "img/icons/" + ext + ".png");
+
+                tr.find('td:nth-child(3)').html(ext);
+            })
+            .fail(function(e){
+                alert(e);
+            });
+        }
+    });
+    
 }
 
 /**
