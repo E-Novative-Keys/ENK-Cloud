@@ -164,8 +164,8 @@ function renameFile(tr)
 
                 tr.find('td:nth-child(3)').html(ext);
             })
-            .fail(function(e){
-                alert(e);
+            .fail(function(data){
+                alert(/*JSON.stringify(data)*/"Le fichier/dossier ne peut pas être renommé car il existe déjà fichier du même nom.");
             });
         }
     });

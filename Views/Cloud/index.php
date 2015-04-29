@@ -84,7 +84,7 @@
                         
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                        <button type="submit" id="renameSubmit" class="btn btn-primary" data-dismiss="modal">Créer</button>
+                        <button type="submit" id="renameSubmit" class="btn btn-primary" data-dismiss="modal">Renommer</button>
                     </div>
                 </form>
             </div>

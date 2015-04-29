@@ -63,8 +63,9 @@ function listMails()
 */
 function deleteMail(mail)
 {
-    if(confirm("Voulez-vous supprimer cet e-mail ?"))
-    {
+    $('#deleteModal').modal('show');
+
+    $('#deleteSubmit').on('click', function(){
         $.ajax({
             type : "POST",
             url : "http://enkwebservice.com/mailbox/delete",
@@ -78,7 +79,7 @@ function deleteMail(mail)
         .success(function(data) {
             listMails();
         });
-    }
+    });
 }
 
 /**
