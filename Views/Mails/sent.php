@@ -16,7 +16,7 @@
                     <table id="mails" class="col-xs-12">
                         <thead class="table-header">
                             <tr>
-                                <th class="col-md-3 col-xs-2 col-sm-2 white-border">De</th>    
+                                <th class="col-md-3 col-xs-2 col-sm-2 white-border">Pour</th>    
                                 <th class="col-md-6 col-xs-3 col-sm-2 white-border">Sujet</th>    
                                 <th class="col-md-3 col-xs-2 col-sm-2 white-border">Date</th> 
                             </tr>

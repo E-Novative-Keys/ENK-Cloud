@@ -212,14 +212,16 @@ function moveFile(tr)
 }
 
 /**
-* Renomme un fichier/dossier
+* Supprime un fichier/dossier
 * Option visible dans le menu contextuel
 * @param tr (objet tr contenant les informations du fichier/dossier à supprimer)
 */
 function deleteFile(tr)
 {
-    if(confirm("Voulez-vous supprimer cet élément ?"))
-    {
+    $('#deleteModal').modal('show');
+
+    $('#deleteSubmit').on('click', function(){
+
         var dir = atob(tr.attr("data-file")); 
         var args = dir.split('/');
         var name = '';
@@ -244,7 +246,7 @@ function deleteFile(tr)
             dir = btoa(args.join('/'));
             listFiles(tr.attr("data-user"), (dir.length == 0) ? btoa('/') : dir);
         });
-    }
+    });
 }
 
 /**

@@ -99,7 +99,7 @@
                         
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                        <button type="button" id="newDirSubmit" class="btn btn-primary" data-dismiss="modal">Créer</button>
+                        <button type="submit" id="newDirSubmit" class="btn btn-primary" data-dismiss="modal">Créer</button>
                     </div>
                 </form>
             </div>
