@@ -44,7 +44,7 @@ $(document).ready(function() {
     /* Bouton Création Nouveau Dossier */
 
     // Création d'un nouveau dossier dans le répertoire courant
-    $('#new-dir').click(function() {
+    $('#newDirSubmit').click(function() {
         folderCreate();
     });
 

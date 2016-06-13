@@ -16,7 +16,7 @@
                     <table id="mails" class="col-xs-12">
                         <thead class="table-header">
                             <tr>
-                                <th class="col-md-3 col-xs-2 col-sm-2 white-border">De</th>    
+                                <th class="col-md-3 col-xs-2 col-sm-2 white-border">Pour</th>    
                                 <th class="col-md-6 col-xs-3 col-sm-2 white-border">Sujet</th>    
                                 <th class="col-md-3 col-xs-2 col-sm-2 white-border">Date</th> 
                             </tr>
@@ -37,5 +37,23 @@
                 </div>
             </div>
         </div>  
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Suppression d'email</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Etes-vous sur de vouloir supprimer cet e-mail?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="submit" id="deleteSubmit" class="btn btn-primary" autofocus data-dismiss="modal">Supprimer</button>
+                </div>
+            </div>
+        </div>
     </div>
 </section>

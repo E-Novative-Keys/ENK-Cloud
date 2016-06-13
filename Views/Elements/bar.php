@@ -33,7 +33,7 @@
                     ?>
                     <span class="show-on-desktops inline">Espace de stockage</span>
                 </button>
-                <button class="btn enk-button files-buttons" id="new-dir">
+                <button class="btn enk-button files-buttons" id="new-dir" data-toggle="modal" data-target="#newDirModal">
                     <?php
                         echo $this->image('nouveau_dossier.svg', array(
                             'alt'       => 'Nouveau dossier',
@@ -76,6 +76,33 @@
                     <ul class="dropdown-menu" role="menu"></ul>
                 </span>
             <?php endif; ?>
+        </div>
+    </div>
+
+    <div class="modal fade" id="newDirModal" tabindex="-1" role="dialog" aria-labelledby="newDir" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="newDir">Nouveau dossier</h4>
+                </div>
+            
+                <form class="form-horizontal">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="dir" class="col-sm-3 control-label">Nom du dossier</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="dir" placeholder="Dossier" class="form-control" required />
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                        <button type="submit" id="newDirSubmit" class="btn btn-primary" data-dismiss="modal">Créer</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </nav>
